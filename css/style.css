@@ -1,0 +1,173 @@
+@font-face {
+    font-family: 'Chicago';
+    src: url('/assets/fonts/ChicagoFLF.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+  cursor: url('/assets/icons/cursor.png') 1 1, auto;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  font-family: 'Chicago', sans-serif;
+}
+
+#monitor {
+  width: 99%;
+  height: 98%;
+  margin: 10px auto 0 auto;
+  box-shadow: 0 0 20px #00ffcc33;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: black;
+  border-radius: 10px;
+}
+
+#monitor::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.1) 0px,
+    rgba(0, 0, 0, 0.1) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  mix-blend-mode: multiply;
+  z-index: 10;
+}
+
+#monitor::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
+  z-index: 11;
+}
+
+#topbar {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background-color: #DDDDDD;
+  border-bottom: 2px solid black;
+  color: black;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-size: 12px;
+  font-weight: bold;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+#desktop {
+  flex: 1;
+  background-image: url('/assets/bgs/defbg.png');
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  filter: contrast(1.1) brightness(1.1) saturate(1.2);
+  image-rendering: pixelated;
+}
+
+#buttons {
+  position: absolute;
+  display: flex;
+  left: 20px;
+}
+
+#mac-icon img {
+  width: 20px;
+}
+
+#topbar button {
+  background-color: transparent;
+  border-color: transparent;
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-family: 'Chicago', sans-serif;
+  height: 30px;
+}
+
+#topbar button:active {
+  background-color: #3531A2;
+  color: white;
+}
+
+.desktop-icon {
+  width: 64px;
+  text-align: center;
+  color: black;
+  margin: 20px;
+  font-size: 10px;
+}
+
+.desktop-icon div {
+  background-color: #C7C9DE;
+  display: inline-block;
+  padding: 2px;
+}
+
+.desktop-icon img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+}
+
+.window {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  width: 300px;
+  height: 200px;
+  background: #e0e0e0;
+  border: 2px solid #000;
+  box-shadow: 1px 1px 0 #808080, -1px -1px 0 #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.window-header {
+  background: #c0c0c0;
+  color: black;
+  padding: 4px;
+  cursor: move;
+  user-select: none;
+  border-bottom: 2px solid #808080;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.window-body {
+  flex: 1;
+  padding: 10px;
+  background: #ffffff;
+  font-size: 12px;
+  overflow: auto;
+  border-top: 2px solid #fff;
+}
