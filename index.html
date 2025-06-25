@@ -5,13 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>almasso</title>
         <link rel="stylesheet" href="css/style.css" />
+        <link rel="icon" type="image/x-icon" href="/assets/icons/system/searcher.png" />
     </head>
     <body>
         <div id="monitor">
             <div id="topbar">
                 <div id="buttons">
                     <div id="mac-icon">
-                        <button><img src="assets/macs/happy.png" /></button>
+                        <button><img src="assets/icons/system/macs/happy.png" /></button>
                     </div>
                     <div id="file-button">
                         <button>File</button>
@@ -29,16 +30,35 @@
                         <button>Help</button>
                     </div>
                 </div>
+
+                <div class="right-group">
+                    <div id="time">
+                        <span id="time-text"></span> 
+                    </div>
+                        
+                    <div id="lang-flag">
+                        <button><img src="/assets/icons/system/flags/es_ES.png" /></button>
+                    </div>
+
+                    <div id="topbar-slider">
+                        <button><img src="/assets/icons/system/topslider.png" /></button>
+                    </div>
+
+                    <div id="current-app">
+                        <button>
+                            <div class="app-button-content">
+                                <img src="assets/icons/system/searcher.png" />
+                                <span>Searcher</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
 
             <div id="desktop">
-                <div class="desktop-icon" data-app="app1">
-                    <img src="assets/icons/searcher.png" />
-                    <div>My App</div>
-                </div>
             </div>
         </div>
 
-        <script src="js/os.js"></script>
+        <script type="module" src="js/os.js"></script>
     </body>
 </html>

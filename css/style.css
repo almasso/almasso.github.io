@@ -6,7 +6,7 @@
 }
 
 * {
-  cursor: url('/assets/icons/cursor.png') 1 1, auto;
+  cursor: url('/assets/icons/system/cursor.png') 1 1, auto;
 }
 
 body, html {
@@ -80,6 +80,7 @@ body, html {
   font-weight: bold;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  justify-content: space-between;
 }
 
 #desktop {
@@ -118,24 +119,88 @@ body, html {
   color: white;
 }
 
+.right-group {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#lang-flag img {
+  height: 20px;
+  padding-top: 3px;
+}
+
+#topbar-slider, #current-app, #lang-flag {
+  display: flex;
+  align-items: center;
+}
+
+#topbar-slider button {
+  padding: 0 0 0 0;
+  height: 30px;
+  border: 0;
+}
+
+#topbar-slider button:active {
+  filter: brightness(0.6);
+}
+
+#topbar-slider img {
+  height: 30px;
+}
+
+.app-button-content {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.app-button-content img {
+  width: 25px;
+}
+
 .desktop-icon {
   width: 64px;
   text-align: center;
   color: black;
   margin: 20px;
   font-size: 10px;
+  user-select: none;
+  position: relative;
 }
 
-.desktop-icon div {
+.desktop-icon #prog-name {
   background-color: #C7C9DE;
   display: inline-block;
   padding: 2px;
 }
 
-.desktop-icon img {
+.icon-stack {
+  position: relative;
+  width: 45px;
+  margin: 0 auto 5px auto;
+  height: 32px;
+}
+
+.icon {
+  position: absolute;
+  right: 0;
+  width: 32px;
+  height: 32px;
+}
+
+.indiv-icon {
   width: 32px;
   height: 32px;
   margin-bottom: 4px;
+}
+
+.alias-arrow {
+  position: absolute;
+  width: 10px;
+  bottom: 0;
+  left: 0;
 }
 
 .window {
