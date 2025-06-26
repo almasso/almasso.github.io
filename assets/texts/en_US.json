@@ -1,0 +1,12 @@
+[
+    {
+        "id" : "searcher",
+        "texts" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "view" : "View",
+            "special" : "Special",
+            "help" : "Help"
+        }
+    }
+]

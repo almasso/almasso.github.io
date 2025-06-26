@@ -1,0 +1,12 @@
+[
+    {
+        "id" : "searcher",
+        "texts" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "view" : "Visualización",
+            "special" : "Especial",
+            "help" : "Ayuda"
+        }
+    }
+]

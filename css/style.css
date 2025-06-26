@@ -1,3 +1,4 @@
+/*#region FONTS AND CURSOR*/
 @font-face {
     font-family: 'Chicago';
     src: url('/assets/fonts/ChicagoFLF.ttf');
@@ -17,7 +18,9 @@ body, html {
   overflow: hidden;
   font-family: 'Chicago', sans-serif;
 }
+/*#endregion*/
 
+/*#region MONITOR*/
 #monitor {
   width: 99%;
   height: 98%;
@@ -46,7 +49,7 @@ body, html {
     transparent 3px
   );
   mix-blend-mode: multiply;
-  z-index: 10;
+  z-index: 100;
 }
 
 #monitor::after {
@@ -62,9 +65,12 @@ body, html {
     rgba(0, 0, 0, 0) 60%,
     rgba(0, 0, 0, 0.25) 100%
   );
-  z-index: 11;
+  z-index: 101;
 }
+/*#endregion*/
 
+/*#region OS*/
+/*#region TOPBAR*/
 #topbar {
   top: 0;
   left: 0;
@@ -83,26 +89,6 @@ body, html {
   justify-content: space-between;
 }
 
-#desktop {
-  flex: 1;
-  background-image: url('/assets/bgs/defbg.png');
-  background-size: cover;
-  overflow: hidden;
-  position: relative;
-  filter: contrast(1.1) brightness(1.1) saturate(1.2);
-  image-rendering: pixelated;
-}
-
-#buttons {
-  position: absolute;
-  display: flex;
-  left: 20px;
-}
-
-#mac-icon img {
-  width: 20px;
-}
-
 #topbar button {
   background-color: transparent;
   border-color: transparent;
@@ -119,6 +105,16 @@ body, html {
   color: white;
 }
 
+#buttons {
+  position: absolute;
+  display: flex;
+  left: 20px;
+}
+
+#mac-icon img {
+  width: 20px;
+}
+
 .right-group {
   margin-left: auto;
   display: flex;
@@ -129,6 +125,29 @@ body, html {
 #lang-flag img {
   height: 20px;
   padding-top: 3px;
+}
+
+.dropdown {
+  position: absolute;
+  background-color: #DDDDDD;
+  border: 2px solid black;
+  color: black;
+  min-width: 15px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 60;
+}
+
+.dropdown-option {
+  padding: 10px;
+}
+
+.dropdown-option:hover {
+  background-color: #3531A2;
+  color: white;
+}
+
+.hidden {
+  display: none;
 }
 
 #topbar-slider, #current-app, #lang-flag {
@@ -149,7 +168,20 @@ body, html {
 #topbar-slider img {
   height: 30px;
 }
+/*#endregion*/
 
+/*#region DESKTOP*/
+#desktop {
+  flex: 1;
+  background-image: url('/assets/bgs/defbg.png');
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+  filter: contrast(1.1) brightness(1.1) saturate(1.2);
+  image-rendering: pixelated;
+}
+
+/*#region PROGRAMS*/
 .app-button-content {
   display: flex;
   align-items: center;
@@ -221,11 +253,11 @@ body, html {
   background: #c0c0c0;
   color: black;
   padding: 4px;
-  cursor: move;
   user-select: none;
   border-bottom: 2px solid #808080;
   font-size: 12px;
   font-weight: bold;
+  text-align: center;
 }
 
 .window-body {
@@ -236,3 +268,6 @@ body, html {
   overflow: auto;
   border-top: 2px solid #fff;
 }
+/*#endregion*/
+/*#endregion*/
+/*#endregion*/
