@@ -19,12 +19,27 @@ export default class OS extends EventTarget {
     this.#getLocale();
     this.#loadPrograms();
     this.currentApp = null;
-    this.buttons = null;
     this.setCurrentApp(this.apps.get("searcher"));
     this.windows = new Array();
     this.windowID = 0;
+
+    this.addEventListener("focusChanged", () => {
+      this.#setButtons();
+    });
+
+    this.addEventListener("langLoaded", () => {
+      this.#setButtons();
+    });
+
+    this.addEventListener("focusWindow", (e) => {
+      this.setCurrentApp(e.detail.app);
+      this.#focusWindow(e.detail.windowID);
+    });
   }
 
+  /**
+   * Returns default locale from user's browser
+   */
   #getLocale() {
     const locale = navigator.language || navigator.userLanguage;
     if(locale === "es-ES") this.locale = "es_ES";
@@ -35,6 +50,10 @@ export default class OS extends EventTarget {
     this.#setLocale(this.locale);
   }
 
+  /**
+   * Sets a certain locale
+   * @param {string} code Locale code (de_DE, en_US, es_ES)
+   */
   #setLocale(code) {
     this.locale = code;
     document.getElementById("lang-flag").innerHTML = `
@@ -85,6 +104,9 @@ export default class OS extends EventTarget {
     })
   }
 
+  /**
+   * Loads all programs
+   */
   #loadPrograms() {
     this.apps = new Map();
     this.apps.set("searcher", new Searcher(this));
@@ -92,22 +114,38 @@ export default class OS extends EventTarget {
     this.dispatchEvent(new CustomEvent("appsLoaded", {}));
   }
 
+  /**
+   * Sets a window in front
+   * @param {number} id Window ID to set in front
+   */
   #focusWindow(id) {
     this.windows.forEach(w => {
       if(w.id != id) w.unfocus();
     });
+    this.dispatchEvent(new CustomEvent("focusChanged", {}));
   }
 
+  /**
+   * Opens an instance of a program (window)
+   * @param {string} app Program identifier
+   */
   openWindow(app) {
     const win = new Window(this, app, this.windowID++);
-    win.addEventListener("focusWindow", (e) => this.#focusWindow(e.detail.windowID));
     win.open();
     this.windows.push(win);
   }
 
+  /**
+   * Closes a certain window or instance of a program
+   * @param {number} id 
+   */
   closeWindow(id) {
   }
 
+  /**
+   * Sets current app on the topbar
+   * @param {string} app 
+   */
   setCurrentApp(app) {
     this.currentApp = app;
     const currentAppBut = document.querySelector(".app-button-content");
@@ -115,23 +153,21 @@ export default class OS extends EventTarget {
       <img src="/assets/icons/programs/${this.currentApp.icon}" />
       <span>${this.currentApp.name}</span>
     `;
-    this.addEventListener("langLoaded", () => {
-      this.buttons = app.getButtons();
-      this.#setButtons();
-    });
   }
 
+  /**
+   * Sets function buttons like on MacOS
+   */
   #setButtons() {
     const buttons = document.getElementById("buttons");
     let buttonsHtml = "";
-    for(const key in this.buttons) {
+    for(const key in this.currentApp.getButtons()) {
       buttonsHtml += `
         <div id="${key}-button">
-          <button>${this.buttons[key]}</button>
+          <button>${this.currentApp.getButtons()[key]}</button>
         </div>
       `;
     }
-
 
     buttons.innerHTML = `
       <div id="mac-icon">

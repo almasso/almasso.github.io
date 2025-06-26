@@ -66,8 +66,6 @@ export default class Program extends EventTarget {
     getButtons() {}
 
     setLanguage(langcode, callback) {
-        console.log("AAAA");
-        console.log(langcode, callback)
         fetch(`/assets/texts/${langcode}.json`).then(response => {
             if(!response.ok) throw new Error("HTTP error " + response.status);
             return response.json();

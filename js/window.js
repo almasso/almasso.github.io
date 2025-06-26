@@ -49,11 +49,10 @@ export default class Window extends EventTarget{
     }
 
     focus() {
-        this.dispatchEvent(new CustomEvent("focusWindow", {
-            detail: {windowId: this.id}
+        this.os.dispatchEvent(new CustomEvent("focusWindow", {
+            detail: {windowId: this.id, app: this.program}
         }));
         this.win.style.zIndex = 3;
-        this.os.setCurrentApp(this.program);
     }
 
     unfocus() {
