@@ -78,6 +78,10 @@ export default class Program extends EventTarget {
 
     getButtons() {}
 
+    gainedFocus() {}
+
+    lostFocus() {}
+
     setLanguage(langcode, callback) {
         fetch(`assets/texts/${langcode}.json`).then(response => {
             if(!response.ok) throw new Error("HTTP error " + response.status);
@@ -95,5 +99,5 @@ export default class Program extends EventTarget {
         return this.langData?.find(e => e.id === this.id) || null;
     }
 
-    getBodyHTML() {}
+    async getBodyHTML() {}
 }

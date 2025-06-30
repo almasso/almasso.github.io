@@ -5,7 +5,7 @@ export default class Arkanoid extends Program {
         super(os, "Arkanoid", "arkanoid", "arkanoid.png", true, "desktop", true);
     }
 
-    getBodyHTML() {
+    async getBodyHTML() {
         return `<div>¡Hola!</div>` 
     }
 }

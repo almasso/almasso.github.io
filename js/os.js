@@ -1,6 +1,7 @@
 import Window from "./window.js"
 import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
+import Terminal from "./programs/terminal.js";
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,7 +31,12 @@ export default class OS extends EventTarget {
 
     this.addEventListener("focusWindow", (e) => {
       this.setCurrentApp(e.detail.app);
+      e.detail.app.gainedFocus();
       this.#focusWindow(e.detail.windowID);
+    });
+
+    this.addEventListener("unfocusWindow", (e) => {
+      e.detail.app.lostFocus();
     });
 
     this.addEventListener("closeWindow", (e) => {
@@ -123,6 +129,7 @@ export default class OS extends EventTarget {
     this.apps = new Map();
     this.apps.set("searcher", new Searcher(this));
     this.apps.set("arkanoid", new Arkanoid(this));
+    this.apps.set("terminal", new Terminal(this));
     this.dispatchEvent(new CustomEvent("appsLoaded", {}));
   }
 
@@ -147,9 +154,9 @@ export default class OS extends EventTarget {
    * Opens an instance of a program (window)
    * @param {string} app Program identifier
    */
-  openWindow(app) {
+  async openWindow(app) {
     const win = new Window(this, app, this.windowID++);
-    win.open();
+    await win.open();
     this.windows.push(win);
   }
 
@@ -213,7 +220,6 @@ export default class OS extends EventTarget {
 }
 
 //TODO:
-// Que las ventanas se puedan minimizar y maximizar
 // Que las aplicaciones puedan mostrar contenido
 // Que los botones de la topbar funcionen
 // Fijar el botón de mac, file y edit para que sean intocables y como mucho desactivables

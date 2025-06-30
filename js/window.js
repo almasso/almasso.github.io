@@ -13,12 +13,13 @@ export default class Window extends EventTarget{
         this.minimized = false;
     }
 
-    open() {
+    async open() {
         let existingWindow = document.getElementById(`${this.program.id}-${this.id}`);
         if(!existingWindow) {
             this.win = document.createElement("div");
             this.win.className = "window";
             this.win.id = `${this.program.id}-${this.id}`;
+            const bodyHTML = await this.program.getBodyHTML();
             this.win.innerHTML = `
                 <div class="window-header">
                     <img class="close-button" src="assets/icons/system/but.png"/>
@@ -29,8 +30,13 @@ export default class Window extends EventTarget{
                     <img class="minim-button" src="assets/icons/system/minimize.png"/>
                 </div>
                 ${this.showDetails ? `<div class="window-details"></div>` : ``}
-                <div class="window-body">${this.program.getBodyHTML()}</div>
+                <div class="window-body">${bodyHTML}</div>
             `;
+
+            const pageStyle = document.createElement("link");
+            pageStyle.rel = "stylesheet";
+            pageStyle.href = `css/programs/${this.program.id}.css`;
+            this.win.appendChild(pageStyle);
 
             const dk = document.getElementById("desktop");
 
@@ -110,6 +116,9 @@ export default class Window extends EventTarget{
     }
 
     unfocus() {
+        this.os.dispatchEvent(new CustomEvent("unfocusWindow", {
+            detail: {windowId: this.id, app: this.program}
+        }));
         this.win.style.zIndex = 2;
     }
 

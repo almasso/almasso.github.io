@@ -8,5 +8,12 @@
             "special" : "Speziell",
             "help" : "Hilfe"
         }
+    },
+    {
+        "id" : "terminal",
+        "texts" : {
+            "cmdhelp" : "Verfügbare Befehle: help, echo, clear",
+            "cmdcommandnf" : "Befehl nicht gefunden: "
+        }
     }
 ]

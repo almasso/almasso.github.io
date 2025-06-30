@@ -1,0 +1,37 @@
+/*#region FONTS AND CURSOR*/
+@font-face {
+    font-family: 'JetBrains Mono';
+    src: url('./../../assets/fonts/JetBrainsMono-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+/*#endregion*/
+
+.terminal {
+  margin: 0;
+  padding-left: 10px;
+  padding-top: 5px;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', sans-serif;
+  color: #0f0;
+  font-size: 12px;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  margin-right: 5px;
+}
+
+.terminal-input {
+  background: transparent;
+  border: none;
+  color: #0f0;
+  outline: none;
+  flex-grow: 1;
+}

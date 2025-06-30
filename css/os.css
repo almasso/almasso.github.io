@@ -321,12 +321,10 @@ body, html {
 
 .window-body {
   flex: 1;
-  padding: 10px;
   background: #ffffff;
   font-size: 12px;
-  overflow: auto;
-  border-top: 2px solid #fff;
   text-align: start;
+  overflow: hidden;
 }
 /*#endregion*/
 /*#endregion*/
