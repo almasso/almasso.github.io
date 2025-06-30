@@ -1,13 +1,13 @@
 /*#region FONTS AND CURSOR*/
 @font-face {
     font-family: 'Chicago';
-    src: url('/assets/fonts/ChicagoFLF.ttf');
+    src: url('./../assets/fonts/ChicagoFLF.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 * {
-  cursor: url('/assets/icons/system/cursor.png') 1 1, auto;
+  cursor: url('./../assets/icons/system/cursor.png') 1 1, auto;
 }
 
 body, html {
@@ -173,7 +173,7 @@ body, html {
 /*#region DESKTOP*/
 #desktop {
   flex: 1;
-  background-image: url('/assets/bgs/defbg.png');
+  background-image: url('./../assets/bgs/defbg.png');
   background-size: cover;
   overflow: hidden;
   position: relative;
@@ -239,22 +239,81 @@ body, html {
   position: absolute;
   top: 100px;
   left: 100px;
-  width: 300px;
-  height: 200px;
-  background: #e0e0e0;
-  border: 2px solid #000;
-  box-shadow: 1px 1px 0 #808080, -1px -1px 0 #fff;
+  background: #999999;
+  border-bottom: 5px solid #999999;
+  border-top: 15px solid #999999;
+  border-left: 5px solid #999999;
+  border-right: 5px solid #999999;
+  box-shadow: 2px 2px 0 #000, -2px -2px 0 #000;
   display: flex;
   flex-direction: column;
   z-index: 1;
+  font-size: 14px;
+  text-align: center;
 }
 
 .window-header {
-  background: #c0c0c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  user-select: none;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+}
+
+.close-button, .minim-button {
+  height: 15px;
+  transform: translateY(-5px);
+}
+
+.maxim-button {
+  height: 15px;
+  transform: translateY(-5px) translateX(-2px);
+}
+
+.window-title {
+  white-space: nowrap;
+  transform: translateY(-5px);
+  padding: 0 6px;
+  z-index: 1;
+}
+
+.title-stripe {
+  flex: 1;
+  height: 6px;
+  transform: translateY(-5px);
+  background: repeating-linear-gradient(
+    to bottom,
+    #444 0px,
+    #444 1px,
+    #888 1px,
+    #888 2px,
+    #444 2px,
+    #444 3px,
+    #888 3px,
+    #888 4px,
+    #444 4px,
+    #444 5px,
+    #888 5px,
+    #888 6px,
+    #444 6px,
+    #444 7px,
+    #888 7px,
+    #888 8px
+  );
+  margin: 0 4px;
+  opacity: 0.6;
+}
+
+.window-details {
+  background: #bbbbbb;
   color: black;
   padding: 4px;
   user-select: none;
-  border-bottom: 2px solid #808080;
+  border-bottom: 2px solid #000;
   font-size: 12px;
   font-weight: bold;
   text-align: center;
@@ -267,6 +326,7 @@ body, html {
   font-size: 12px;
   overflow: auto;
   border-top: 2px solid #fff;
+  text-align: start;
 }
 /*#endregion*/
 /*#endregion*/

@@ -1,5 +1,5 @@
 export default class Program extends EventTarget {
-    constructor(os, name, id, icon, isAlias, route) {
+    constructor(os, name, id, icon, isAlias, route, unique) {
         super();
         this.os = os;
         this.name = name;
@@ -9,6 +9,8 @@ export default class Program extends EventTarget {
         this.zIndexCounter = 2;
         this.isAlias = isAlias;
         this.route = route;
+        this.unique = unique;
+        this.instanceCreated = false;
 
         this.#createProgramIcon();
     }
@@ -30,12 +32,12 @@ export default class Program extends EventTarget {
 
             const img = document.createElement("img");
             img.className = "icon";
-            img.src = `/assets/icons/programs/${this.icon}`;
+            img.src = `assets/icons/programs/${this.icon}`;
             iconStack.appendChild(img);
 
             const arrow = document.createElement("img");
             arrow.className = "alias-arrow";
-            arrow.src = "/assets/icons/system/aliasarrow.png";
+            arrow.src = "assets/icons/system/aliasarrow.png";
             iconStack.appendChild(arrow);
 
             iconDiv.appendChild(iconStack);
@@ -43,7 +45,7 @@ export default class Program extends EventTarget {
         else {
             const img = document.createElement("img");
             img.className = "indiv-icon";
-            img.src = `/assets/icons/programs/${this.icon}`;
+            img.src = `assets/icons/programs/${this.icon}`;
             iconDiv.appendChild(img);
         }
 
@@ -60,13 +62,24 @@ export default class Program extends EventTarget {
     }
 
     openWindow() {
-        this.os.openWindow(this);
+        if(!this.instanceCreated) {
+            this.os.openWindow(this);
+            this.instanceCreated = true;
+        }
+        else {
+            if(!this.unique) this.os.openWindow(this);
+            else this.os.focusWindow(this);
+        }
+    }
+
+    closeWindow() {
+        if(this.unique) this.instanceCreated = false;
     }
 
     getButtons() {}
 
     setLanguage(langcode, callback) {
-        fetch(`/assets/texts/${langcode}.json`).then(response => {
+        fetch(`assets/texts/${langcode}.json`).then(response => {
             if(!response.ok) throw new Error("HTTP error " + response.status);
             return response.json();
         }).then(data => {

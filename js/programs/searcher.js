@@ -2,7 +2,7 @@ import Program from "../program.js";
 
 export default class Searcher extends Program {
     constructor(os) {
-        super(os, "Searcher", "searcher", "searcher.png", false, "desktop");
+        super(os, "Searcher", "searcher", "searcher.png", false, "desktop", false);
         this.addEventListener("localeSet", (e) =>
         this.setLanguage(os.locale, () => {
             const programData = this.searchForProgramInData();

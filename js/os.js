@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
   var os = new OS();
 
-  /* TIME */
-  setInterval(updateTime, 1000);
-  updateTime();
-
 });
 
 export default class OS extends EventTarget {
@@ -22,6 +18,7 @@ export default class OS extends EventTarget {
     this.setCurrentApp(this.apps.get("searcher"));
     this.windows = new Array();
     this.windowID = 0;
+    this.showTime = true;
 
     this.addEventListener("focusChanged", () => {
       this.#setButtons();
@@ -35,6 +32,21 @@ export default class OS extends EventTarget {
       this.setCurrentApp(e.detail.app);
       this.#focusWindow(e.detail.windowID);
     });
+
+    this.addEventListener("closeWindow", (e) => {
+      this.setCurrentApp(this.apps.get("searcher"));
+      this.#setButtons();
+      e.detail.app.closeWindow();
+      this.closeWindow(e.detail.windowId);
+    });
+
+    setInterval(this.updateTime.bind(this), 100);
+    this.updateTime();
+
+    const timeDiv = document.getElementById("time-div");
+    timeDiv.addEventListener("click", () => {
+      this.showTime = !this.showTime;
+    })
   }
 
   /**
@@ -57,11 +69,11 @@ export default class OS extends EventTarget {
   #setLocale(code) {
     this.locale = code;
     document.getElementById("lang-flag").innerHTML = `
-      <button id="lang-button"><img src="/assets/icons/system/flags/${this.locale}.png" /></button>
+      <button id="lang-button"><img src="assets/icons/system/flags/${this.locale}.png" /></button>
       <div id="lang-selector" class="dropdown hidden">
-        <div class="dropdown-option" data-key="de_DE"><img src="/assets/icons/system/flags/de_DE.png" /></div>
-        <div class="dropdown-option" data-key="en_US"><img src="/assets/icons/system/flags/en_US.png" /></div>
-        <div class="dropdown-option" data-key="es_ES"><img src="/assets/icons/system/flags/es_ES.png" /></div>
+        <div class="dropdown-option" data-key="de_DE"><img src="assets/icons/system/flags/de_DE.png" /></div>
+        <div class="dropdown-option" data-key="en_US"><img src="assets/icons/system/flags/en_US.png" /></div>
+        <div class="dropdown-option" data-key="es_ES"><img src="assets/icons/system/flags/es_ES.png" /></div>
       </div>
     `;
     const but = document.getElementById("lang-button");
@@ -125,6 +137,12 @@ export default class OS extends EventTarget {
     this.dispatchEvent(new CustomEvent("focusChanged", {}));
   }
 
+  focusWindow(app) {
+    this.windows.forEach(w => {
+      if(w.program === app) w.focus();
+    });
+  }
+
   /**
    * Opens an instance of a program (window)
    * @param {string} app Program identifier
@@ -140,6 +158,7 @@ export default class OS extends EventTarget {
    * @param {number} id 
    */
   closeWindow(id) {
+    this.windows = this.windows.filter(win => win.id !== id);
   }
 
   /**
@@ -150,7 +169,7 @@ export default class OS extends EventTarget {
     this.currentApp = app;
     const currentAppBut = document.querySelector(".app-button-content");
     currentAppBut.innerHTML = `
-      <img src="/assets/icons/programs/${this.currentApp.icon}" />
+      <img src="assets/icons/programs/${this.currentApp.icon}" />
       <span>${this.currentApp.name}</span>
     `;
   }
@@ -176,12 +195,25 @@ export default class OS extends EventTarget {
       ${buttonsHtml}
     `;
   }
+
+  updateTime() {
+    const now = new Date();
+    if(this.showTime) {
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      document.getElementById('time-text').textContent = `${hours}:${minutes}`;
+    }
+    else {
+      const day = now.getDate().toString().padStart(2, '0');
+      const month = (now.getMonth() + 1).toString().padStart(2, '0');
+      const year = now.getFullYear().toString();
+      document.getElementById('time-text').textContent = `${day}/${month}/${year}`;
+    }
+  }
 }
 
-/* TIME FUNCTIONS */
-function updateTime() {
-  const now = new Date();
-  const hours = now.getHours().toString().padStart(2, '0');
-  const minutes = now.getMinutes().toString().padStart(2, '0');
-  document.getElementById('time-text').textContent = `${hours}:${minutes}`;
-}
+//TODO:
+// Que las ventanas se puedan minimizar y maximizar
+// Que las aplicaciones puedan mostrar contenido
+// Que los botones de la topbar funcionen
+// Fijar el botón de mac, file y edit para que sean intocables y como mucho desactivables
