@@ -1,5 +1,10 @@
+import {sha256} from "./utils.js"
+
 export default class Program extends EventTarget {
-    constructor(os, name, id, icon, isAlias, route, unique) {
+    
+    static programCount = 0;
+
+    constructor(os, name, id, icon, route, unique) {
         super();
         this.os = os;
         this.name = name;
@@ -7,59 +12,27 @@ export default class Program extends EventTarget {
         this.icon = icon;
         this.isDragging = false;
         this.zIndexCounter = 2;
-        this.isAlias = isAlias;
         this.route = route;
         this.unique = unique;
         this.instanceCreated = false;
-
-        this.#createProgramIcon();
-    }
-
-    /**
-     * Creates an icon on the desktop of the OS
-     */
-    #createProgramIcon() {
-        const dk = document.getElementById("desktop");
-
-        const iconDiv = document.createElement("div");
-        iconDiv.className = "desktop-icon";
-        iconDiv.dataset.app = this.id;
-        iconDiv.setAttribute("is-alias", this.isAlias);
-
-        if(this.isAlias) {
-            const iconStack = document.createElement("div");
-            iconStack.className = "icon-stack";
-
-            const img = document.createElement("img");
-            img.className = "icon";
-            img.src = `assets/icons/programs/${this.icon}`;
-            iconStack.appendChild(img);
-
-            const arrow = document.createElement("img");
-            arrow.className = "alias-arrow";
-            arrow.src = "assets/icons/system/aliasarrow.png";
-            iconStack.appendChild(arrow);
-
-            iconDiv.appendChild(iconStack);
-        } 
-        else {
-            const img = document.createElement("img");
-            img.className = "indiv-icon";
-            img.src = `assets/icons/programs/${this.icon}`;
-            iconDiv.appendChild(img);
-        }
-
-        const label = document.createElement("div");
-        label.id = "prog-name";
-        label.innerHTML = this.isAlias ? `<i>${this.name}</i>` : this.name;
-        iconDiv.appendChild(label);
-
-        iconDiv.addEventListener("click", () => {
-            this.openWindow();
+        this._ready = sha256(this.id + Program.programCount.toString()).then((result) => {
+            this.instanceID = result;
         });
 
-        dk.appendChild(iconDiv);
+        this._languageReady = null;
+        
+        Program.programCount++;
     }
+
+    async ready() {
+        await this._ready;
+    }
+
+    async langReady() {
+        await this._languageReady;
+    }
+
+    static getIcons() {}
 
     openWindow() {
         if(!this.instanceCreated) {
@@ -82,16 +55,15 @@ export default class Program extends EventTarget {
 
     lostFocus() {}
 
-    setLanguage(langcode, callback) {
-        fetch(`assets/texts/${langcode}.json`).then(response => {
+    setLanguage(langcode) {
+        this._languageReady = fetch(`assets/texts/${langcode}.json`).then(response => {
             if(!response.ok) throw new Error("HTTP error " + response.status);
             return response.json();
         }).then(data => {
             this.langData = data;
-            if(callback) callback();
-            this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
         }).catch(error => {
             console.error("Failed to load JSON: ", error);
+            throw error;
         });
     }
 

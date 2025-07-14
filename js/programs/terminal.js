@@ -1,8 +1,13 @@
 import Program from "../program.js";
 
 export default class Terminal extends Program {
+
+    static icon = "terminal.png";
+    static id = "terminal";
+    static name = "Terminal";
+
     constructor(os) {
-        super(os, "Terminal", "terminal", "terminal.png", false, "desktop", false);
+        super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop", false);
 
         this.instanceID = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 8)}`;
         this.container = null;
@@ -86,5 +91,9 @@ export default class Terminal extends Program {
             this.input.removeEventListener("keydown", this._keydownListener);
             this._keydownListener = null;
         }
+    }
+
+    static getIcons() {
+        return [{route : "desktop", isAlias : false}];
     }
 }

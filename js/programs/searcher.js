@@ -1,19 +1,29 @@
 import Program from "../program.js";
 
 export default class Searcher extends Program {
+
+    static icon = "searcher.png";
+    static id = "searcher";
+    static name = "Searcher";
+
     constructor(os) {
-        super(os, "Searcher", "searcher", "searcher.png", false, "desktop", false);
-        this.addEventListener("localeSet", (e) =>
-            this.setLanguage(os.locale, () => {
-                const programData = this.searchForProgramInData();
-                if(programData) {
-                    this.strings = programData["texts"];
-                } else {
-                    console.warn("No data found for program", this.id);
-                    this.strings = {};
-                }
-            }
-        ));
+        super(os, Searcher.name, Searcher.id, Searcher.icon, "desktop", false);
+        this.addEventListener("localeSet", (e) => {
+            this.setLanguage(os.locale);
+            this.getProgramData();
+        });
+    }
+
+    async getProgramData() {
+        await this.langReady();
+        const programData = this.searchForProgramInData();
+        if(programData) {
+            this.strings = programData["texts"];
+        } else {
+            console.warn("No data found for program", this.id);
+            this.strings = {};
+        }
+        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
     }
 
     async getBodyHTML() {
@@ -22,5 +32,9 @@ export default class Searcher extends Program {
 
     getButtons() {
         return this.strings;
+    }
+
+    static getIcons() {
+        return [{route : "desktop", isAlias : false}]
     }
 }

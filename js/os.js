@@ -2,32 +2,32 @@ import Window from "./window.js"
 import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
+import Icon from "./icon.js";
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
   
   var os = new OS();
+  os.init();
 
 });
 
 export default class OS extends EventTarget {
   constructor() {
     super();
-    this.#getLocale();
-    this.#loadPrograms();
+
+    this.appInstances = new Map();
+    this.appRegistered = new Map();
+
+
     this.currentApp = null;
-    this.setCurrentApp(this.apps.get("searcher"));
     this.windows = new Array();
     this.windowID = 0;
     this.showTime = true;
 
-    this.addEventListener("focusChanged", () => {
-      this.#setButtons();
-    });
+    this.addEventListener("focusChanged", () => this.#setButtons());
 
-    this.addEventListener("langLoaded", () => {
-      this.#setButtons();
-    });
+    this.addEventListener("langLoaded", () => this.#setButtons());
 
     this.addEventListener("focusWindow", (e) => {
       this.setCurrentApp(e.detail.app);
@@ -35,12 +35,10 @@ export default class OS extends EventTarget {
       this.#focusWindow(e.detail.windowID);
     });
 
-    this.addEventListener("unfocusWindow", (e) => {
-      e.detail.app.lostFocus();
-    });
+    this.addEventListener("unfocusWindow", (e) => e.detail.app.lostFocus());
 
     this.addEventListener("closeWindow", (e) => {
-      this.setCurrentApp(this.apps.get("searcher"));
+      this.setCurrentApp(this.appInstances.get(0));
       this.#setButtons();
       e.detail.app.closeWindow();
       this.closeWindow(e.detail.windowId);
@@ -53,6 +51,13 @@ export default class OS extends EventTarget {
     timeDiv.addEventListener("click", () => {
       this.showTime = !this.showTime;
     })
+  }
+
+  async init() {
+    this.#getLocale();
+    await this.#loadPrograms();
+    this.#loadIcons();
+    this.setCurrentApp(this.appInstances.get(0));
   }
 
   /**
@@ -108,29 +113,43 @@ export default class OS extends EventTarget {
       }
     });
 
-    if(this.apps != null) {
-      this.apps.forEach(app => {
+    if(this.appInstances != null) {
+      this.appInstances.forEach(app => {
         app.dispatchEvent(new CustomEvent("localeSet", {
           detail: {langcode : this.locale}
       }))});
     }
-    else this.addEventListener("appsLoaded", () => {
-      this.apps.forEach(app => {
+    
+    this.addEventListener("appsLoaded", () => {
+      this.appInstances.forEach(app => {
+        console.log(app)
         app.dispatchEvent(new CustomEvent("localeSet", {
           detail: {langcode : this.locale}
       }))});
-    })
+    });
   }
 
   /**
    * Loads all programs
    */
-  #loadPrograms() {
-    this.apps = new Map();
-    this.apps.set("searcher", new Searcher(this));
-    this.apps.set("arkanoid", new Arkanoid(this));
-    this.apps.set("terminal", new Terminal(this));
+  async #loadPrograms() {
+    this.appRegistered.set(Searcher.id, Searcher);
+    this.appRegistered.set(Arkanoid.id, Arkanoid);
+    this.appRegistered.set(Terminal.id, Terminal);
+    let instance = new Searcher(this);
+    await instance.ready();
+    this.appInstances.set(0, instance);
+  
     this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+  }
+
+  #loadIcons() {
+    this.appRegistered.forEach((val, key) => {
+      let locs = val.getIcons();
+      locs.forEach(loc => {
+        new Icon(this, val, loc.isAlias, loc.route);
+      });
+    });
   }
 
   /**
@@ -155,7 +174,12 @@ export default class OS extends EventTarget {
    * @param {string} app Program identifier
    */
   async openWindow(app) {
-    const win = new Window(this, app, this.windowID++);
+    let instance = new app(this);
+    await instance.ready();
+    this.appInstances.set(instance.instanceID, instance);
+    this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+    
+    const win = new Window(this, instance, this.windowID++);
     await win.open();
     this.windows.push(win);
   }
