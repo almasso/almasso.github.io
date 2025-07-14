@@ -5,9 +5,10 @@ export default class Searcher extends Program {
     static icon = "searcher.png";
     static id = "searcher";
     static name = "Searcher";
+    static unique = false;
 
     constructor(os) {
-        super(os, Searcher.name, Searcher.id, Searcher.icon, "desktop", false);
+        super(os, Searcher.name, Searcher.id, Searcher.icon, "desktop");
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
             this.getProgramData();

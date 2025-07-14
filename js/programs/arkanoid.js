@@ -5,9 +5,10 @@ export default class Arkanoid extends Program {
     static icon = "arkanoid.png";
     static id = "arkanoid";
     static name = "Arkanoid";
+    static unique = true;
 
     constructor(os) {
-        super(os, Arkanoid.name, Arkanoid.id, Arkanoid.icon, "desktop", true);
+        super(os, Arkanoid.name, Arkanoid.id, Arkanoid.icon, "desktop");
     }
 
     async getBodyHTML() {

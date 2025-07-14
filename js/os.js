@@ -40,7 +40,6 @@ export default class OS extends EventTarget {
     this.addEventListener("closeWindow", (e) => {
       this.setCurrentApp(this.appInstances.get(0));
       this.#setButtons();
-      e.detail.app.closeWindow();
       this.closeWindow(e.detail.windowId);
     });
 
@@ -173,14 +172,23 @@ export default class OS extends EventTarget {
    * @param {string} app Program identifier
    */
   async openWindow(app) {
-    let instance = new app(this);
-    await instance.ready();
-    this.appInstances.set(instance.instanceID, instance);
-    this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+    let searchedInstance = [...this.appInstances.values()].find(
+      a => a instanceof app
+    );
 
-    const win = new Window(this, instance, this.windowID++);
-    await win.open();
-    this.windows.push(win);
+    if(app.unique && searchedInstance) {
+      this.focusWindow(searchedInstance);
+    }
+    else {
+      let instance = new app(this);
+      await instance.ready();
+      this.appInstances.set(instance.instanceID, instance);
+      this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+  
+      const win = new Window(this, instance, this.windowID++);
+      await win.open();
+      this.windows.push(win);
+    }
   }
 
   /**

@@ -5,9 +5,10 @@ export default class Terminal extends Program {
     static icon = "terminal.png";
     static id = "terminal";
     static name = "Terminal";
+    static unique = false;
 
     constructor(os) {
-        super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop", false);
+        super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop");
 
         this.instanceID = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 8)}`;
         this.container = null;

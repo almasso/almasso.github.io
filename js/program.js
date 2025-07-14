@@ -4,7 +4,7 @@ export default class Program extends EventTarget {
     
     static programCount = 0;
 
-    constructor(os, name, id, icon, route, unique) {
+    constructor(os, name, id, icon, route) {
         super();
         this.os = os;
         this.name = name;
@@ -13,8 +13,6 @@ export default class Program extends EventTarget {
         this.isDragging = false;
         this.zIndexCounter = 2;
         this.route = route;
-        this.unique = unique;
-        this.instanceCreated = false;
         this._ready = sha256(this.id + Program.programCount.toString()).then((result) => {
             this.instanceID = result;
         });
@@ -33,22 +31,7 @@ export default class Program extends EventTarget {
     }
 
     static getIcons() {}
-
-    openWindow() {
-        if(!this.instanceCreated) {
-            this.os.openWindow(this);
-            this.instanceCreated = true;
-        }
-        else {
-            if(!this.unique) this.os.openWindow(this);
-            else this.os.focusWindow(this);
-        }
-    }
-
-    closeWindow() {
-        if(this.unique) this.instanceCreated = false;
-    }
-
+ 
     getButtons() {}
 
     gainedFocus() {}
