@@ -122,7 +122,6 @@ export default class OS extends EventTarget {
     
     this.addEventListener("appsLoaded", () => {
       this.appInstances.forEach(app => {
-        console.log(app)
         app.dispatchEvent(new CustomEvent("localeSet", {
           detail: {langcode : this.locale}
       }))});
@@ -178,17 +177,18 @@ export default class OS extends EventTarget {
     await instance.ready();
     this.appInstances.set(instance.instanceID, instance);
     this.dispatchEvent(new CustomEvent("appsLoaded", {}));
-    
+
     const win = new Window(this, instance, this.windowID++);
     await win.open();
     this.windows.push(win);
   }
 
   /**
-   * Closes a certain window or instance of a program
+   * Closes a certain window and instance of a program
    * @param {number} id 
    */
   closeWindow(id) {
+    this.appInstances.delete(this.windows.find(w => w.id === id).program.instanceID);
     this.windows = this.windows.filter(win => win.id !== id);
   }
 
