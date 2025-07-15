@@ -5,3 +5,7 @@ export async function sha256(string) {
     const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
     return hashHex;
 }
+
+export function getRoot() {
+    return window.location.pathname.includes("almasso") ? "/almasso/" : "/";
+}

@@ -22,10 +22,12 @@
 .terminal-input-line {
   display: flex;
   align-items: center;
+  font-family: 'JetBrains Mono', sans-serif;
 }
 
 .prompt {
   margin-right: 5px;
+  font-family: 'JetBrains Mono', sans-serif;
 }
 
 .terminal-input {
@@ -34,4 +36,5 @@
   color: #0f0;
   outline: none;
   flex-grow: 1;
+  font-family: 'JetBrains Mono', sans-serif;
 }

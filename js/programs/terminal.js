@@ -1,4 +1,5 @@
 import Program from "../program.js";
+import {getRoot} from "../utils.js";
 
 export default class Terminal extends Program {
 
@@ -40,7 +41,7 @@ export default class Terminal extends Program {
     }
 
     async getBodyHTML() {
-        const response = await fetch("./../../../html/programs/terminal.html");
+        const response = await fetch(`${getRoot()}html/programs/terminal.html`);
         return await response.text();
     }
 
