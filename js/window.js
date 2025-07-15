@@ -18,7 +18,7 @@ export default class Window extends EventTarget{
         if(!existingWindow) {
             this.win = document.createElement("div");
             this.win.className = "window";
-            this.win.id = `${this.program.id}-${this.id}`;
+            this.win.id = `${this.program.instanceID}`;
             const bodyHTML = await this.program.getBodyHTML();
             this.win.innerHTML = `
                 <div class="window-header">

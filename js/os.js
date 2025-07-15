@@ -24,6 +24,7 @@ export default class OS extends EventTarget {
     this.windows = new Array();
     this.windowID = 0;
     this.showTime = true;
+    this.currentAppResumed = false;
 
     this.addEventListener("focusChanged", () => this.#setButtons());
 
@@ -41,6 +42,11 @@ export default class OS extends EventTarget {
       this.setCurrentApp(this.appInstances.get(0));
       this.#setButtons();
       this.closeWindow(e.detail.windowId);
+    });
+
+    document.getElementById("topbar-slider").addEventListener("click", () => {
+        this.currentAppResumed = !this.currentAppResumed;
+        this.setCurrentApp(this.currentApp);
     });
 
     setInterval(this.updateTime.bind(this), 100);
@@ -209,7 +215,7 @@ export default class OS extends EventTarget {
     const currentAppBut = document.querySelector(".app-button-content");
     currentAppBut.innerHTML = `
       <img src="assets/icons/programs/${this.currentApp.icon}" />
-      <span>${this.currentApp.name}</span>
+      ${this.currentAppResumed ? ``: `<span>${this.currentApp.name}</span>`}
     `;
   }
 

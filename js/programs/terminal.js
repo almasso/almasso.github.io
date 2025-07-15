@@ -10,29 +10,33 @@ export default class Terminal extends Program {
     constructor(os) {
         super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop");
 
-        this.instanceID = `${Date.now().toString(36)}-${Math.random().toString(36).substring(2, 8)}`;
         this.container = null;
 
-        this.addEventListener("localeSet", (e) =>
-            this.setLanguage(os.locale, () => {
-                const programData = this.searchForProgramInData();
-                if(programData) {
-                    this.strings = programData["texts"];
+        this.addEventListener("localeSet", (e) => {
+            this.setLanguage(os.locale);
+            this.getProgramData();
+        });
+    }
 
-                    this.commands = {
-                        help : this.strings["cmdhelp"],
-                        echo: (args) => args.join(" "),
-                        clear: () => {
-                            this.output.innerHTML = "";
-                            return null;
-                        }
-                    }
-                } else {
-                    console.warn("No data found for program", this.id);
-                    this.strings = {};
+    async getProgramData() {
+        await this.langReady();
+        const programData = this.searchForProgramInData();
+        if(programData) {
+            this.strings = programData["texts"];
+
+            this.commands = {
+                help : this.strings["cmdhelp"],
+                echo: (args) => args.join(" "),
+                clear: () => {
+                    this.output.innerHTML = "";
+                    return null;
                 }
             }
-        ));
+        } else {
+            console.warn("No data found for program", this.id);
+            this.strings = {};
+        }
+        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
     }
 
     async getBodyHTML() {
@@ -44,9 +48,10 @@ export default class Terminal extends Program {
         requestAnimationFrame(() => {
             console.log("cargó", this.container)
             if(this.container === null) {
-                const container = document.getElementById("terminal");
-                const output = document.getElementById("terminal-output");
-                const input = document.getElementById("terminal-input");
+                const win = document.getElementById(this.instanceID);
+                const container = win.querySelector("#terminal");
+                const output = win.querySelector("#terminal-output");
+                const input = win.querySelector("#terminal-input");
 
                 container.id += `-${this.instanceID}`;
                 output.id += `-${this.instanceID}`;
