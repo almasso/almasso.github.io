@@ -47,7 +47,6 @@ export default class Terminal extends Program {
 
     gainedFocus() {
         requestAnimationFrame(() => {
-            console.log("cargó", this.container)
             if(this.container === null) {
                 const win = document.getElementById(this.instanceID);
                 const container = win.querySelector("#terminal");
@@ -61,11 +60,18 @@ export default class Terminal extends Program {
                 this.container = container;
                 this.output = output;
                 this.input = input;
+
+                this.input.focus();
+
+                this.container.addEventListener("click", () => {
+                    this.input.focus();
+                });
             }
 
             this._keydownListener = (e) => {
                 if(e.key === "Enter") {
-                    let commandLine = this.input.value.trim();
+                    e.preventDefault();
+                    let commandLine = this.input.innerText.trim();
                     let [cmd, ...args] = commandLine.split(" ");
                     let result = this.commands[cmd]
                     ? typeof this.commands[cmd] === "function"
@@ -82,14 +88,28 @@ export default class Terminal extends Program {
                                 ${result}
                             </div>
                         `;
+                        this.output.scrollTop = this.output.scrollHeight;
                     }
 
-                    this.input.value = "";
-                    this.container.scrollTop = this.container.scrollHeight;
+                    this.input.innerText = "";
+                    this.input.innerHTML = "";
+                    setTimeout(() => this.input.focus(), 0);
+                    //this.container.scrollTop = this.container.scrollHeight;
+                }
+
+                if(e.key === "Backspace") {
+                    requestAnimationFrame(() => {
+                        if(this.input.innerText === "\n") {
+                            this.input.innerHTML = "";
+                        }
+                    })
                 }
             };
 
             this.input.addEventListener("keydown", this._keydownListener);
+            this.input.addEventListener("keypress", e => {
+                if(e.key === "Enter") e.preventDefault();
+            });
         });
     }
 
