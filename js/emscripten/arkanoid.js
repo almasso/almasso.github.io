@@ -277,6 +277,7 @@ function locateFile(path) {
   if (Module['locateFile']) {
     return Module['locateFile'](path, scriptDirectory);
   }
+  console.log(scriptDirectory + path);
   return scriptDirectory + path;
 }
 
@@ -346,7 +347,7 @@ if (ENVIRONMENT_IS_SHELL) {
 // ENVIRONMENT_IS_NODE.
 if (ENVIRONMENT_IS_WEB || ENVIRONMENT_IS_WORKER) {
   try {
-    scriptDirectory = new URL('.', _scriptName).href; // includes trailing slash
+    //scriptDirectory = new URL('.', _scriptName).href; // includes trailing slash
   } catch {
     // Must be a `blob:` or `data:` URL (e.g. `blob:http://site.com/etc/etc`), we cannot
     // infer anything from them.
@@ -894,7 +895,7 @@ function createExportWrapper(name, nargs) {
 var wasmBinaryFile;
 
 function findWasmBinary() {
-    return locateFile(`../../../assets/wasm/arkanoid.wasm`);
+    return locateFile(`${getRoot()}assets/wasm/arkanoid.wasm`);
 }
 
 function getBinarySync(file) {
