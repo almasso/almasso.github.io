@@ -190,8 +190,8 @@ export default class OS extends EventTarget {
       await instance.ready();
       this.appInstances.set(instance.instanceID, instance);
       this.dispatchEvent(new CustomEvent("appsLoaded", {}));
-  
-      const win = new Window(this, instance, this.windowID++);
+
+      const win = new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
       await win.open();
       this.windows.push(win);
     }
