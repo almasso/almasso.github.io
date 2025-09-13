@@ -119,6 +119,8 @@ export default class Navigator extends Program {
     }
 
     #updateButtons() {
+        this.homeButton.querySelector("img").src = `${getRoot()}assets/icons/programs/navigator/home.png`;
+        this.reloadButton.querySelector("img").src = `${getRoot()}assets/icons/programs/navigator/reload.png`;
         this.backButton.disabled = this.currentIndex <= 0;
         this.backButton.querySelector("img").src = this.backButton.disabled ? `${getRoot()}assets/icons/programs/navigator/back.png` : `${getRoot()}assets/icons/programs/navigator/back_active.png`;
         this.forwardButton.disabled = this.currentIndex >= this.historyStack.length - 1;
