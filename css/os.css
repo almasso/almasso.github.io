@@ -115,6 +115,7 @@ body, html {
   height: 100vh;
   background-color: black;
   transition: background-color 3s linear;
+  position: relative;
 }
 
 #bootup-screen.afterChime {
@@ -196,6 +197,26 @@ body, html {
   background-blend-mode: overlay;
   transition: width 0.5s;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+#extensions {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.ext {
+  width: 32px !important;
+  height: 32px !important;
+  opacity: 0;
+  transition: opacity 0.05s step-start;
+}
+
+.ext.active {
+  opacity: 1;
 }
 
 /*endregion*/

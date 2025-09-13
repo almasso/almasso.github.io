@@ -3,7 +3,7 @@ import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Icon from "./icon.js";
-import {getRoot} from "./utils.js"
+import {getRoot, shuffle} from "./utils.js"
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,6 +18,7 @@ export default class OS extends EventTarget {
     super();
 
     this.barWidth = 0;
+    this.#loadExtensions();
     this.#waitUntilUserClicks();
 
     this.appInstances = new Map();
@@ -62,6 +63,30 @@ export default class OS extends EventTarget {
     })
   }
 
+  #loadExtensions() {
+    this.extensions = shuffle([
+      `${getRoot()}assets/icons/system/extensions/blender.png`,
+      `${getRoot()}assets/icons/system/extensions/emscripten.png`,
+      `${getRoot()}assets/icons/system/extensions/guide.png`,
+      `${getRoot()}assets/icons/system/extensions/html.png`,
+      `${getRoot()}assets/icons/system/extensions/opengl.png`,
+      `${getRoot()}assets/icons/system/extensions/quicktime.png`,
+      `${getRoot()}assets/icons/system/extensions/sdl.png`,
+      `${getRoot()}assets/icons/system/extensions/sound_manager.png`,
+      `${getRoot()}assets/icons/system/extensions/unity.png`,
+      `${getRoot()}assets/icons/system/extensions/url_access.png`
+    ])
+
+    let container = document.getElementById("extensions");
+    this.extensions.forEach(src => {
+      const el = document.createElement("img");
+      el.src = src;
+      el.className = "ext";
+      container.appendChild(el);
+    });
+
+  }
+
   #waitUntilUserClicks() {
     document.getElementById("bootup-screen").addEventListener("click", () => {
       let diskette = document.getElementById("load-diskette");
@@ -90,7 +115,10 @@ export default class OS extends EventTarget {
           macIcon.src = `${getRoot()}assets/icons/system/macs/wink.png`;
           setTimeout(() => {
             macIcon.classList.add("invisible");
+            document.getElementById("loading-text").textContent = this.locale === "es_ES" ? 
+            "Bienvenid@ a almasso OS" : this.locale === "de_DE" ? "Willkommen in almasso OS" : "Welcome to almasso OS";
             welcomeScreen.classList.remove("invisible");
+            document.getElementById("extensions").classList.remove("invisible");
             setTimeout(() => {
               this.#loadAnim();
             }, 4000);
@@ -100,22 +128,33 @@ export default class OS extends EventTarget {
     }, 5000);
   }
 
+  #changeCursor(route) {
+     const allElements = document.querySelectorAll("*");
+     allElements.forEach(el => {
+        el.style.cursor = `${route}`;
+     })
+  }
+
   #loadAnim() {
     let bootupScreen = document.getElementById("bootup-screen");
     bootupScreen.style.backgroundColor = "black";
     bootupScreen.style.transition = "none";
     bootupScreen.style.backgroundImage = `url('${getRoot()}assets/bgs/defbg.png')`;
     bootupScreen.style.backgroundSize = "cover";
-    document.getElementById("loading-text").textContent = "Starting Up...";
+    document.getElementById("loading-text").textContent = this.locale === "es_ES" ? 
+    "Arrancando..." : this.locale === "de_DE" ? "Hochfahren Gerade..." : "Starting Up...";
     document.getElementById("loading-container").classList.remove("invisible");
 
     this.#fillBar();
   }
 
   #fillBar() {
+    let container = document.getElementById("extensions");
     let loadingBar =  document.getElementById("loading-bar");
     if(this.barWidth < 100) {
       this.barWidth++;
+      this.#changeCursor(`url('${getRoot()}assets/icons/system/spinningwheel/frame${(this.barWidth % 4) + 1}.png') 1 1, auto`);
+      if(this.barWidth % 10 === 0) container.children[(this.barWidth / 10) - 1].classList.add("active");
       loadingBar.style.width = this.barWidth + '%';
       setTimeout(() => this.#fillBar(), Math.random() * 290 + 10);
     }
@@ -123,9 +162,13 @@ export default class OS extends EventTarget {
   }
 
   #afterLoad() {
-    document.getElementById("bootup-screen").classList.add("invisible");
-    document.getElementById("topbar").classList.remove("invisible");
-    document.getElementById("desktop").classList.remove("invisible");
+    setTimeout(() => {
+      document.getElementById("bootup-screen").classList.add("invisible");
+      document.getElementById("extensions").classList.add("invisible");
+      document.getElementById("topbar").classList.remove("invisible");
+      document.getElementById("desktop").classList.remove("invisible");
+      this.#changeCursor(`url('${getRoot()}assets/icons/system/cursor.png') 1 1, auto`);
+    }, 3000);
   }
 
   async init() {
