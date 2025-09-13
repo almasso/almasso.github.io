@@ -89,6 +89,7 @@ export default class Navigator extends Program {
             });
 
             this.addedListeners = true;
+            this.#updateButtons();
         }
     }
 
