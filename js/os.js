@@ -3,6 +3,7 @@ import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Icon from "./icon.js";
+import {getRoot} from "./utils.js"
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
@@ -15,6 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 export default class OS extends EventTarget {
   constructor() {
     super();
+
+    this.barWidth = 0;
+    this.#waitUntilUserClicks();
 
     this.appInstances = new Map();
     this.appRegistered = new Map();
@@ -56,6 +60,72 @@ export default class OS extends EventTarget {
     timeDiv.addEventListener("click", () => {
       this.showTime = !this.showTime;
     })
+  }
+
+  #waitUntilUserClicks() {
+    document.getElementById("bootup-screen").addEventListener("click", () => {
+      let diskette = document.getElementById("load-diskette");
+      diskette.classList.remove("flicker");
+      diskette.classList.add("invisible");
+      this.#bootupAnim();
+    }, {once : true});
+  }
+
+  #bootupAnim() {
+    let bootupScreen = document.getElementById("bootup-screen");
+    bootupScreen.classList.remove("checkered");
+    let macIcon = document.getElementById("bootup-macicon");
+    let welcomeScreen = document.getElementById("welcome");
+    const bootupSound = new Audio(`${getRoot()}assets/sounds/startup.m4a`);
+    bootupSound.volume = 0.3;
+    bootupSound.play();
+    setTimeout(() => {
+      bootupScreen.classList.add("afterChime");
+      setTimeout(() => {
+        macIcon.classList.remove("invisible");
+        setTimeout(() => {
+          const winkSound = new Audio(`${getRoot()}assets/sounds/Temple.wav`);
+          winkSound.volume = 0.3;
+          winkSound.play();
+          macIcon.src = `${getRoot()}assets/icons/system/macs/wink.png`;
+          setTimeout(() => {
+            macIcon.classList.add("invisible");
+            welcomeScreen.classList.remove("invisible");
+            setTimeout(() => {
+              this.#loadAnim();
+            }, 4000);
+          }, 4000);
+        }, 3000);
+      }, 4000);
+    }, 5000);
+  }
+
+  #loadAnim() {
+    let bootupScreen = document.getElementById("bootup-screen");
+    bootupScreen.style.backgroundColor = "black";
+    bootupScreen.style.transition = "none";
+    bootupScreen.style.backgroundImage = `url('${getRoot()}assets/bgs/defbg.png')`;
+    bootupScreen.style.backgroundSize = "cover";
+    document.getElementById("loading-text").textContent = "Starting Up...";
+    document.getElementById("loading-container").classList.remove("invisible");
+
+    this.#fillBar();
+  }
+
+  #fillBar() {
+    let loadingBar =  document.getElementById("loading-bar");
+    if(this.barWidth < 100) {
+      this.barWidth++;
+      loadingBar.style.width = this.barWidth + '%';
+      setTimeout(() => this.#fillBar(), Math.random() * 290 + 10);
+    }
+    else this.#afterLoad();
+  }
+
+  #afterLoad() {
+    document.getElementById("bootup-screen").classList.add("invisible");
+    document.getElementById("topbar").classList.remove("invisible");
+    document.getElementById("desktop").classList.remove("invisible");
   }
 
   async init() {

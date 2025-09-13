@@ -9,7 +9,21 @@
     </head>
     <body>
         <div id="monitor">
-            <div id="topbar">
+            <div id="bootup-screen" class="checkered">
+                <img src="assets/icons/system/load.png" id="load-diskette" class="flicker">
+                <img src="assets/icons/system/macs/happy.png" id="bootup-macicon" class="invisible">
+                <div id="welcome" class="invisible">
+                    <div id="almasso-logo">
+                        <img src="assets/icons/system/searcher.png">
+                        <p>almasso <span style="color: #505089;">OS 9.0</span></p>
+                    </div>
+                    <p id="loading-text">Welcome to almasso OS</p>
+                    <div id="loading-container" class="invisible">
+                        <div id="loading-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div id="topbar" class="invisible">
                 <div id="buttons">
                     <div id="mac-icon">
                         <button><img src="assets/icons/system/macs/happy.png" /></button>
@@ -37,7 +51,7 @@
                 </div>
             </div>
 
-            <div id="desktop">
+            <div id="desktop" class="invisible">
             </div>
         </div>
 

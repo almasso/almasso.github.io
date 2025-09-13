@@ -15,5 +15,14 @@
             "cmdhelp" : "Comandos disponibles: help, echo, clear",
             "cmdcommandnf" : "No se ha encontrado el comando: "
         }
+    },
+    {
+        "id" : "arkanoid",
+        "texts" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "play" : "Jugar",
+            "help" : "Ayuda"
+        }
     }
 ]
