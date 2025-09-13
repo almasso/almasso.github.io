@@ -2,8 +2,11 @@ import Window from "./window.js"
 import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
+import Navigator from "./programs/navigator.js";
 import Icon from "./icon.js";
 import {getRoot, shuffle} from "./utils.js"
+
+const debugVar = false;
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,9 +20,14 @@ export default class OS extends EventTarget {
   constructor() {
     super();
 
-    this.barWidth = 0;
-    this.#loadExtensions();
-    this.#waitUntilUserClicks();
+    if(!debugVar) {
+      this.barWidth = 0;
+      this.#loadExtensions();
+      this.#waitUntilUserClicks();
+    }
+    else {
+      this.#afterLoad();
+    }
 
     this.appInstances = new Map();
     this.appRegistered = new Map();
@@ -168,7 +176,7 @@ export default class OS extends EventTarget {
       document.getElementById("topbar").classList.remove("invisible");
       document.getElementById("desktop").classList.remove("invisible");
       this.#changeCursor(`url('${getRoot()}assets/icons/system/cursor.png') 1 1, auto`);
-    }, 3000);
+    }, debugVar ? 0 : 3000);
   }
 
   async init() {
@@ -253,6 +261,7 @@ export default class OS extends EventTarget {
     this.appRegistered.set(Searcher.id, Searcher);
     this.appRegistered.set(Arkanoid.id, Arkanoid);
     this.appRegistered.set(Terminal.id, Terminal);
+    this.appRegistered.set(Navigator.id, Navigator);
     let instance = new Searcher(this);
     await instance.ready();
     this.appInstances.set(0, instance);

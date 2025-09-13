@@ -75,8 +75,8 @@ export default class Window extends EventTarget{
             container.id = `windows-container-${this.program.id}-${this.id}`;
             container.appendChild(this.win);
             this.makeDraggable()
-            this.focus();
             dk.appendChild(container);
+            this.focus();
         }
         else {
             existingWindow.style.display = "flex";

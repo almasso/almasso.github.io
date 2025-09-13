@@ -24,5 +24,16 @@
             "play" : "Play",
             "help" : "Help"
         }
+    },
+    {
+        "id" : "navigator",
+        "texts" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "view" : "View",
+            "go" : "Go",
+            "bookmarks" : "Bookmarks",
+            "help" : "Help"
+        }
     }
 ]

@@ -24,5 +24,16 @@
             "play" : "Spielen",
             "help" : "Hilfe"
         }
+    },
+    {
+        "id" : "navigator",
+        "texts" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "view" : "Darstellung",
+            "go" : "Gehen",
+            "bookmarks" : "Lesezeichen",
+            "help" : "Hilfe"
+        }
     }
 ]

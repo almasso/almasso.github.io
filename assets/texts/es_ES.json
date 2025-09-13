@@ -24,5 +24,16 @@
             "play" : "Jugar",
             "help" : "Ayuda"
         }
+    },
+    {
+        "id" : "navigator",
+        "texts" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "view" : "Visualización",
+            "go" : "Ir",
+            "bookmarks" : "Marcadores",
+            "help" : "Ayuda"
+        }
     }
 ]
