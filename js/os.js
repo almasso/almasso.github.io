@@ -8,10 +8,9 @@ import Terminal from "./programs/terminal.js";
 import Navigator from "./programs/navigator.js";
 import Steam from "./programs/steam.js";
 import Icon from "./icon.js";
-import {getRoot, shuffle} from "./utils.js"
 import {getRoot, shuffle} from "./utils.js";
 
-const debugVar = true;
+const debugVar = false;
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
