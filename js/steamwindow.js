@@ -1,16 +1,9 @@
-export default class Window extends EventTarget{
+import Window from "./window.js";
+
+export default class SteamWindow extends Window {
     constructor(os, program, id, width = 400, height = 300, maxWidth = 800, maxHeight = 600) {
-        super();
-        this.program = program;
-        this.id = id;
-        this.os = os;
-        this.win = null;
-        this.showDetails = false;
-        this.width = width;
-        this.height = height;
-        this.maxWidth = maxWidth;
-        this.maxHeight = maxHeight;
-        this.minimized = false;
+        super(os, program, id, width, height, maxWidth, maxHeight);
+        console.log("SOY DISTINTA");
     }
 
     async open() {

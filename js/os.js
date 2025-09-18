@@ -1,8 +1,10 @@
 import Window from "./window.js"
+import SteamWindow from "./steamwindow.js";
 import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Navigator from "./programs/navigator.js";
+import Steam from "./programs/steam.js";
 import Icon from "./icon.js";
 import {getRoot, shuffle} from "./utils.js"
 
@@ -259,9 +261,10 @@ export default class OS extends EventTarget {
    */
   async #loadPrograms() {
     this.appRegistered.set(Searcher.id, Searcher);
-    this.appRegistered.set(Arkanoid.id, Arkanoid);
     this.appRegistered.set(Terminal.id, Terminal);
     this.appRegistered.set(Navigator.id, Navigator);
+    this.appRegistered.set(Steam.id, Steam);
+    this.appRegistered.set(Arkanoid.id, Arkanoid);
     let instance = new Searcher(this);
     await instance.ready();
     this.appInstances.set(0, instance);
@@ -313,7 +316,8 @@ export default class OS extends EventTarget {
       this.appInstances.set(instance.instanceID, instance);
       this.dispatchEvent(new CustomEvent("appsLoaded", {}));
 
-      const win = new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
+      const win = app.id === Steam.id ? new SteamWindow(this, instance, this.windowID++, app.width, app.height, app.width, app.height) : 
+      new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
       await win.open();
       this.windows.push(win);
     }

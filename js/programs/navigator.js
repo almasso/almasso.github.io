@@ -99,7 +99,7 @@ export default class Navigator extends Program {
     }
 
     static getIcons() {
-        return [{route : "desktop", isAlias : true}];
+        return [{route : "desktop", isAlias : false}];
     }
 
     getButtons() {

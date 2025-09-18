@@ -1,17 +1,23 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 
-export default class Arkanoid extends Program {
 
-    static icon = "arkanoid.png";
-    static id = "arkanoid";
-    static name = "Arkanoid";
+export default class Steam extends Program {
+
+    static icon = "steam.png";
+    static id = "steam";
+    static name = "Steam";
     static unique = true;
-    static width = 828;
-    static height = 644;
 
     constructor(os) {
-        super(os, Arkanoid.name, Arkanoid.id, Arkanoid.icon, "desktop");
+        super(os, Steam.name, Steam.id, Steam.icon, "desktop");
+
+        this.container = null;
+        this.addedListeners = false;
+
+        this.historyStack = [];
+        this.currentIndex = -1;
+
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
             this.getProgramData();
@@ -30,15 +36,17 @@ export default class Arkanoid extends Program {
         this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
     }
 
+
     async getBodyHTML() {
-        return `<iframe src="${getRoot()}html/programs/arkanoid.html" style="width:100%; height:100%; border:none;"></iframe>`
+        const response = await fetch(`${getRoot()}html/programs/steam.html`);
+        return await response.text();
+    }
+
+    static getIcons() {
+        return [{route : "desktop", isAlias : false}];
     }
 
     getButtons() {
         return this.strings;
-    }
-
-    static getIcons() {
-        return [{route : "desktop", isAlias : true}]
     }
 }
