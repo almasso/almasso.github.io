@@ -494,6 +494,86 @@ body, html {
   overflow: hidden;
   border: 2px solid black;
 }
+
+/*#region STEAM SPECIAL WINDOW*/
+.steam-window {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  background: #4c5844;
+  border-bottom: 5px solid #4c5844;
+  border-top: 15px solid #4c5844;
+  border-left: 5px solid #4c5844;
+  border-right: 5px solid #4c5844;
+  box-shadow: 2px 2px 0 #3f4738, -2px -2px 0 #3f4738;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  font-size: 14px;
+  text-align: center;
+}
+
+.steam-window-title-and-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.steam-white-logo {
+  position: relative;
+  top: -5px;
+}
+
+.steam-window-title {
+  white-space: nowrap;
+  transform: translateY(-5px);
+  padding: 0 6px;
+  z-index: 1;
+}
+
+.steam-window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #eff6ee;
+  user-select: none;
+  font-size: 12px;
+  text-align: center;
+  position: relative;
+}
+
+.steam-window-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.steam-close-button, .steam-minim-button {
+  height: 15px;
+  transform: translateY(-5px);
+  border-top: 1px solid #80827F;
+  border-left: 1px solid #80827F;
+  border-right: 1px solid #27301F;
+  border-bottom: 1px solid #27301F;
+}
+
+.steam-close-button:active, .steam-minim-button:active {
+  height: 15px;
+  transform: translateY(-5px);
+  border-bottom: 1px solid #80827F;
+  border-right: 1px solid #80827F;
+  border-left: 1px solid #27301F;
+  border-top: 1px solid #27301F;
+}
+
+.steam-window-body {
+  flex: 1;
+  background: #4c5844;
+  font-size: 12px;
+  text-align: start;
+  overflow: hidden;
+}
+/*#endregion*/
+
 /*#endregion*/
 
 /*#region CONTROL STRIP*/

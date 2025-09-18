@@ -88,6 +88,7 @@ export default class Window extends EventTarget{
     }
 
     close() {
+        this.program.onClose();
         this.os.dispatchEvent(new CustomEvent("closeWindow", {
             detail: {windowId: this.id, app: this.program}
         }));

@@ -38,6 +38,8 @@ export default class Program extends EventTarget {
 
     lostFocus() {}
 
+    onClose() {}
+
     setLanguage(langcode) {
         this._languageReady = fetch(`assets/texts/${langcode}.json`).then(response => {
             if(!response.ok) throw new Error("HTTP error " + response.status);

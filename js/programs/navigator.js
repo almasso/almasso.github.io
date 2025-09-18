@@ -94,7 +94,7 @@ export default class Navigator extends Program {
     }
 
     async getBodyHTML() {
-        const response = await fetch(`${getRoot()}html/programs/navigator.html`);
+        const response = await fetch(`${getRoot()}html/programs/navigator/navigator.html`);
         return await response.text();
     }
 

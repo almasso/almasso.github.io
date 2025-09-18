@@ -1,5 +1,6 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
+import SteamWindow from "../windows/steamwindow.js";
 
 
 export default class Steam extends Program {
@@ -8,15 +9,18 @@ export default class Steam extends Program {
     static id = "steam";
     static name = "Steam";
     static unique = true;
+    static width = 420;
+    static height = 320;
 
-    constructor(os) {
-        super(os, Steam.name, Steam.id, Steam.icon, "desktop");
+    constructor(os, name = Steam.name) {
+        super(os, name, Steam.id, Steam.icon, "desktop");
 
         this.container = null;
         this.addedListeners = false;
 
         this.historyStack = [];
         this.currentIndex = -1;
+        this.gamesWindow = null;
 
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
@@ -36,9 +40,38 @@ export default class Steam extends Program {
         this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
     }
 
+    gainedFocus() {
+        const win = document.getElementById(this.instanceID);
+        const steamDiv = win.querySelector("#steam");
+
+        if(!this.addedListeners) {
+            steamDiv.querySelector("#steam-button-games button").addEventListener("click", () => {
+                this.gamesWindow = this.os.openSubwindow(this, Steam.width / 2, Steam.height, Steam.width / 2, Steam.height);
+            });
+            steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
+            });
+            steamDiv.querySelector("#steam-button-servers button").addEventListener("click", () => {
+            });
+            steamDiv.querySelector("#steam-button-monitor button").addEventListener("click", () => {
+            });
+            steamDiv.querySelector("#steam-button-settings button").addEventListener("click", () => {
+            });
+            steamDiv.querySelector("#steam-button-news button").addEventListener("click", () => {
+            });
+            this.addedListeners = true;
+        }
+    }
+
+    async onClose() {
+        if(this.gamesWindow) {
+            this.gamesWindow = await this.gamesWindow;
+            this.os.closeSubwindow(this.gamesWindow.id);
+            this.gamesWindow = null;
+        }
+    }
 
     async getBodyHTML() {
-        const response = await fetch(`${getRoot()}html/programs/steam.html`);
+        const response = await fetch(`${getRoot()}html/programs/steam/steam.html`);
         return await response.text();
     }
 

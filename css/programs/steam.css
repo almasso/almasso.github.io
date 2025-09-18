@@ -1,0 +1,72 @@
+#steam {
+    align-items: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+#steam-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.steam-main-button {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+}
+
+.steam-main-button p {
+    color: #818e7c;
+}
+
+.steam-button {
+    font-family: 'Chicago', sans-serif;
+    background-color: #4c5844;
+    border-top: 2px solid #80827F;
+    border-left: 2px solid #80827F;
+    border-right: 2px solid #27301F;
+    border-bottom: 2px solid #27301F;
+    color: white;
+    height: 26px;
+    width: 86px;
+    text-align: left;
+}
+
+.steam-button:active {
+    border-right: 2px solid #80827F;
+    border-bottom: 2px solid #80827F;
+    border-left: 2px solid #27301F;
+    border-top: 2px solid #27301F;
+    padding-left: 8px;
+    padding-top: 2px;
+}
+
+#steam-images {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+#steam-bottom {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#valve-logo {
+    height: 25px;
+    filter: brightness(0) saturate(100%) invert(51%) sepia(7%) saturate(691%) hue-rotate(58deg) brightness(91%) contrast(86%);
+}
+
+#steam-logo {
+    height: 25px;
+    filter: brightness(0) saturate(100%) invert(51%) sepia(7%) saturate(691%) hue-rotate(58deg) brightness(91%) contrast(86%);
+}
+
+.steam-hr {
+    border-color: #818e7c;
+    height: 1px;
+}

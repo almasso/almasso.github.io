@@ -1,5 +1,7 @@
-import Window from "./window.js"
-import SteamWindow from "./steamwindow.js";
+import Window from "./windows/window.js"
+import SteamWindow from "./windows/steamwindow.js";
+import Subwindow from "./windows/subwindow.js";
+import SteamSubwindow from "./windows/steamsubwindow.js";
 import Arkanoid from "./programs/arkanoid.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
@@ -7,8 +9,9 @@ import Navigator from "./programs/navigator.js";
 import Steam from "./programs/steam.js";
 import Icon from "./icon.js";
 import {getRoot, shuffle} from "./utils.js"
+import {getRoot, shuffle} from "./utils.js";
 
-const debugVar = false;
+const debugVar = true;
 
 /* LOADING OS */
 document.addEventListener("DOMContentLoaded", () => {
@@ -317,10 +320,27 @@ export default class OS extends EventTarget {
       this.dispatchEvent(new CustomEvent("appsLoaded", {}));
 
       const win = app.id === Steam.id ? new SteamWindow(this, instance, this.windowID++, app.width, app.height, app.width, app.height) : 
-      new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
+        new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
       await win.open();
       this.windows.push(win);
     }
+  }
+
+  /**
+   * Allows an instance of a program to open another window associated with the program
+   * @param {*} appInstance Program instance
+   * @param {*} winID Window identifier given by the program
+   */
+  async openSubwindow(appInstance, width, height, maxWidth, maxHeight) {
+    const win = appInstance.id === Steam.id ? new SteamSubwindow(this, appInstance, this.windowID++, width, height, maxWidth, maxHeight) :
+      new Subwindow(this, appInstance, winID, width, height, maxWidth, maxHeight);
+    await win.open();
+    this.windows.push(win);
+    return win;
+  }
+
+  closeSubwindow(id) {
+    this.windows = this.windows.filter(win => win.id !== id);
   }
 
   /**
