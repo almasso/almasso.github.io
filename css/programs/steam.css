@@ -70,3 +70,84 @@
     border-color: #818e7c;
     height: 1px;
 }
+
+#steam-games {
+    height: 95%;
+    background-color: #3f4738 !important;
+    border-right: 2px solid #80827F;
+    border-bottom: 2px solid #80827F;
+    border-left: 2px solid #27301F;
+    border-top: 2px solid #27301F;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+@-moz-document url-prefix() {
+    #steam-games {
+        scrollbar-color: #80827F #4c5844;
+    }
+}
+
+@supports selector(::-webkit-scrollbar) {
+    #steam-games::-webkit-scrollbar {
+        background-color: #4c5844;
+    }
+
+    #steam-games::-webkit-scrollbar-thumb {
+        border-left: 2px solid #80827F;
+        border-top: 2px solid #80827F;
+        border-right: 2px solid #27301F;
+        border-bottom: 2px solid #27301F;
+    }
+
+    #steam-games::-webkit-scrollbar-button:vertical:start:decrement, #steam-games::-webkit-scrollbar-button:vertical:end:increment {
+        border-left: 2px solid #80827F;
+        border-top: 2px solid #80827F;
+        border-right: 2px solid #27301F;
+        border-bottom: 2px solid #27301F;
+    }
+}
+
+#steam-games h1 {
+    font-size: 10px;
+    color: #968732;
+    display: flex;
+    padding-left: 30px;
+}
+
+#steam-games p {
+    font-size: 12px;
+}
+
+#steam-games hr {
+    border-color: #3f4738;
+    height: 1px;
+    width: 90%;
+}
+
+#my-games {
+    padding-top: 5px;
+}
+
+.steam-game {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 10px;
+    margin-top: -10px;
+    gap: 5px;
+}
+
+.game-available {
+    color: white;
+}
+
+.game-not-available {
+    color: #717D6C;
+}
+
+.steam-game img {
+    width: 20px;
+    height: 20px;
+}

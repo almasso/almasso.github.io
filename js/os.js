@@ -61,6 +61,12 @@ export default class OS extends EventTarget {
       this.closeWindow(e.detail.windowId);
     });
 
+    this.addEventListener("closeSubwindow", (e) => {
+      this.setCurrentApp(this.appInstances.get(0));
+      this.#setButtons();
+      this.closeSubwindow(e.detail.windowId);
+    })
+
     document.getElementById("topbar-slider").addEventListener("click", () => {
         this.currentAppResumed = !this.currentAppResumed;
         this.setCurrentApp(this.currentApp);
@@ -330,9 +336,9 @@ export default class OS extends EventTarget {
    * @param {*} appInstance Program instance
    * @param {*} winID Window identifier given by the program
    */
-  async openSubwindow(appInstance, width, height, maxWidth, maxHeight) {
-    const win = appInstance.id === Steam.id ? new SteamSubwindow(this, appInstance, this.windowID++, width, height, maxWidth, maxHeight) :
-      new Subwindow(this, appInstance, winID, width, height, maxWidth, maxHeight);
+  async openSubwindow(appInstance, name, contentRoute, width, height, maxWidth, maxHeight) {
+    const win = appInstance.id === Steam.id ? new SteamSubwindow(this, appInstance, this.windowID++, name, contentRoute, width, height, maxWidth, maxHeight) :
+      new Subwindow(this, appInstance, this.windowID++, name, width, height, maxWidth, maxHeight);
     await win.open();
     this.windows.push(win);
     return win;

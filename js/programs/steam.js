@@ -12,6 +12,8 @@ export default class Steam extends Program {
     static width = 420;
     static height = 320;
 
+    static gamesWindow = null;
+
     constructor(os, name = Steam.name) {
         super(os, name, Steam.id, Steam.icon, "desktop");
 
@@ -20,11 +22,18 @@ export default class Steam extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
-        this.gamesWindow = null;
 
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
             this.getProgramData();
+        });
+
+        this.addEventListener("closeSubwindow", (e) => {
+            switch(e.detail.windowName) {
+                case "Games":
+                    Steam.gamesWindow = null;
+                    break;
+            }
         });
     }
 
@@ -46,7 +55,10 @@ export default class Steam extends Program {
 
         if(!this.addedListeners) {
             steamDiv.querySelector("#steam-button-games button").addEventListener("click", () => {
-                this.gamesWindow = this.os.openSubwindow(this, Steam.width / 2, Steam.height, Steam.width / 2, Steam.height);
+                if(!Steam.gamesWindow) {
+                    Steam.gamesWindow = this.os.openSubwindow(this, "Games", `${getRoot()}html/programs/steam/games.html`, 
+                    Steam.width / 1.5, Steam.height, Steam.width / 1.5, Steam.height);
+                }
             });
             steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
             });
@@ -63,10 +75,11 @@ export default class Steam extends Program {
     }
 
     async onClose() {
-        if(this.gamesWindow) {
-            this.gamesWindow = await this.gamesWindow;
-            this.os.closeSubwindow(this.gamesWindow.id);
-            this.gamesWindow = null;
+        if(Steam.gamesWindow) {
+            Steam.gamesWindow = await Steam.gamesWindow;
+            this.os.closeSubwindow(Steam.gamesWindow.id);
+            Steam.gamesWindow.close();
+            Steam.gamesWindow = null;
         }
     }
 
