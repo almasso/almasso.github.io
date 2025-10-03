@@ -17,3 +17,7 @@ export function shuffle(array) {
     }
     return array;
 }
+
+export function isPromise(promise) {
+    return !!promise && typeof promise.then === 'function';
+}

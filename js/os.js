@@ -136,6 +136,9 @@ export default class OS extends EventTarget {
             document.getElementById("loading-text").textContent = this.locale === "es_ES" ? 
             "Bienvenid@ a almasso OS" : this.locale === "de_DE" ? "Willkommen in almasso OS" : "Welcome to almasso OS";
             welcomeScreen.classList.remove("invisible");
+            requestAnimationFrame(() => {
+              welcomeScreen.classList.add("showing");
+            });
             document.getElementById("extensions").classList.remove("invisible");
             setTimeout(() => {
               this.#loadAnim();

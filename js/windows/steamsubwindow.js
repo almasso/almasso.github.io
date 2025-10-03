@@ -7,6 +7,11 @@ export default class SteamSubwindow extends SteamWindow {
         this.contentRoute = contentRoute;
     }
 
+    changeWindowName(newName) {
+        this.name = newName;
+        this.win.querySelector(".steam-window-title").innerHTML = `${this.name}`;
+    }
+
     async open() {
         let existingWindow = document.getElementById(`${this.program.id}-${this.id}`);
         if(!existingWindow) {

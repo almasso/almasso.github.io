@@ -35,5 +35,29 @@
             "bookmarks" : "Bookmarks",
             "help" : "Help"
         }
+    },
+    {
+        "id" : "steam",
+        "texts" : {
+            "buttons" : {
+
+            },
+            "interface" : {
+                "games" : "Games",
+                "gamesExplained" : "Choose a game and start playing!",
+                "friends" : "Friends",
+                "friendsExplained" : "Find friends, chat, play together",
+                "servers" : "Servers",
+                "serversExplained" : "Browse multiplayer games-in-progress",
+                "monitor" : "Monitor",
+                "monitorExplained" : "Monitor Steam network activity",
+                "settings" : "Settings",
+                "settingsExplained" : "Change Steam options",
+                "news" : "News",
+                "newsExplained" : "Keep up with the latest Steam news",
+                "myGames" : "MY GAMES",
+                "availableGames" : "AVAILABLE GAMES"
+            }
+        }
     }
 ]
