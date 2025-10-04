@@ -35,6 +35,7 @@ export default class OS extends EventTarget {
 
     this.appInstances = new Map();
     this.appRegistered = new Map();
+    this.icons = new Array();
 
 
     this.currentApp = null;
@@ -65,11 +66,23 @@ export default class OS extends EventTarget {
       this.setCurrentApp(this.appInstances.get(0));
       this.#setButtons();
       this.closeSubwindow(e.detail.windowId);
-    })
+    });
+
+    this.addEventListener("iconSelected", (e) => {
+      this.deselectIcons(e.detail.program);
+    });
 
     document.getElementById("topbar-slider").addEventListener("click", () => {
-        this.currentAppResumed = !this.currentAppResumed;
-        this.setCurrentApp(this.currentApp);
+      this.currentAppResumed = !this.currentAppResumed;
+      this.setCurrentApp(this.currentApp);
+    });
+
+    document.getElementById("desktop").addEventListener("click", (e) => {
+      if(e.target === e.currentTarget) {
+        this.setCurrentApp(this.appInstances.get(0));
+        this.#unfocusWindows();
+        this.#deselectIcons();
+      }
     });
 
     setInterval(this.updateTime.bind(this), 100);
@@ -287,7 +300,7 @@ export default class OS extends EventTarget {
     this.appRegistered.forEach((val, key) => {
       let locs = val.getIcons();
       locs.forEach(loc => {
-        new Icon(this, val, loc.isAlias, loc.route);
+        this.icons.push(new Icon(this, val, loc.isAlias, loc.route));
       });
     });
   }
@@ -306,6 +319,25 @@ export default class OS extends EventTarget {
   focusWindow(app) {
     this.windows.forEach(w => {
       if(w.program === app) w.focus();
+    });
+  }
+
+  #unfocusWindows() {
+    this.windows.forEach(w => {
+      w.unfocus();
+    });
+    this.dispatchEvent(new CustomEvent("focusChanged", {}));
+  }
+
+  #deselectIcons() {
+    this.icons.forEach(ic => {
+      ic.dispatchEvent(new CustomEvent("unclicked", {}));
+    });
+  }
+
+  deselectIcons(iconProgram) {
+    this.icons.forEach(ic => {
+      if(ic.program != iconProgram) ic.dispatchEvent(new CustomEvent("unclicked", {}));
     });
   }
 
@@ -410,8 +442,3 @@ export default class OS extends EventTarget {
     }
   }
 }
-
-//TODO:
-// Que las aplicaciones puedan mostrar contenido
-// Que los botones de la topbar funcionen
-// Fijar el botón de mac, file y edit para que sean intocables y como mucho desactivables

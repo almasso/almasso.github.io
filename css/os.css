@@ -83,6 +83,8 @@ body, html {
   --square_size: 20px;
   --square_size_halved: 10px;
   --negative_square_size_halved: -10px;
+  --icon-url : url("app.png");
+  --dots-displacement: 30%;
 }
 
 .invisible {
@@ -372,6 +374,37 @@ body, html {
   padding: 2px;
 }
 
+.selected-name {
+  background-color: #000000 !important;
+  color: white;
+  display: inline-block;
+  padding: 2px;
+}
+
+.opened-app img {
+  filter: brightness(0) saturate(100%) invert(63%) sepia(66%) saturate(228%) hue-rotate(201deg) brightness(95%) contrast(82%) drop-shadow(0 0 4px black) !important;
+}
+
+.opened-app::after { 
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: var(--dots-displacement);
+  width: 32px;
+  height: 32px;
+  background-image: radial-gradient(black 20%, transparent 21%);
+  background-size: 6px 6px;
+  background-attachment: fixed;
+  background-position: 0 0;
+  opacity: 0.6;
+  pointer-events: none;
+
+  mask-image: var(--icon-url);
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+}
+
 .icon-stack {
   position: relative;
   width: 45px;
@@ -390,6 +423,10 @@ body, html {
   width: 32px;
   height: 32px;
   margin-bottom: 4px;
+}
+
+.selected {
+  filter: brightness(60%);
 }
 
 .alias-arrow {
