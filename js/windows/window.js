@@ -114,6 +114,13 @@ export default class Window extends EventTarget{
             detail: {windowId: this.id, app: this.program}
         }));
         this.win.style.zIndex = 3;
+
+        this.win.classList.remove("disabled");
+        this.win.querySelector(".close-button").classList.remove("disabled");
+        this.win.querySelector(".left-stripe").classList.remove("disabled");
+        this.win.querySelector(".right-stripe").classList.remove("disabled");
+        this.win.querySelector(".maxim-button").classList.remove("disabled");
+        this.win.querySelector(".minim-button").classList.remove("disabled");
     }
 
     unfocus() {
@@ -121,6 +128,13 @@ export default class Window extends EventTarget{
             detail: {windowId: this.id, app: this.program}
         }));
         this.win.style.zIndex = 2;
+
+        this.win.classList.add("disabled");
+        this.win.querySelector(".close-button").classList.add("disabled");
+        this.win.querySelector(".left-stripe").classList.add("disabled");
+        this.win.querySelector(".right-stripe").classList.add("disabled");
+        this.win.querySelector(".maxim-button").classList.add("disabled");
+        this.win.querySelector(".minim-button").classList.add("disabled");
     }
 
     makeDraggable() {

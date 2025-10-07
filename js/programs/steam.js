@@ -93,10 +93,6 @@ export default class Steam extends Program {
         this.dispatchEvent(new CustomEvent("langChanged", {}));
     }
 
-    #changeUITexts() {
-
-    }
-
     gainedFocus() {
         const win = document.getElementById(this.instanceID);
         const steamDiv = win.querySelector("#steam");

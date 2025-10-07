@@ -51,7 +51,9 @@ export default class OS extends EventTarget {
     this.addEventListener("focusWindow", (e) => {
       this.setCurrentApp(e.detail.app);
       e.detail.app.gainedFocus();
-      this.#focusWindow(e.detail.windowID);
+      this.#focusWindow(e.detail.windowId);
+      this.deselectIcons(e.detail.app);
+      this.#selectIcon(e.detail.app);
     });
 
     this.addEventListener("unfocusWindow", (e) => e.detail.app.lostFocus());
@@ -335,6 +337,12 @@ export default class OS extends EventTarget {
     });
   }
 
+  #selectIcon(iconProgram) {
+    this.icons.forEach(ic => {
+      if(ic.program === iconProgram) ic.dispatchEvent(new CustomEvent("selected", {}));
+    });
+  }
+
   deselectIcons(iconProgram) {
     this.icons.forEach(ic => {
       if(ic.program != iconProgram) ic.dispatchEvent(new CustomEvent("unclicked", {}));
@@ -390,6 +398,10 @@ export default class OS extends EventTarget {
   closeWindow(id) {
     this.appInstances.delete(this.windows.find(w => w.id === id).program.instanceID);
     this.windows = this.windows.filter(win => win.id !== id);
+
+    this.icons.forEach(ic => {
+      if(this.windows.filter(win => win.program instanceof ic.program).length === 0) ic.dispatchEvent(new CustomEvent("programClosed", {}));
+    });
   }
 
   /**

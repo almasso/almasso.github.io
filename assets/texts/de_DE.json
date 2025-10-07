@@ -28,12 +28,22 @@
     {
         "id" : "navigator",
         "texts" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "view" : "Darstellung",
-            "go" : "Gehen",
-            "bookmarks" : "Lesezeichen",
-            "help" : "Hilfe"
+            "buttons" : {
+                "file" : "Ablage",
+                "edit" : "Bearbeiten",
+                "view" : "Darstellung",
+                "go" : "Gehen",
+                "bookmarks" : "Lesezeichen",
+                "help" : "Hilfe"
+            },
+            "interface" : {
+                "back" : "Zurück",
+                "forward" : "Weiter",
+                "home" : "Startseite",
+                "reload" : "Neu laden",
+                "stop" : "Stopp",
+                "location" : "Lage"
+            }
         }
     },
     {

@@ -71,6 +71,20 @@ export default class SteamWindow extends Window {
         });
     }
 
+    focus() {
+        this.os.dispatchEvent(new CustomEvent("focusWindow", {
+            detail: {windowId: this.id, app: this.program}
+        }));
+        this.win.style.zIndex = 3;
+    }
+
+    unfocus() {
+        this.os.dispatchEvent(new CustomEvent("unfocusWindow", {
+            detail: {windowId: this.id, app: this.program}
+        }));
+        this.win.style.zIndex = 2;
+    }
+
 
     minimize() {
         this.win.style.height = this.win.style.height === "15px" ? `${this.height}px` : "15px" ;

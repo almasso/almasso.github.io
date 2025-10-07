@@ -69,7 +69,6 @@ export default class Icon extends EventTarget {
             }
             else {
                 this.os.openWindow(this.program);
-                 this.iconDiv.querySelector(".icon-div").classList.remove("selected");
                 this.iconDiv.querySelector(".icon-div").classList.add("opened-app");
                 this.iconDiv.querySelector(".icon-div").style.setProperty("--icon-url", `url(${getRoot()}assets/icons/programs/${this.program.icon})`);
                 this.isAlias ? this.iconDiv.querySelector(".icon-div").style.setProperty("--dots-displacement", "34%") : this.iconDiv.querySelector(".icon-div").style.setProperty("--dots-displacement", "25%");
@@ -80,7 +79,19 @@ export default class Icon extends EventTarget {
             this.selected = false;
             this.iconDiv.querySelector(".icon-div").classList.remove("selected");
             this.iconDiv.querySelector("#prog-name").classList.remove("selected-name");
-        })
+        });
+
+        this.addEventListener("selected", () => {
+            this.os.dispatchEvent(new CustomEvent("iconSelected", {
+                detail : {program : this.program}
+            }));
+            this.iconDiv.querySelector(".icon-div").classList.add("selected");
+            this.iconDiv.querySelector("#prog-name").classList.add("selected-name");
+        });
+
+        this.addEventListener("programClosed", () => {
+            this.iconDiv.querySelector(".icon-div").classList.remove("opened-app");
+        });
 
         dk.appendChild(this.iconDiv);
     }

@@ -22,18 +22,30 @@ export default class Navigator extends Program {
             this.setLanguage(os.locale);
             this.getProgramData();
         });
+
+        this.addEventListener("langChanged", () => {
+            const navDiv = document.getElementById(this.instanceID).querySelector("#navigator");
+            navDiv.querySelector("#left-buttons button:nth-child(1) .label").innerText = this.interfaceTexts["back"];
+            navDiv.querySelector("#left-buttons button:nth-child(2) .label").innerText = this.interfaceTexts["forward"];
+            navDiv.querySelector("#left-buttons button:nth-child(3) .label").innerText = this.interfaceTexts["home"];
+            navDiv.querySelector("#right-buttons button:nth-child(1) .label").innerText = this.interfaceTexts["reload"];
+            navDiv.querySelector("#right-buttons button:nth-child(2) .label").innerText = this.interfaceTexts["stop"];
+            navDiv.querySelector("#url p").innerText = this.interfaceTexts["location"];
+        });
     }
 
     async getProgramData() {
         await this.langReady();
         const programData = this.searchForProgramInData();
         if(programData) {
-            this.strings = programData["texts"];
+            this.strings = programData["texts"]["buttons"];
+            this.interfaceTexts = programData["texts"]["interface"];
         } else {
             console.warn("No data found for program", this.id);
             this.strings = {};
         }
         this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
+        this.dispatchEvent(new CustomEvent("langChanged", {}));
     }
 
     gainedFocus() {
