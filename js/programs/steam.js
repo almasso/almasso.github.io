@@ -107,7 +107,7 @@ export default class Steam extends Program {
                     const gamesWindow = document.querySelector("#steam-games");
                     gamesWindow.querySelector("#game-arkanoid img").src = `${getRoot()}assets/icons/programs/arkanoid.png`;
                     gamesWindow.querySelector("#game-asteroids img").src = `${getRoot()}assets/icons/programs/asteroids.png`;
-                    gamesWindow.querySelector("#game-arkanoid img").src = `${getRoot()}assets/icons/programs/arkanoid.png`;
+                    gamesWindow.querySelector("#game-galactic img").src = `${getRoot()}assets/icons/programs/galactic.png`;
                     gamesWindow.querySelector("#game-erpg img").src = `${getRoot()}assets/icons/programs/erpg.png`;
                     gamesWindow.querySelector("#game-chillout img").src = `${getRoot()}assets/icons/programs/chillout.png`;
                     gamesWindow.querySelector("#game-ott img").src = `${getRoot()}assets/icons/programs/ott.png`;

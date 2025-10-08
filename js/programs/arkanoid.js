@@ -7,8 +7,8 @@ export default class Arkanoid extends Program {
     static id = "arkanoid";
     static name = "Arkanoid";
     static unique = true;
-    static width = 828;
-    static height = 644;
+    static width = 800;
+    static height = 620;
 
     constructor(os) {
         super(os, Arkanoid.name, Arkanoid.id, Arkanoid.icon, "desktop");

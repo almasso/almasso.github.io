@@ -4,6 +4,7 @@ import Subwindow from "./windows/subwindow.js";
 import SteamSubwindow from "./windows/steamsubwindow.js";
 import Arkanoid from "./programs/arkanoid.js";
 import Asteroids from "./programs/asteroids.js";
+import Galactic from "./programs/galactic.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Navigator from "./programs/navigator.js";
@@ -293,6 +294,7 @@ export default class OS extends EventTarget {
     this.appRegistered.set(Steam.id, Steam);
     this.appRegistered.set(Arkanoid.id, Arkanoid);
     this.appRegistered.set(Asteroids.id, Asteroids);
+    this.appRegistered.set(Galactic.id, Galactic);
     let instance = new Searcher(this);
     await instance.ready();
     this.appInstances.set(0, instance);

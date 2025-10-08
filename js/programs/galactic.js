@@ -1,17 +1,17 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 
-export default class Asteroids extends Program {
+export default class Galactic extends Program {
 
-    static icon = "asteroids.png";
-    static id = "asteroids";
-    static name = "Asteroids";
+    static icon = "galactic.png";
+    static id = "galactic";
+    static name = "The Galactic Plague";
     static unique = true;
-    static width = 800;
-    static height = 620;
+    static width = 1280;
+    static height = 720;
 
     constructor(os) {
-        super(os, Asteroids.name, Asteroids.id, Asteroids.icon, "desktop");
+        super(os, Galactic.name, Galactic.id, Galactic.icon, "desktop");
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
             this.getProgramData();
@@ -31,7 +31,7 @@ export default class Asteroids extends Program {
     }
 
     async getBodyHTML() {
-        return `<iframe src="${getRoot()}html/programs/asteroids.html" style="width:100%; height:100%; border:none;"></iframe>`
+        return `<iframe src="${getRoot()}html/programs/galactic.html" style="width:100%; height:100%; border:none;"></iframe>`
     }
 
     getButtons() {
