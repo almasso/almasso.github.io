@@ -8,6 +8,7 @@ export default class Navigator extends Program {
     static id = "navigator";
     static name = "Navigator";
     static unique = false;
+    static appClass = "program";
 
     constructor(os) {
         super(os, Navigator.name, Navigator.id, Navigator.icon, "desktop");

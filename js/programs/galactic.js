@@ -9,6 +9,7 @@ export default class Galactic extends Program {
     static unique = true;
     static width = 1280;
     static height = 720;
+    static appClass = "game";
 
     constructor(os) {
         super(os, Galactic.name, Galactic.id, Galactic.icon, "desktop");

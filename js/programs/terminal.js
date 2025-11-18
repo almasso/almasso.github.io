@@ -7,6 +7,7 @@ export default class Terminal extends Program {
     static id = "terminal";
     static name = "Terminal";
     static unique = false;
+    static appClass = "program";
 
     constructor(os) {
         super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop");

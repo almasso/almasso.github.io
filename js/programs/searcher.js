@@ -6,6 +6,7 @@ export default class Searcher extends Program {
     static id = "searcher";
     static name = "Searcher";
     static unique = false;
+    static appClass = "program";
 
     constructor(os) {
         super(os, Searcher.name, Searcher.id, Searcher.icon, "desktop");

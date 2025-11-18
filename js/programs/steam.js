@@ -1,6 +1,9 @@
 import Program from "../program.js";
 import {getRoot, isPromise} from "../utils.js";
 import SteamWindow from "../windows/steamwindow.js";
+import Arkanoid from "./arkanoid.js";
+import Asteroids from "./asteroids.js";
+import Galactic from "./galactic.js";
 
 
 export default class Steam extends Program {
@@ -11,8 +14,10 @@ export default class Steam extends Program {
     static unique = true;
     static width = 420;
     static height = 320;
+    static appClass = "program";
 
     static gamesWindow = null;
+    static loadingGameWindow = null;
 
     constructor(os, name = Steam.name) {
         super(os, name, Steam.id, Steam.icon, "desktop");
@@ -32,6 +37,9 @@ export default class Steam extends Program {
             switch(e.detail.windowName) {
                 case this.interfaceTexts["games"]:
                     Steam.gamesWindow = null;
+                    break;
+                default:
+                    Steam.loadingGameWindow = null;
                     break;
             }
         });
@@ -93,6 +101,28 @@ export default class Steam extends Program {
         this.dispatchEvent(new CustomEvent("langChanged", {}));
     }
 
+    async initGame(game) {
+        Steam.loadingGameWindow = this.os.openSubwindow(this, game.name + " - Steam", 
+            `${getRoot()}html/programs/steam/loading.html`,
+            Steam.width / 1.5, Steam.height / 4, Steam.width / 1.5, Steam.height);
+        Steam.loadingGameWindow = await Steam.loadingGameWindow;
+        const loadingWindow = document.querySelector("#steam-loading");
+        let textToDisplay = this.os.locale === "de_DE" ? game.name + this.interfaceTexts["preparing"] : 
+            this.interfaceTexts["preparing"] + game.name;
+        loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
+                                
+        setTimeout(() => {
+            if(Steam.loadingGameWindow != null) {
+                this.os.closeSubwindow(Steam.loadingGameWindow.id);
+                Steam.loadingGameWindow.close();
+                Steam.loadingGameWindow = null;
+                setTimeout(() => {
+                    this.os.openWindow(game, false);
+                }, 1000);
+            }
+        }, 3000);
+    }
+
     gainedFocus() {
         const win = document.getElementById(this.instanceID);
         const steamDiv = win.querySelector("#steam");
@@ -116,6 +146,26 @@ export default class Steam extends Program {
                     gamesWindow.querySelector("#game-ctp img").src = `${getRoot()}assets/icons/programs/ctp.bmp`;
                     gamesWindow.querySelector("#my-games h1").textContent = this.interfaceTexts["myGames"];
                     gamesWindow.querySelector("#available-games h1").textContent = this.interfaceTexts["availableGames"];
+
+                    gamesWindow.querySelectorAll(".steam-game").forEach(button => {
+                        button.addEventListener("click", async () => {
+                            if(!button.classList.contains("gameselected")) {
+                                gamesWindow.querySelectorAll(".steam-game").forEach(bt2 => {
+                                    bt2.dispatchEvent(new CustomEvent("unclicked", {}));
+                                });
+                                button.classList.add('gameselected');
+                            }
+                            else {
+                                button.classList.remove("gameselected");
+                                if(button.id === "game-arkanoid") this.initGame(Arkanoid);
+                                else if(button.id === "game-asteroids") this.initGame(Asteroids);
+                                else if(button.id === "game-galactic") this.initGame(Galactic);
+                            }
+                        });
+                        button.addEventListener("unclicked", () => {
+                            button.classList.remove("gameselected");
+                        });
+                    });
                 }
             });
             steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
@@ -137,6 +187,11 @@ export default class Steam extends Program {
             this.os.closeSubwindow(Steam.gamesWindow.id);
             Steam.gamesWindow.close();
             Steam.gamesWindow = null;
+        }
+        if(Steam.loadingGameWindow) {
+            this.os.closeSubwindow(Steam.loadingGameWindow.id);
+            Steam.loadingGameWindow.close();
+            Steam.loadingGameWindow = null;
         }
     }
 

@@ -141,9 +141,16 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-top: -1px;
     padding-left: 10px;
-    margin-top: -10px;
     gap: 5px;
+    align-self: end;
+    height: 4vh;
+}
+
+.steam-game.gameselected {
+    background-color: #968732;
+    color: white;
 }
 
 .game-available {
@@ -157,4 +164,10 @@
 .steam-game img {
     width: 20px;
     height: 20px;
+}
+
+#steam-loading p {
+    color: #a4b49e;
+    font-size: var(--paragraph-text-size);
+    padding-left: 20px;
 }

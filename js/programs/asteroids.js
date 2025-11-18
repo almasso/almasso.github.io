@@ -9,6 +9,7 @@ export default class Asteroids extends Program {
     static unique = true;
     static width = 800;
     static height = 620;
+    static appClass = "game";
 
     constructor(os) {
         super(os, Asteroids.name, Asteroids.id, Asteroids.icon, "desktop");

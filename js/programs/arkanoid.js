@@ -9,6 +9,7 @@ export default class Arkanoid extends Program {
     static unique = true;
     static width = 800;
     static height = 620;
+    static appClass = "game";
 
     constructor(os) {
         super(os, Arkanoid.name, Arkanoid.id, Arkanoid.icon, "desktop");

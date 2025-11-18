@@ -357,7 +357,7 @@ export default class OS extends EventTarget {
    * Opens an instance of a program (window)
    * @param {string} app Program identifier
    */
-  async openWindow(app) {
+  async openWindow(app, userCalled = true) {
     let searchedInstance = [...this.appInstances.values()].find(
       a => a instanceof app
     );
@@ -366,15 +366,28 @@ export default class OS extends EventTarget {
       this.focusWindow(searchedInstance);
     }
     else {
-      let instance = new app(this);
-      await instance.ready();
-      this.appInstances.set(instance.instanceID, instance);
-      this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+      if(app.appClass === "game" && userCalled) {
+        let steamInstance = new Steam(this);
+        await steamInstance.ready();
+        this.appInstances.set(steamInstance.instanceID, steamInstance);
+        this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+        
+        steamInstance.initGame(app);
 
-      const win = app.id === Steam.id ? new SteamWindow(this, instance, this.windowID++, app.width, app.height, app.width, app.height) : 
-        new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
-      await win.open();
-      this.windows.push(win);
+        this.appInstances.delete(steamInstance.instanceID);
+        steamInstance = null;
+      }
+      else {
+        let instance = new app(this);
+        await instance.ready();
+        this.appInstances.set(instance.instanceID, instance);
+        this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+
+        const win = app.id === Steam.id ? new SteamWindow(this, instance, this.windowID++, app.width, app.height, app.width, app.height) : 
+          new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
+        await win.open();
+        this.windows.push(win);
+      }
     }
   }
 
