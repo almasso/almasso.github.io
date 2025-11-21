@@ -21,3 +21,13 @@ export function shuffle(array) {
 export function isPromise(promise) {
     return !!promise && typeof promise.then === 'function';
 }
+
+export function clamp(value, min, max) {
+    if(value < min) return min;
+    else if(value > max) return max;
+    return value;
+}
+
+export function rndNext(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}

@@ -20,27 +20,7 @@ export default class ERPG extends Program {
             this.getProgramData();
         });
     }
-
-    async getProgramData() {
-        await this.langReady();
-        const programData = this.searchForProgramInData();
-        if(programData) {
-            this.strings = programData["texts"];
-        } else {
-            console.warn("No data found for program", this.id);
-            this.strings = {};
-        }
-        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
-    }
-
-    async getBodyHTML() {
-        return `<iframe src="${getRoot()}html/programs/erpg/erpg.html" style="width:100%; height:100%; border:none;"></iframe>`
-    }
-
-    getButtons() {
-        return this.strings;
-    }
-
+    
     static getIcons() {
         return [{route : "desktop", isAlias : true}]
     }
