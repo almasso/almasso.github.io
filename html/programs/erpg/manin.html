@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es_ES">
+    <head>
+        <meta charset="UTF-8">
+
+        <!--Fuentes-->
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/668d999ad9.js" crossorigin="anonymous"></script>
+        <!--Fuentes-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=2.0">
+        <link rel="stylesheet" href="../../../css/programs/erpg.css">
+        <script src="./lib/phaser.js"></script>
+        <link rel="icon" type="image/x-icon" href="http://labs.phaser.io/assets/sprites/star.png">
+        <title>ÑRPG</title>
+    </head>
+
+    <body>
+        <header>
+            <a href="erpg.html" id="titulo"><h1><span class="rojo">Ñ</span><span class="amarillo">RP</span><span class="rojo">G</span>
+                <span> - ESPAÑA: RONDANDO POR </span><span class="blanco">GA</span><span class="azul">LIC</span><span class="blanco">IA</span></h1></a>
+            <p class="subtitulo">CONOCE A LA BANDA QUE HA HECHO POSIBLE QUE ESTE "JUEGO" SALGA A LA LUZ</p>
+        </header>
+        <hr>
+        <nav>
+            <ul id="navegacion">
+                <li class="enlacesNAV"><a href="erpg.html" class="enlacesNAV">Inicio</a></li>
+                <li class="enlacesNAV currentLink"><a href="manin.html" class="enlacesNAV">Manín Interactive</a></li>
+                <li class="enlacesNAV"><a href="https://github.com/almasso/PVLI_ERPG/issues" target="_blank"  class="enlacesNAV">¿Bug?</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <section>
+            <h1>¿Quién c***** somos Manín Interactive?</h1>
+            <div class="desarrolladores">
+                <ul class="desarrolladores">
+                    <li>
+                        <div id="david">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan = "3">
+                                            <h2>David Rivera Martínez</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan = "4" style="width:12%;">
+                                            <img src="../../../assets/icons/programs/erpg/webassets/david.png">
+                                        </td>
+                                        <td rowspan = "4" style="width:25%">
+                                            <blockquote>
+                                                <p><i>Qué pereza</i></p>
+                                                <p><i>uwu</i></p>
+                                            </blockquote>
+                                        </td>
+                                        <td rowspan = "4">
+                                            <a class="personalsocials" href="https://twitter.com/daweakest" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                            <a class="personalsocials" href="https://www.instagram.com/david.rainder/" target="_blank"><i class="fa-brands fa-instagram"></i></a> 
+                                            <a class="personalsocials" href="https://github.com/DavidRainder" target="_blank"><i class="fa-brands fa-github"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="pablo">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan = "3">
+                                            <h2>Pablo Sánchez Martín</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan = "4">
+                                            <a class="personalsocials" href="https://twitter.com/pablosm196" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                            <a class="personalsocials" href="https://www.instagram.com/almeida_putotonto/" target="_blank"><i class="fa-brands fa-instagram"></i></a> 
+                                            <a class="personalsocials" href="https://github.com/pablosm196" target="_blank"><i class="fa-brands fa-github"></i></a>
+                                        </td>
+                                        <td rowspan = "4" style="width:25%">
+                                            <blockquote>
+                                                <p><i>Pregúntame la del pan que habla</i></p>
+                                                <p><i>¿Está Lin?</i></p>
+                                                <p><i>¿La de trabajar te la sabes?</i></p>
+                                                <p><i>Tengo que ir al baño (por décimonovena vez en el día)</i></p>
+                                            </blockquote>
+                                        </td>
+                                        <td rowspan = "4" style="width:12%">
+                                            <img src="../../../assets/icons/programs/erpg/webassets/pablo.png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="raul">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan = "3">
+                                            <h2>Raúl Pérez Cogolludo</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan = "4" style="width:12%">
+                                            <img src="../../../assets/icons/programs/erpg/webassets/Raul.png">
+                                        </td>
+                                        <td rowspan = "4" style="width:25%">
+                                            <blockquote>
+                                                <p><i>Más vale pájaro en mano que caballo regalado</i></p>
+                                                <p><i>Tengo sueño</i></p>
+                                                <p><i>¿El trabajo este pa cuando era?</i></p>
+                                            </blockquote>
+                                        </td>
+                                        <td rowspan = "4">
+                                            <a class="personalsocials" href="https://twitter.com/Raul_28_4" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+                                            <a class="personalsocials" href="https://www.instagram.com/raul_28_4/" target="_blank"><i class="fa-brands fa-instagram"></i></a> 
+                                            <a class="personalsocials" href="https://github.com/raul284" target="_blank"><i class="fa-brands fa-github"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="roi">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan = "3">
+                                            <h2>Roi Quintas Diz</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan = "4">
+                                            <a class="personalsocials" href="https://www.instagram.com/roiquintas16/" target="_blank"><i class="fa-brands fa-instagram"></i></a> 
+                                            <a class="personalsocials" href="https://github.com/roiqd03" target="_blank"><i class="fa-brands fa-github"></i></a>
+                                        </td>
+                                        <td rowspan = "4" style="width:25%">
+                                            <blockquote>
+                                                <p><i>No sé</i></p>
+                                                <p><i>xD</i></p>
+                                            </blockquote>
+                                        </td>
+                                        <td rowspan = "4" style="width:12%">
+                                            <img src="../../../assets/icons/programs/erpg/webassets/roi.png">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                    <li>
+                        <div id="alex">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td colspan = "3">
+                                            <h2>Alejandro Massó Martínez</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan = "4" style="width:12%">
+                                            <img src="../../../assets/icons/programs/erpg/webassets/Alex.png">
+                                        </td>
+                                        <td rowspan = "4" style="width:25%">
+                                            <blockquote>
+                                                <p><i>!Glupi-dupi-dú!</i></p>
+                                                <p><i>¡Zing!</i></p>
+                                                <p><i>El verdadero anhelo definitivo del hombre es el dulce alivio de la muerte.</i></p>
+                                                <p><i>¡Bada-boing!</i></p>
+                                            </blockquote>
+                                        </td>
+                                        <td rowspan = "4">
+                                            <a class="personalsocials" href="https://github.com/almasso" target="_blank"><i class="fa-brands fa-github"></i></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </section>
+        <hr>
+        <section>
+            <h1>Agradecimientos</h1>
+            <hr>
+                <p><b>En agradecimiento a todos aquellos seres humanos que decidieron hacernos caso y participar en nuestro gran concurso de creación de NPC</b></p>
+                <ul id="agradecimientos">
+                    <li>
+                        <p>Al grandísimo <a href="http://twitter.com/Joawynn" target="_blank">Joa</a> por habernos creado a Vovovo y Elmo Tivao.</p>
+                    </li>
+                    <li>
+                        <p>A nuestra querida <a href="http://twitter.com/Andreuskis18" target="_blank">McAndrr</a> por habernos creado a Jatsune Miku, a Compuman, al Toni falso y a mi mismo
+                            (sí, soy tan vago que ni me he hecho mi propio NPC, así va España)</p>
+                    </li>
+                    <li>
+                        <p>A la gran <a href="https://www.instagram.com/likeadrag0n/?next=%2F" target="_blank">Patri (aka la verdadera hermana de Pablo)</a> por haberse creado a ella misma y algunos sprites, con un par, sí señor.</p>
+                    </li>
+                    <li>
+                        <p>Al gran <a href="https://twitter.com/Maik73_" target="_blank">Maik</a> por crearnos a Frozono. ¡TOMA MANGO!</p>
+                    </li>
+                    <li>
+                        <p>Al gran <a href="https://www.instagram.com/aday_me_llaman/" target="_blank">Aday</a> por crearnos a Iker Jiménez y permitirnos rickrollear a todos los que jueguen el juego</p>
+                    </li>
+                    <li>
+                        <p>Al grandísimo <a href="https://twitter.com/D_Diego___" target="_blank">Diego</a> por componernos la canción de inicio</p>
+                    </li>
+                    <li>
+                        <p>Y por último, pero no menos importante, a <a href="http://twitter.com/toni_qa" target="_blank">Toni</a> por haberse creado a sí mismo (verificado), a Pepperboy y por
+                        habernos enseñado el <a href="https://youtu.be/pZUTdw6zcck" target="_blank">peor lenguaje que un ser humano ha sido capaz de inventar en los últimos 50 años de historia de la computación</a>, 
+                        <a href="https://imgur.com/a/fp5s8XI" target="_blank">JavaScript</a></p>
+                    </li>
+                </ul>
+        </section>
+
+        <footer class="socials">
+            <div>
+                <p id="copy"><i class="fa-regular fa-copyright fa-flip-horizontal"></i> Copyleft 2022 - Manín Interactive. Todos los izquierdos reservados.</p>
+            </div>
+            <div>
+                <a class="socialslinks" href="https://github.com/almasso/PVLI_ERPG" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>
+            
+        </footer>
+    </body>
+</html>

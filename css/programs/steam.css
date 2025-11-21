@@ -166,6 +166,10 @@
     height: 20px;
 }
 
+.game-not-available img {
+    filter: sepia(100%) hue-rotate(40deg) saturate(50%) opacity(70%);
+}
+
 #steam-loading p {
     color: #a4b49e;
     font-size: var(--paragraph-text-size);

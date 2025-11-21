@@ -4,6 +4,8 @@ import SteamWindow from "../windows/steamwindow.js";
 import Arkanoid from "./arkanoid.js";
 import Asteroids from "./asteroids.js";
 import Galactic from "./galactic.js";
+import Navigator from "./navigator.js";
+import ERPG from "./erpg.js";
 
 
 export default class Steam extends Program {
@@ -123,6 +125,30 @@ export default class Steam extends Program {
         }, 3000);
     }
 
+    async initWebgame(game) {
+        Steam.loadingGameWindow = this.os.openSubwindow(this, game.name + " - Steam", 
+            `${getRoot()}html/programs/steam/loading.html`,
+            Steam.width / 1.5, Steam.height / 4, Steam.width / 1.5, Steam.height);
+        Steam.loadingGameWindow = await Steam.loadingGameWindow;
+        const loadingWindow = document.querySelector("#steam-loading");
+        let textToDisplay = this.os.locale === "de_DE" ? game.name + this.interfaceTexts["preparing"] : 
+            this.interfaceTexts["preparing"] + game.name;
+        loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
+
+        setTimeout(() => {
+            if(Steam.loadingGameWindow != null) {
+                this.os.closeSubwindow(Steam.loadingGameWindow.id);
+                Steam.loadingGameWindow.close();
+                Steam.loadingGameWindow = null;
+                setTimeout(async () => {
+                    let wind = this.os.openWindow(Navigator);
+                    wind = await wind;
+                    wind.program.navigate(game);
+                }, 1000);
+            }
+        }, 3000);
+    }
+
     gainedFocus() {
         const win = document.getElementById(this.instanceID);
         const steamDiv = win.querySelector("#steam");
@@ -160,6 +186,7 @@ export default class Steam extends Program {
                                 if(button.id === "game-arkanoid") this.initGame(Arkanoid);
                                 else if(button.id === "game-asteroids") this.initGame(Asteroids);
                                 else if(button.id === "game-galactic") this.initGame(Galactic);
+                                else if(button.id === "game-erpg") this.initWebgame(ERPG);
                             }
                         });
                         button.addEventListener("unclicked", () => {

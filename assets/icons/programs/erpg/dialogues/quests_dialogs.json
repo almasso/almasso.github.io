@@ -1,0 +1,118 @@
+{
+    "attributes" : [
+        {
+            "qnpcName" : "Melendi",
+            "qnpcID" : 0
+        },
+        {
+            "qnpcName" : "Pescador",
+            "qnpcID" : 1
+        },
+        {
+            "qnpcName" : "Jarfaiter",
+            "qnpcID" : 2
+        },
+        {
+            "qnpcName" : "Cartel en Dinoseto",
+            "qnpcID" : 3
+        },
+        {
+            "qnpcName" : "David",
+            "qnpcID" : 4
+        },
+        {
+            "qnpcName" : "Pedro Sánchez",
+            "qnpcID" : 5
+        }
+    ],
+    "dialogues" : [
+        {
+            "qnpcID" : 0,
+            "text" : "♫ Y es que voy, caminando por la vida, sin pausa pero sin prisa, procurando no hacer ruido, vestío' con una sonrisa ♫"
+        },
+        {
+            "qnpcID" : 0,
+            "text" : "Cago nes pites coloraes guaxín, perdí la mia guitarra. Preciso que recuperesla, babayu, que tengo mañana un conciertu y preciso ensayar un mizcu, ho."
+        },
+        {
+            "qnpcID" : 0,
+            "text" : "Ayudame y voi dir contigo"
+        },
+        {
+            "qnpcID" : 0,
+            "text" : "♫ Sin complejo' ni temore', canto rumba' de colore', y el llorar no me hace daño siempre y cuando tú no llore' ♫"
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "Bo día Manín. Hai moito que non te miro. Como estás?"
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "Eu, a verdade, cágome na virxe puta, porque perdín a caña dos collóns por eiquí cerca porque son máis parbo que o señor espido detrás do arbusto con dúas formigas. Vístelo? É incrible que ninguén faga nada por sacalo de ahí."
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "De calquera forma, volvendo ao punto desta interación:"
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "A verdade e que ti non me podes responder a pregunta de 'Como estás?', porque os estoupapozas dos desenvolledores non fixeron opcións nos diálogos, así que vaste foder e vas ter que axudar a recuperar a miña caña."
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "Creo que está por eiquí no parque e podería ir buscala eu si tivera movemento, pero como son un NPC da merda esta de xogo, estou inválido, fillo"
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "Así que espero que podas axudar a este pobre señor que quero voltar a pescar, que dixéronme que había polbo por esta zona."
+        },
+        {
+            "qnpcID" : 1,
+            "text" : "Podería darte un se atopas a caña"
+        },
+        {
+            "qnpcID" : 2,
+            "text" : "No, niñato, aparta o te mato"
+        },
+        {
+            "qnpcID" : 2,
+            "text" : "Ah, si eres tú, Manín from Manín Interactive™"
+        },
+        {
+            "qnpcID" : 2,
+            "text" : "5 jambos mágicos me han dicho que si me das un porro te puedo ayudar a derrotar al apollardamiento."
+        },
+        {
+            "qnpcID" : 2,
+            "text" : "No sé ni quiénes eran los jambos ni por qué te voy a poder ayudar a derrotarlo, pero me suena bien."
+        },
+        {
+            "qnpcID" : 2,
+            "text" : "Eso sí, quiero mi porro eh, que si no verás el meco que te llevas."
+        },
+        {
+            "qnpcID" : 3,
+            "text" : "Concello de Vigo: as pezas do Dinoseto foron roubadas. Recompensa: 50000€"
+        },
+        {
+            "qnpcID" : 4,
+            "text" : "Hola Manín, nos gustaría testearte algún día de estos."
+        },
+        {
+            "qnpcID" : 4,
+            "text" : "Vuelve cuando puedas para ponernos con ello."
+        },
+        {
+            "qnpcID" : 5,
+            "text" : "Menudo lío tengo con lo de la estatua."
+        },
+        {
+            "qnpcID" : 5,
+            "text" : "Tal y como está el país y ahora a pagar otra estatua."
+        },
+        {
+            "qnpcID" : 5,
+            "text" : "Bueno Manín, si me pagas 500 euros por gastos podría ir contigo a ayudarte."
+        }
+    ]
+}

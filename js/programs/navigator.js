@@ -1,5 +1,6 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
+import ERPG from "./erpg.js";
 
 
 export default class Navigator extends Program {
@@ -18,6 +19,9 @@ export default class Navigator extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
+
+        this.specialURLS = new Map();
+        this.specialURLS.set(ERPG.urlpage, ERPG);
 
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
@@ -120,16 +124,31 @@ export default class Navigator extends Program {
     }
 
     navigate(url) {
-        this.iframe.src = url;
-        this.urlInput.value = url;
-        this.statusBar.textContent = "Loading...";
+        if(typeof url === "string") {
+            if(this.specialURLS.get(url) !== undefined) return this.navigate(this.specialURLS.get(url));
+            this.iframe.src = url;
+            this.urlInput.value = url;
+            this.statusBar.textContent = "Loading...";
 
-        this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
-        this.historyStack.push(url);
-        this.currentIndex++;
-        this.stopButton.disabled = false;
+            this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
+            this.historyStack.push(url);
+            this.currentIndex++;
+            this.stopButton.disabled = false;
 
-        this.#updateButtons();
+            this.#updateButtons();
+        }
+        else {
+            this.iframe.src = url.src;
+            this.urlInput.value = url.urlpage;
+            this.statusBar.textContent = "Loading...";
+
+            this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
+            this.historyStack.push(url.src);
+            this.currentIndex++;
+            this.stopButton.disabled = false;
+
+            this.#updateButtons();
+        }
     }
 
     #updateButtons() {

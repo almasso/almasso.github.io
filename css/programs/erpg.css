@@ -1,0 +1,226 @@
+:root {
+    --lightgray: #efefef;
+    --blue: rgba(30,150,255,1);
+    --white: #fff;
+    --black: rgba(0, 0, 0, 0.8);
+    --bounceEasing: cubic-bezier(0.51, 0.92, 0.24, 1.15);
+}
+body {
+    font-family: 'Silkscreen', cursive;
+    background-color: var(--blue);
+    text-align: center;
+}
+#navegacion, #botones_index {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.enlacesNAV, .enlacesNAVJuego {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+}
+li.enlacesNAV:hover {
+    background-color: rgba(239, 10, 10, 0.4);
+}
+li.enlacesNAVJuego:hover {
+    background-color:rgba(241, 241, 126, 0.5);
+}
+.currentLink {
+    background-color: rgba(169,169,169,0.5);
+}
+.currentLinkJuego{
+    background-color:rgba(75, 233, 27, 0.5);
+}
+#titulo:link, :visited {
+    text-decoration: none;
+    color:white;
+}
+.rojo {
+    color:rgba(255,0,0,1);
+}
+.amarillo {
+    color:rgba(255, 255, 0, 1);
+}
+.azul {
+    color: rgba(30,194,247,1);
+}
+.blanco {
+    color:rgba(255,255,255, 1);
+}
+.socials {
+    font-size: 40px;
+}
+.socialslinks {
+    color:black;
+}
+.socialslinks:hover {
+    color:red;
+}
+#copy {
+    font-size:20px;
+}
+#rc {
+    transform: rotate(8deg) translateX(180%) translateY(-820%);
+    line-height: 100%;
+    display: inline-block;
+    color: #FFFF55;
+}
+/*SOLO PÁG PRINCIPAL*/
+#game{
+    display:block;
+    border-style:solid;
+    border-width: 15px;
+    /*Por dios cambiar esta bazofia por una imagen decente*/
+    /*border-top-color:red;
+    border-bottom-color:red;
+    border-left-color:yellow;
+    border-right-color:yellow;*/
+}
+/*Modales del index.html*/
+.close-modal{
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: inherit;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: var(--black);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.35s ease-in;
+  }
+#controles{ 
+    text-align: center;
+}
+.modal-dialog {
+    position: relative;
+    max-width: 800px;
+    max-height: 80vh;
+    border-radius: 5px;
+    background: var(--blue);
+    overflow: auto;
+    cursor: default;
+  }
+#controles .modal-dialog{
+    width: 100%;
+    height: 100%;
+    max-width:800px;
+    max-height: 75vh;
+}
+.modal-dialog > * {
+    padding: 1rem;
+}
+.modal-header, .modal-footer {
+    background: var(--lightgray);
+}
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.modal-header .modal-close {
+    font-size: 1.5rem;
+}
+.modal p + p{
+    margin-top: 1rem;
+}
+.modal.is-visible{
+    visibility: visible;
+    opacity: 1;
+}
+#filosofofo, #filosofofo:visited {
+    color:white;
+}
+#dinoseto, #dinoseto:visited {
+    color:var(--blue);
+}
+
+/*SOLO PÁG MANIN*/
+ul.desarrolladores{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+ul.desarrolladores div {
+    width:85%;
+    display:inline-block;
+}
+#david {
+    text-align: left;
+    align-items:left;
+}
+#pablo {
+    text-align:right;
+    align-items:right;
+}
+#raul {
+    text-align: left;
+    align-items:left;
+}
+#roi {
+    text-align:right;
+    align-items:right;
+}
+#alex {
+    text-align: left;
+    align-items:left;
+}
+ul.desarrolladores div#david img, ul.desarrolladores div#raul img, ul.desarrolladores div#alex img {
+    border-radius: 20%;
+    width: 100%;
+    float:left;
+}
+ul.desarrolladores div#pablo img, ul.desarrolladores div#roi img {
+    border-radius: 20%;
+    width:100%;
+    float:right;
+}
+ul.desarrolladores div#david blockquote, ul.desarrolladores div#raul blockquote, ul.desarrolladores div#alex blockquote {
+    width:75%;
+    float:left;
+}
+ul.desarrolladores div#pablo blockquote, ul.desarrolladores div#roi blockquote {
+    width:75%;
+    float:right;
+}
+blockquote p {
+    padding: 15px;
+    background: rgba(238, 238, 238, 0.8);
+    border-radius: 6px;
+}
+blockquote p::before {
+    content: '\201C';
+}
+
+blockquote p::after {
+    content: '\201D';
+}
+.personalsocials {
+    font-size:300%;
+    color:black;
+}
+.personalsocials:hover {
+    color:red;
+}
+#agradecimientos {
+    list-style:none;
+}
+#agradecimientos a, #agradecimientos a:visited {
+    color:white;
+}

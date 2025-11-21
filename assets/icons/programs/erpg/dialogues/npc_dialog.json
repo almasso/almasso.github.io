@@ -1,0 +1,806 @@
+{
+    "comentarios_NO_PARSEAR" : [
+        {
+            "listaIDS" : {
+                "Elmo Tivao" : 0,
+                "Vovovo" : 1,
+                "Jatsune Micu" : 2,
+                "Alex" : 3,
+                "Frozono" : 4,
+                "Compuman" : 5,
+                "Toni falso" : 6,
+                "Toni verificado" : 7,
+                "Pepperboy" : 8,
+                "Apu" : 9,
+                "Patri" : 10,
+                "Healer" : 11,
+                "Doña Comedia (Andrea)" : 12,
+                "Kratos" : 13,
+                "Sirenita" : 14,
+                "El Guasón" : 15,
+                "Aloy" : 16,
+                "Bob Esponja" : 17,
+                "Patricio" : 18,
+                "Espáider Man" : 19,
+                "Isshin Ashina" : 20,
+                "Pablo Motos" : 21,
+                "Raúl" : 22,
+                "Guardia" : 23,
+                "Tío la Vara" : 24,
+                "Rick Astley" : 25,
+                "Roi" : 26,
+                "Iker Jiménez" : 27,
+                "NPC VACÍO" : 28,
+                "Pablo":29,
+                "David":30
+            }
+        }
+    ],
+
+    "attributes" : [
+        {
+            "npcID" : 0,
+            "npcName" : "Elmo Tivao",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 1,
+            "npcName" : "Vovovo",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 2,
+            "npcName" : "Jatsune Micu",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 3,
+            "npcName" : "Alex",
+            "verified" : false,
+            "developer" : true
+        },
+        {
+            "npcID" : 4,
+            "npcName" : "Frozono",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 5,
+            "npcName" : "Compuman",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 6,
+            "npcName" : "Toni",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 7,
+            "npcName" : "Toni ✔",
+            "verified" : true,
+            "developer" : false
+        },
+        {
+            "npcID" : 8,
+            "npcName" : "Pepperboy",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 9,
+            "npcName" : "Apu",
+            "verified" : false,
+            "developer" : false
+        },
+        
+        {
+            "npcID" : 10,
+            "npcName": "Patri",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 11,
+            "npcName" : "Healer",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 12,
+            "npcName" : "Doña Comedia", 
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID":13,
+            "npcName": "Kratos",
+            "verified":false,
+            "developer": false
+        },
+        {
+            "npcID" : 14,
+            "npcName" : "Sirenita",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 15,
+            "npcName" : "El Guasón",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 16,
+            "npcName" : "Aloy",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 17,
+            "npcName" : "Bob Esponja",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 18,
+            "npcName" : "Patricio",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 19,
+            "npcName" : "Espáider Man",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 20,
+            "npcName" : "Isshin Ashina",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 21,
+            "npcName" : "Pablo Motos",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 22,
+            "npcName" : "Raúl",
+            "verified" : false,
+            "developer" : true
+        },
+        {
+            "npcID" : 23,
+            "npcName" : "Guardia",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 24,
+            "npcName" : "El Tío la Vara",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 25,
+            "npcName" : "Rick Astley",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID": 26,
+            "npcName": "Roi",
+            "verified": false,
+            "developer": true
+        },
+        {
+            "npcID": 27,
+            "npcName": "Iker Jiménez",
+            "verified": false,
+            "developer": false
+        },
+        {
+            "npcID" : 28,
+            "npcName" : "NPC",
+            "verified" : false,
+            "developer" : false
+        },
+        {
+            "npcID" : 29,
+            "npcName" : "Pablo",
+            "verified" : false,
+            "developer" : true
+        },
+        {
+            "npcID" : 30,
+            "npcName" : "David",
+            "verified" : false,
+            "developer" : true
+        }
+    ],
+    "texts" : [
+        {
+            "npcID" : 0,
+            "unique" : true,
+            "text" : "No temas a quien haya practicado 10000 patadas diferentes, teme a quien haya practicado una misma patada 10000 veces."
+        },
+        {
+            "npcID": 0,
+            "unique" : true,
+            "text": "He hecho kárate mucho tiempo mientras crecía, pero nada gana a un buen escopetazo."
+        },
+        {
+            "npcID": 0,
+            "unique" : true,
+            "text": "Hacer mudanzas es horrible."
+        },
+        {
+            "npcID": 1,
+            "unique" : true,
+            "text": "Mi habilidad es ser capaz de decir 'aaaaa' ante un ventilador. En verano lo hago 3 veces a la semana, aunque en invierno tan solo 2. Y por cierto, en el campeonato de este año quedé en un digno 2º puesto."
+        },
+        {
+            "npcID": 1,
+            "unique" : true,
+            "text": "¡Por el poder del cabello nasal!"
+        },
+        {
+            "npcID": 1,
+            "unique" : true,
+            "text": "Por favor, haga el favor de mirar hacia otro lado... Me estoy cambiando de ropa. No vaya tan deprisa por favor, así no conseguirá nada."
+        },
+        {
+            "npcID": 1,
+            "unique" : true,
+            "text": "No se puede vivir ya en esta triste sociedad, mi espíritu ha adquirido la social enemistad. ¡Toma ya! ¡Toma ya!"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "*vocaloid noises*"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "*blushes* >w<"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "uwu"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "To become god is the loneliest achievement of them all"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "owo"
+        },
+        {
+            "npcID": 2,
+            "unique" : true,
+            "text": "M-Manin kun...*blushes again*"
+        },
+        {
+            "npcID": 3,
+            "unique" : true,
+            "text": "Bueno."
+        },
+        {
+            "npcID": 3,
+            "unique" : true,
+            "text": "¿Y?"
+        },
+        {
+            "npcID": 3,
+            "unique" : true,
+            "text": "Me **** en la **** de oros. (Este he sido yo haciendo que este texto se muestre en pantalla tal y como tú lo estás viendo ahora mismo)"
+        },
+        {
+            "npcID": 3,
+            "unique" : true,
+            "text": "¡Toma mango!"
+        },
+        {
+            "npcID": 3,
+            "unique" : true,
+            "text": "Sí, sí, sí Pedrerol, sí, sí."
+        },
+        {
+            "npcID": 4,
+            "unique" : true,
+            "text": "¿Dónde está mi súpertraje?"
+        },
+        {
+            "npcID": 4,
+            "unique" : true,
+            "text": "Pongan bachata."
+        },
+        {
+            "npcID": 4,
+            "unique" : true,
+            "text": "Me has dejado helado."
+        },
+        {
+            "npcID": 5,
+            "unique" : true,
+            "text": "Hola a mis fans"
+        },
+        {
+            "npcID": 5,
+            "unique" : true,
+            "text": "jeje"
+        },
+        {
+            "npcID": 5,
+            "unique" : true,
+            "text": "¿Karnaugh? Es un buen amigo, jeje"
+        },
+        {
+            "npcID": 5,
+            "unique" : true,
+            "text": "Esto se acabó. Kisses."
+        },
+        {
+            "npcID": 6,
+            "unique" : true,
+            "text": "ª"
+        },
+        {
+            "npcID": 7,
+            "unique" : true,
+            "text": "Ey, completo undefined."
+        },
+        {
+            "npcID": 7,
+            "unique" : false,
+            "text": "Mira, acabo de terminar this insignia."
+        },
+        {
+            "npcID": 7,
+            "unique" : false,
+            "text": "Se la he copiado al tal 'Musck' ese."
+        },
+        {
+            "npcID": 7,
+            "unique" : false,
+            "text": "¿Tú tienes alguna insignia?."
+        },
+        {
+            "npcID": 7,
+            "unique" : false,
+            "text": "Traeme 30 y te invito a una cerveza en la posada más cercana."
+        },
+        {
+            "npcID": 8,
+            "unique" : true,
+            "text": "Ha llegado la época de los sobornos."
+        },
+        {
+            "npcID": 8,
+            "unique" : false,
+            "text": "Llevo una semana cenando pimientos de Pliego."
+        },
+        {
+            "npcID": 8,
+            "unique" : false,
+            "text": "Con un buen filetón están tremendos."
+        },
+        {
+            "npcID": 9,
+            "unique" : true,
+            "text" : "¿Quieres comprar?"
+        },
+        {   "npcID": 10,
+            "unique": true,
+            "text": "A mí me han engañao', pensaba que esto era Moképon."
+        },
+        {
+            "npcID": 10,
+            "unique": true,
+            "text": "Jueguen al Yakuza 0"
+        },
+        {
+            "npcID" : 11,
+            "unique": true,
+            "text": "Toma una fría para regular el pH, que estáis apollardaos"
+        },
+        {
+            "npcID" : 12,
+            "unique" : true,
+            "text" : "¿Te cuento un chiste?"
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Este es un pueblo en el que empiezan a aparecer carteles. En el ayuntamiento, el corcho de la plaza, etc. En el cartel se podía leer: \"GRAN GIRA NACIONAL. EL CIRCO DEL PAN QUE HABLA. ¡PRÓXIMA APERTURA EN UN AÑO EN ESTE MISMO PUEBLO!\""
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Al verlo, la gente se extrañó pero no le hizo demasiado caso."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Fueron pasando los meses y el pueblo cada vez se llenaba más de carteles de este circo, así que la curiosidad empezó a invadir a los habitantes de este gran pueblo de España."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Fue tanta la curiosidad que decidieron acercarse a otros pueblos para preguntarles si sabían lo que era ese circo, a lo que todos les respondieron lo mismo: \"!¿VA EL CIRCO DEL PAN QUE HABLA A VUESTRO PUEBLO?! ES IMPRESIONANTE, NO OS LO PODÉIS PERDER. LITERALMENTE HA CAMBIADO MI VIDA\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "A partir de ese momento el pueblo se llenó de emoción. Empezaron a aparecer carteles, hicieron merchandising del pan que habla, se enteraron incluso Pedro Sánchez y el rey ,el alcalde se vistió de él para hacer propaganda electoral (que perdió, porque a casi nadie le caía bien)."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Llegó el mes de la apertura y todo el pueblo empezó a acampar en el recinto ferial. Todas las casas se quedaron vacías y abrieron y baños portátiles tiendas ahí en medio."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Un día llegaron los camiones que traían los materiales para construir la carpa y TODO el pueblo decidió ayudar a construirlo. Tardaron entre todos tan solo 30 minutos."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Llegó el día de la apertura, y la gente estaba como loca. Tuvo que ir el ejército a controlar la cola porque intentaban entrar todo el rato de la emoción que tenían por ver el pan que habla."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "También había ambulancias todo el rato porque cada dos por tres a la gente le daban ataques de ansiedad de los nervios."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Finalmente llega la apertura. La gente entró como un terremoto, tanto los de el pueblo como otros de al lado que querían volver a vivir la experiencia."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Fue tan bestial que varias personas murieron aplastadas, y la gente que no entró se suicidó en la puerta por no haber podido acudir al espectáculo."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : " En total ese día murieron 6 personas."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Ya finalmente la gente estaba dentro, incluidos el presidente y el rey, que tampoco se lo querían perder."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "En un momento, llega el presentador: \"¡BUENAS NOCHES [nombre del pueblo], ¿CÓMO ESTÁN USTEDES?!\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "La gente empezó a gritar con emoción, y el presentador vuelve a decir: \"VEO QUE ESTÁN MUY EMOCIONADOS, ¡QUE EMPIECE ENTONCES EL ESPECTÁCULO CON NUESTRO PRIMER NÚMERO: EL ÁGUILA QUE HACE MALABARES!\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "El pueblo respondió con abucheos: \"BUUUUU, FUERA, QUE ENTRE EL PAN QUE HABLA\""
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "El presentador respondió a los abucheos: \"BUENO, BUENO, PARECE QUE NO QUERÉIS VERLO. PUES PASEMOS AL SIGUIENTE ESPECTÁCULO: ¡EL TIGRE QUE HACE PIRUETAS!\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "El público volvió a abuchear y a pedir que entre el pan que habla, a lo que el presentador respondió: \"BUENO, VEO QUE USTEDES VAN A LO QUE VAN. PUES VAYAMOS AL ÚLTIMO ESPECTÁCULO: ¡QUE ENTRE EL PAN QUE HABLA!\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "De repente un hombre entra empujando un carrito que tiene una bandejita de plata tapada. El presentador dice: \"PARA ESTE ESPECTÁCULO NECESITO UN VOLUNTARIO\"."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Todo el pueblo se emocionó. Empezaron a seguir el foco de luz, a lanzar a sus hijos y a pegarse."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Finalmente, el foco se para y señala a un hombre. Ese hombre bajó al escenario llorando, todo el pueblo le empezó a aplaudir y el alcalde le cedió su puesto."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Finalmente llega al escenario, y el presentador le pregunta su nombre."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "\"As-Astolfo...\" respondió él entre sollozos."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "\"Bueno Astolfo, tranquilícese que le necesito para este espectáculo\" le tranquilizó el presentador, y acto seguido destapa la bandeja."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Se ve entonces un pan de molde normal y corriente a simple vista."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "El presentador pide a Astolfo que toque el pan. Astolfo acerca su mano, tembloroso y a punto del ataque de ansiedad."
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "Finalmente Astolfo logra tocar el pan, y el presentador le dice: "
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "\"Astolfo, ¿podría decirme cómo está el pan?\", a lo que Astolfo responde:"
+        },
+        {
+            "npcID" : 12,
+            "unique" : false,
+            "text" : "\"Está blando.\""
+        },
+        {
+            "npcID" : 12,
+            "unique" : true,
+            "text" : ":)"
+        },
+        {
+            "npcID":13,
+            "unique":true,
+            "text":"¡Vamos chico!"
+        },
+        {
+            "npcID":13,
+            "unique":true,
+            "text":"¡Zeus! ¡Tu hijo ha regresado, y trae consigo la destrucción del Olimpo!"
+        },
+        {
+            "npcID":13,
+            "unique":true,
+            "text":"Los dioses del Olimpo me han abandonado,...ya no queda esperanza."
+        },
+    
+        {
+            "npcID" : 14,
+            "unique" : true,
+            "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras gravida massa eget pretium pretium."
+        },
+        {
+            "npcID" : 15,
+            "unique" : true,
+            "text" : "Vivimos en una suciedad"
+        },
+        {
+            "npcID" : 15,
+            "unique" : true,
+            "text" : "JAJAJAJAJA"
+        },
+        {
+            "npcID" : 16,
+            "unique" : true,
+            "text" : "Tengo vello en la cara. Asústate, Gamer™"
+        },
+        {
+            "npcID" : 17,
+            "unique": true,
+            "text" : "Bob"
+        },
+        {
+            "npcID" : 18,
+            "unique" : true,
+            "text" : "Patricio"
+        },
+        {
+            "npcID" : 19,
+            "unique" : true,
+            "text" : "Tequila"
+        },
+        {
+            "npcID" : 20,
+            "unique" : false,
+            "text" : "Shura... Nunca pensé..."
+        },
+        {
+            "npcID" : 20,
+            "unique" : false,
+            "text" : "¡Qué habría de matar a otro como vos!"
+        },
+        {
+            "npcID" : 20,
+            "unique" : true,
+            "text" : "Ah, me equivoqué de persona..."
+        },
+        {
+            "npcID" : 21,
+            "unique" : true,
+            "text" : "Déjame mirar tus *censored*"
+        },
+        {
+            "npcID" : 21,
+            "unique" : true,
+            "text" : "Ni machismo, ni feminismo: igualdad"
+        },
+        {
+            "npcID" : 21,
+            "unique" : true,
+            "text" : "¿Cómo voy a ser yo racista si Will Smith es mi pana? ¡Que pase la china!"
+        },
+        {
+            "npcID" : 22,
+            "unique" : true,
+            "text" : "Give me otra bandeja"
+        },
+        {
+            "npcID" : 22,
+            "unique" : true,
+            "text" : "Yo soy EL MANIN"
+        },
+        {
+            "npcID" : 23,
+            "unique" : true,
+            "text" : "Yo solía ser un aventurero como tú. Pero un día me hirieron en la rodilla con una flecha..."
+        },
+        {
+            "npcID" : 23,
+            "unique" : true,
+            "text" : "Estaría mucho mas caliente y feliz con la panza bien llena de birra."
+        },
+        {
+            "npcID" : 24,
+            "unique" : true,
+            "text" : "¿Suʰ habíʰ fijao cómo recorto en silueeeeeeeeeeeeeeta?"
+        },
+        {
+            "npcID" : 24,
+            "unique" : true,
+            "text" : "Suʰ viá crujir viiiiiiiiiiiiiiiivos"
+        },
+        {
+            "npcID" : 24,
+            "unique" : true,
+            "text" : "Poder de la varaaaaaaaaaaaa"
+        },
+        {
+            "npcID" : 25,
+            "unique" : false,
+            "text" : "♫ We're no strangers to love ♫"
+        },
+        {
+            "npcID" : 25,
+            "unique" : false,
+            "text" : "♫ You know the rules, and so do I ♫"
+        },
+        {
+            "npcID" : 25,
+            "unique" : false,
+            "text" : "♫ A full commitment's what I'm thinking of ♫"
+        },
+        {
+            "npcID" : 25,
+            "unique" : false,
+            "text" : "♫ You wouldn't get this from any other guy ♫"
+        },
+        {
+            "npcID": 26,
+            "unique": false,
+            "text": "Hey"
+        },
+        {
+            "npcID": 26,
+            "unique": false,
+            "text": "Payaso"
+        },
+        {
+            "npcID": 26,
+            "unique": false,
+            "text": "¿Has jugado al Persona 5 Royal? Es muy buen juego. Voy por el quinto boss y llevo 50 horas."
+        },
+        {
+            "npcID": 26,
+            "unique": false,
+            "text": "Me queda la mitad."
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Hola amigos, y bienvenidos, a la nave del misterio."
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Hoy, en Cuarto Milenio, hablaremos del inquietante caso del programador que nunca tuvo un error de compilación"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Imagenes impactantes, nos preguntamos ¿Que está pasando aquí?"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Escalofriante"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "¿Será esto obra de algún tipo de espíritu o entidad?"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Estos graficos son, sin duda, escalofriantes"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "¿Que será lo que nos mueve? ¿Quizás Ovnis? ¿Pueden ser criaturas paranormales? ¿O será quizás un ser interdimensional más allá de los confines de esta realidad?"
+        },
+        {
+            "npcID": 27,
+            "unique": false,
+            "text": "Me parece un dato interesantísimo"
+        },
+        {
+            "npcID": 28,
+            "unique": false,
+            "text": "NO"
+        },
+        {
+            "npcID": 29,
+            "unique": false,
+            "text": "Sujetame el abrigo que me meo"
+        },
+        {
+            "npcID": 29,
+            "unique": false,
+            "text": "¿Has oido el chiste del pan que habla?"
+        },
+        {
+            "npcID": 29,
+            "unique": false,
+            "text": "♪ Estoy cansado ♪"
+        },
+        {
+            "npcID": 30,
+            "unique": false,
+            "text": "uwu"
+        },
+        {
+            "npcID": 30,
+            "unique": false,
+            "text": "Te gusta Dark Souls 3 y no te gusta Bloodborne..."
+        },
+        {
+            "npcID": 30,
+            "unique": false,
+            "text": "Checkea"
+        }
+    ]
+}

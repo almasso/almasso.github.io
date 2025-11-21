@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es_ES">
+
+    <head>
+        <meta charset="UTF-8">
+
+        <!--Fuentes-->
+        <link rel="preconnect" href="https://fonts.googleapis.com"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+        <link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/668d999ad9.js" crossorigin="anonymous"></script>
+        <!--Fuentes-->
+
+        <meta name="viewport" content="width=device-width, initial-scale=2.0">
+        <link rel="stylesheet" href="../../../css/programs/erpg.css">
+        <script src="../../../js/phaser.js"></script>
+        <link rel="icon" type="image/x-icon" href="http://labs.phaser.io/assets/sprites/star.png">
+        <title>ÑRPG</title>
+    </head>
+
+    <body>
+        <script src="../../../js/programs/erpg/Game.js" type = "module"></script>
+        <header>
+            <a href="erpg.html" id="titulo"><h1><span class="rojo">Ñ</span><span class="amarillo">RP</span><span class="rojo">G</span>
+                <span> - ESPAÑA: RONDANDO POR </span><span class="blanco">GA</span><span class="azul">LIC</span><span class="blanco">IA</span></h1></a>
+            <p class="subtitulo">LA PRIMERA GRAN ENTREGA DE VUESTRA DESARROLLADORA MENOS PREFERIDA: MANÍN INTERACTIVE</p>
+        </header>
+        <hr>
+        <nav>
+            <ul id="navegacion">
+                <li class="enlacesNAV currentLink"><a href="erpg.html" class="enlacesNAV">Inicio</a></li>
+                <li class="enlacesNAV"><a href="manin.html" class="enlacesNAV">Manín Interactive</a></li>
+                <li class="enlacesNAV"><a href="https://github.com/almasso/PVLI_ERPG/issues" target="_blank"  class="enlacesNAV">¿Bug?</a></li>
+            </ul>
+        </nav>
+        <hr>
+        <section>
+            <nav>
+                <ul id="botones_index">
+                    <li class="enlacesNAVJuego" id="objetivoNAV"><a class="enlacesNAV" data-open="descripcion">Descripción y Objetivo</a></li>
+                    <li class="enlacesNAVJuego" id="controlNAV"><a class="enlacesNAV" data-open="controles">Controles</a></li>
+                </ul>
+            </nav>
+        </section>
+        <hr>
+        <section>
+            <div class="modal" id="controles">
+                <div class="modal-dialog">
+                  <header class="modal-header">
+                    Controles
+                    <button class="close-modal" aria-label="close modal" data-close>✕</button>
+                  </header>
+                  <section class="modal-content">
+                    <p><img src="../../../assets/icons/programs/erpg/textures/HUD/NewControls.png" style="height:90%;width:90%;"></p>
+                  </section>
+                </div>
+            </div>
+            
+            <div class="modal" id="descripcion">
+                <div class="modal-dialog">
+                  <header class="modal-header">
+                    Descripción y Objetivo
+                    <button class="close-modal" aria-label="close modal" data-close>✕</button>
+                  </header>
+                  <section class="modal-content">
+                    <p>Literalmente esto es un RPG. No le des más vueltas porque es lo que hay, no vas a ver nada nuevo ni innovador, simplemente un RPG pero los personajes cutres 
+                        basados en deidades ahora son Melendi y otros engendros de la vida cotidiana española (y no tan española).</p>
+                    <p></p>Ah sí, tu objetivo es pelear, así que ve al parque y merodea por los arbustos. Ya está. No te vamos a decir cómo jugar a esto, 
+                    <a id="filosofofo" href="https://youtu.be/wS9R4mVmFZY" target="_blank">apréndete tú que eres el maestro filosófofo.</a></p>
+                  </section>
+                  <section class="modal-footer">
+                    <p>Bueno, me han hecho explicaros este juego de una manera un poco más formal so pena de suspenso así que me tocará explicároslo: esto es un RPG clásico por 
+                        turnos a la vieja usanza.</p>
+                    <p>ÑRPG es un JRPG ubicado en Galicia, más concretamente en Vigo. El <a id="dinoseto" href="https://es.wikipedia.org/wiki/Dinoseto" target="_blank">Dinoseto</a>
+                    ha sido vandalizado y tres de sus piezas han desaparecido. Tendrás que investigar para encontrarlas y devolverlas. Para ello, hablarás con variopintos
+                    personajes que se han reunido (casualmente) en la ciudad y realizarás misiones para ellos, algunas de las cuales te obligarán a enfrentarte a vándalos y artistas
+                    en busca de fama ocultos en los altos arbustos del parque. Si cumples sus misiones podrás enfrentarte a ellos, y si los vences, podrán aliarse contigo para vencer a
+                    esos malvados artistuchos.</p>
+                  </section>
+                </div>
+            </div>
+
+
+            <div id="divcanvas">
+                <canvas id='game' style="image-rendering: pixelated; width: 800px; height: 600px"></canvas>
+            </div>
+        </section>
+        <footer class="socials">
+            <div>
+                <p id="copy"><i class="fa-regular fa-copyright fa-flip-horizontal"></i> Copyleft 2022 - Manín Interactive. Todos los izquierdos reservados.</p>
+            </div>
+            <div>
+                <a class="socialslinks" href="https://github.com/almasso/PVLI_ERPG" target="_blank"><i class="fa-brands fa-github"></i></a>
+            </div>      
+        </footer>
+    </body>
+
+    <script>
+        const openEls = document.querySelectorAll("[data-open]");
+        const closeEls = document.querySelectorAll("[data-close]");
+        const isVisible = "is-visible";
+ 
+        for(const el of openEls) {
+            el.addEventListener("click", function() {
+                const modalId = this.dataset.open;
+                document.getElementById(modalId).classList.add(isVisible);
+            });
+        }
+
+        for (const el of closeEls) {
+            el.addEventListener("click", function() {
+                this.parentElement.parentElement.parentElement.classList.remove(isVisible);
+            });
+        }
+
+        document.addEventListener("click", e => {
+            if (e.target == document.querySelector(".modal.is-visible")) {
+                document.querySelector(".modal.is-visible").classList.remove(isVisible);
+            }
+        });
+
+    </script>
+
+</html>

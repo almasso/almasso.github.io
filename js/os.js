@@ -9,6 +9,7 @@ import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Navigator from "./programs/navigator.js";
 import Steam from "./programs/steam.js";
+import ERPG from "./programs/erpg.js";
 import Icon from "./icon.js";
 import {getRoot, shuffle} from "./utils.js";
 
@@ -295,6 +296,7 @@ export default class OS extends EventTarget {
     this.appRegistered.set(Arkanoid.id, Arkanoid);
     this.appRegistered.set(Asteroids.id, Asteroids);
     this.appRegistered.set(Galactic.id, Galactic);
+    this.appRegistered.set(ERPG.id, ERPG);
     let instance = new Searcher(this);
     await instance.ready();
     this.appInstances.set(0, instance);
@@ -377,6 +379,17 @@ export default class OS extends EventTarget {
         this.appInstances.delete(steamInstance.instanceID);
         steamInstance = null;
       }
+      else if(app.appClass === "webgame" && userCalled) {
+        let steamInstance = new Steam(this);
+        await steamInstance.ready();
+        this.appInstances.set(steamInstance.instanceID, steamInstance);
+        this.dispatchEvent(new CustomEvent("appsLoaded", {}));
+        
+        steamInstance.initWebgame(app);
+
+        this.appInstances.delete(steamInstance.instanceID);
+        steamInstance = null;
+      }
       else {
         let instance = new app(this);
         await instance.ready();
@@ -387,6 +400,7 @@ export default class OS extends EventTarget {
           new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
         await win.open();
         this.windows.push(win);
+        return win;
       }
     }
   }
