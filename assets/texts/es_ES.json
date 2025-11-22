@@ -12,7 +12,7 @@
     {
         "id" : "terminal",
         "texts" : {
-            "cmdhelp" : "Comandos disponibles: help, echo, clear",
+            "cmdhelp" : "Comandos disponibles: help, echo, clear, car, tunnel",
             "cmdcommandnf" : "No se ha encontrado el comando: "
         },
         "games" : {
@@ -23,6 +23,15 @@
                 "crash" : "CRASH!!!!\nTamaño de pista: {tamano}",
                 "points" : "Puntuación: {points}",
                 "pause" : "El juego ha sido parado.\nTamaño de la pista: {tamano}"
+            },
+            "tunnel" : {
+                "score_label": "Puntos: {pts}",
+                "kills_label": "Puntos por kill: {kills}",
+                "total_label": "Puntuación total: {total}",
+                "paused": "JUEGO EN PAUSA",
+                "continue" : "Presiona cualquier tecla para continuar...",
+                "game_over": "Juego finalizado",
+                "debug_label": "Suelo: {suelo} | Techo: {techo} | Enemigo: {enemigo} | Nave: {nave}"
             }
         }
     },

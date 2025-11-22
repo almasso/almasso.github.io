@@ -12,7 +12,7 @@
     {
         "id" : "terminal",
         "texts" : {
-            "cmdhelp" : "Available commands: help, echo, clear",
+            "cmdhelp" : "Available commands: help, echo, clear, car, tunnel",
             "cmdcommandnf" : "Command not found: "
         },
         "games" : {
@@ -23,6 +23,15 @@
                 "crash" : "CRASH!!!!\nTrack size: {tamano}",
                 "points" : "Score: {points}",
                 "pause" : "The game has been paused.\nTrack size: {tamano}"
+            },
+            "tunnel" : {
+                "score_label": "Points: {pts}",
+                "kills_label": "Points per kill: {kills}",
+                "total_label": "Final score: {total}",
+                "paused": "GAME PAUSED",
+                "continue" : "Press any key to continue...",
+                "game_over": "Game over",
+                "debug_label": "Floor: {suelo} | Ceiling: {techo} | Enemy: {enemigo} | Ship: {nave}"
             }
         }
     },

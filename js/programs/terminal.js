@@ -1,6 +1,7 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 import Car from "./terminalgames/car.js";
+import Tunnel from "./terminalgames/tunnel.js";
 
 export default class Terminal extends Program {
 
@@ -132,6 +133,11 @@ export default class Terminal extends Program {
                 car: async () => {
                     const game = new Car(this);
                     await game.start(); 
+                    return null;
+                },
+                tunnel : async () => {
+                    const game = new Tunnel(this);
+                    await game.start();
                     return null;
                 }
             }

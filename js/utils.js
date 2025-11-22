@@ -29,6 +29,7 @@ export function clamp(value, min, max) {
 }
 
 export function rndNext(min, max) {
+    if(max === undefined) return Math.floor(Math.random() * min);
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
