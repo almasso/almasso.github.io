@@ -1,0 +1,45 @@
+.acrobat {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: #525659;
+}
+
+#toolbar {
+    background: #323639;
+    color: white;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #000;
+}
+
+.group {
+    display: flex;
+    gap: 5px;
+}
+
+.group button {
+    cursor: pointer;
+}
+
+#page {
+    font-size: 12px;
+}
+
+#zoom_controls {
+    margin-left: auto;
+}
+
+#canvas-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+#pdf-canvas {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}

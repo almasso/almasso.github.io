@@ -8,6 +8,7 @@ import Galactic from "./programs/galactic.js";
 import Searcher from "./programs/searcher.js";
 import Terminal from "./programs/terminal.js";
 import Navigator from "./programs/navigator.js";
+import Acrobat from "./programs/acrobat.js";
 import Steam from "./programs/steam.js";
 import ERPG from "./programs/erpg.js";
 import Icon from "./icon.js";
@@ -292,6 +293,7 @@ export default class OS extends EventTarget {
     this.appRegistered.set(Searcher.id, Searcher);
     this.appRegistered.set(Terminal.id, Terminal);
     this.appRegistered.set(Navigator.id, Navigator);
+    this.appRegistered.set(Acrobat.id, Acrobat);
     this.appRegistered.set(Steam.id, Steam);
     this.appRegistered.set(Arkanoid.id, Arkanoid);
     this.appRegistered.set(Asteroids.id, Asteroids);

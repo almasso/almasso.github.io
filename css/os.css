@@ -345,6 +345,11 @@ body, html {
   position: relative;
   filter: contrast(1.1) brightness(1.1) saturate(1.2);
   image-rendering: pixelated;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 10px;
 }
 
 /*#region PROGRAMS*/
@@ -360,6 +365,7 @@ body, html {
 
 .desktop-icon {
   width: 64px;
+  height: auto;
   text-align: center;
   color: black;
   margin: 20px;
