@@ -130,12 +130,18 @@ export default class Terminal extends Program {
                     this.output.innerHTML = "";
                     return null;
                 },
-                car: async () => {
+                car: async (args) => {
+                    if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
+                        return `Car Game v${Car.VERSION}`;
+                    }
                     const game = new Car(this);
                     await game.start(); 
                     return null;
                 },
-                tunnel : async () => {
+                tunnel : async (args) => {
+                    if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
+                        return `Tunnel Game v${Car.VERSION}`;
+                    }
                     const game = new Tunnel(this);
                     await game.start();
                     return null;

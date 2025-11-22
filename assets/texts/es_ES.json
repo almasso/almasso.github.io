@@ -12,7 +12,7 @@
     {
         "id" : "terminal",
         "texts" : {
-            "cmdhelp" : "Comandos disponibles: help, echo, clear, car, tunnel",
+            "cmdhelp" : "Comandos disponibles:\n\t help -- muestra esta lista\n\t echo -- permite imprimir texto en la terminal\n\t clear -- limpia la terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
             "cmdcommandnf" : "No se ha encontrado el comando: "
         },
         "games" : {

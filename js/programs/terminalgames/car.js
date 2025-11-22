@@ -8,6 +8,8 @@ export default class Car {
     TOPE = 40;
     ANCHO = 9;
 
+    static VERSION = "1.0 (JS port) - Alejandro Massó Martínez & Raúl Pérez Cogoulludo - 2021";
+
     constructor(terminal) {
         this.terminal = terminal;
         this.strings = this.terminal.gameStrings["car"];

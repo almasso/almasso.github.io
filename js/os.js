@@ -394,11 +394,11 @@ export default class OS extends EventTarget {
         let instance = new app(this);
         await instance.ready();
         this.appInstances.set(instance.instanceID, instance);
-        this.dispatchEvent(new CustomEvent("appsLoaded", {}));
 
         const win = app.id === Steam.id ? new SteamWindow(this, instance, this.windowID++, app.width, app.height, app.width, app.height) : 
           new Window(this, instance, this.windowID++, app.width, app.height, app.width, app.height);
         await win.open();
+        this.dispatchEvent(new CustomEvent("appsLoaded", {}));
         this.windows.push(win);
         return win;
       }
