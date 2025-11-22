@@ -31,3 +31,12 @@ export function clamp(value, min, max) {
 export function rndNext(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+
+export function formatString(template, replacements) {
+    let result = template;
+    for(const key in replacements) {
+        const regex = new RegExp(`{${key}}`, 'g');
+        result = result.replace(regex, replacements[key]);
+    }
+    return result;
+}

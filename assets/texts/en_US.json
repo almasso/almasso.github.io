@@ -14,6 +14,16 @@
         "texts" : {
             "cmdhelp" : "Available commands: help, echo, clear",
             "cmdcommandnf" : "Command not found: "
+        },
+        "games" : {
+            "car" : {
+                "instructions" : "Press keys \"A\" and \"D\" to move left and right respectively.\nPress key \"Q\" to end the game.\nScore in normal mode = 10 pts per line.\nScore in hard mode = 15 pts per line.",
+                "difficulty" : "Press key \"N\" to play normal mode or key \"D\" to play hard mode: ",
+                "refresh" : "\nEnter a refresh rate (in milliseconds, between {min} and {max}): ",
+                "crash" : "CRASH!!!!\nTrack size: {tamano}",
+                "points" : "Score: {points}",
+                "pause" : "The game has been paused.\nTrack size: {tamano}"
+            }
         }
     },
     {

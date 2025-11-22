@@ -120,6 +120,7 @@ export default class Terminal extends Program {
         const programData = this.searchForProgramInData();
         if(programData) {
             this.strings = programData["texts"];
+            this.gameStrings = programData["games"];
 
             this.commands = {
                 help : this.strings["cmdhelp"],
@@ -131,7 +132,7 @@ export default class Terminal extends Program {
                 car: async () => {
                     const game = new Car(this);
                     await game.start(); 
-                    return "Game ended. Type a new command.";
+                    return null;
                 }
             }
         } else {

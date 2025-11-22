@@ -14,6 +14,16 @@
         "texts" : {
             "cmdhelp" : "Verfügbare Befehle: help, echo, clear",
             "cmdcommandnf" : "Befehl nicht gefunden: "
+        },
+        "games" : {
+            "car" : {
+                "instructions" : "Drücken Sie die Tasten \"A\" und \"D\", um sich nach links bzw. rechts zu bewegen.\nDrücken Sie die Taste \"Q\", um das Spiel zu beenden.\nPunkte im normalen Modus = 10 Pkt. pro Linie.\nPunkte im schweren Modus = 15 Pkt. pro Linie.",
+                "difficulty" : "Drücken Sie die Taste \"N\" für den normalen Modus oder die Taste \"D\" für den schweren Modus: ",
+                "refresh" : "\nGeben Sie eine Aktualisierungsrate ein (in Millisekunden, zwischen {min} und {max}): ",
+                "crash" : "CRASH!!!!\nStreckengröße: {tamano}",
+                "points" : "Punktzahl: {points}",
+                "pause" : "Das Spiel wurde pausiert.\nStreckengröße: {tamano}"
+            }
         }
     },
     {

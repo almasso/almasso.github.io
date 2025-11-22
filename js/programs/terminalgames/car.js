@@ -1,6 +1,6 @@
 // Original code in C#, translated into JS
 
-import {clamp, rndNext} from "../../utils.js";
+import {clamp, rndNext, formatString} from "../../utils.js";
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -10,6 +10,7 @@ export default class Car {
 
     constructor(terminal) {
         this.terminal = terminal;
+        this.strings = this.terminal.gameStrings["car"];
 
         this.delta = 0;
         this.pistaIzq = 0;
@@ -58,19 +59,19 @@ export default class Car {
                 this.#decrementoRetardo();
             }
         } finally {
-            this.terminal.togglePrompt(true);
             this.#unbindInput();
+            this.terminal.togglePrompt(true);
         }
         return "Game Over";
     }
 
     async #instrucciones() {
         this.dificultad = false;
-        this.terminal.writeLine("Teclas \"A\" y \"D\" para moverse hacia izquierda y derecha respectivamente.\nTecla \"Q\" para finalizar el juego.\nPuntuación en modo normal = 10 pts. por línea.\nPuntuación en modo difícil = 15 pts. por línea.", 'yellow');
+        this.terminal.writeLine(this.strings["instructions"], 'yellow');
 
         let modoValido = false;
         while (!modoValido) {
-            const modo = (await this.terminal.readLine("Introduzca tecla \"N\" para jugar el modo normal o tecla \"D\" para jugar el modo difícil: ", 'white')).toLowerCase();
+            const modo = (await this.terminal.readLine(this.strings["difficulty"], 'white')).toLowerCase();
 
             if (modo === "n") {
                 this.dificultad = false;
@@ -85,7 +86,7 @@ export default class Car {
     async #pideDelta(min, max) {
         let delta = 0;
         while (delta < min || delta > max || isNaN(delta)) {
-            const input = await this.terminal.readLine(`\nIntroduce una velocidad de refresco (en milisegundos, entre ${min} y ${max}): `, 'white');
+            const input = await this.terminal.readLine(formatString(this.strings["refresh"], {min : min, max : max}), 'white');
             delta = parseInt(input);
         }
         this.delta = delta;
@@ -189,8 +190,8 @@ export default class Car {
             lineHTML += "|";
 
             this.terminal.writeLine(lineHTML, 'white');
-            this.terminal.writeLine(`CRASH!!!!\nTamaño de pista: ${this.tamano}`, 'darkred');
-            this.terminal.writeLine(`Puntuación: ${this.pts}`, 'darkred');
+            this.terminal.writeLine(formatString(this.strings["crash"], {tamano : this.tamano}), 'darkred');
+            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}), 'darkred');
         }
         else if (this.colDcha && !this.stop) {
             lineHTML += "&nbsp;".repeat(Math.max(0, this.pistaIzq - 1));
@@ -203,12 +204,12 @@ export default class Car {
             lineHTML += `<span style="color: red">&lt;o*</span>`;
 
             this.terminal.writeLine(lineHTML, 'white');
-            this.terminal.writeLine(`CRASH!!!!\nTamaño de pista: ${this.tamano}`, 'darkred');
-            this.terminal.writeLine(`Puntuación: ${this.pts}`, 'darkred');
+            this.terminal.writeLine(formatString(this.strings["crash"], {tamano : this.tamano}), 'darkred');
+            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}), 'darkred');
         }
         else if (this.stop) {
-            this.terminal.writeLine(`El juego ha sido parado.\nTamaño de la pista: ${this.tamano}`, '#00ff00');
-            this.terminal.writeLine(`Puntuación: ${this.pts}`, '#00ff00');
+            this.terminal.writeLine(formatString(this.strings["pause"], {tamano : this.tamano}));
+            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}));
         }
     }
 

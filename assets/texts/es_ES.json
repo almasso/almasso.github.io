@@ -14,6 +14,16 @@
         "texts" : {
             "cmdhelp" : "Comandos disponibles: help, echo, clear",
             "cmdcommandnf" : "No se ha encontrado el comando: "
+        },
+        "games" : {
+            "car" : {
+                "instructions" : "Teclas \"A\" y \"D\" para moverse hacia izquierda y derecha respectivamente.\nTecla \"Q\" para finalizar el juego.\nPuntuación en modo normal = 10 pts. por línea.\nPuntuación en modo difícil = 15 pts. por línea.",
+                "difficulty" : "Introduzca tecla \"N\" para jugar el modo normal o tecla \"D\" para jugar el modo difícil: ",
+                "refresh" : "\nIntroduce una velocidad de refresco (en milisegundos, entre {min} y {max}): ",
+                "crash" : "CRASH!!!!\nTamaño de pista: {tamano}",
+                "points" : "Puntuación: {points}",
+                "pause" : "El juego ha sido parado.\nTamaño de la pista: {tamano}"
+            }
         }
     },
     {
