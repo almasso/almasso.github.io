@@ -21,7 +21,7 @@ export default class Steam extends Program {
     static gamesWindow = null;
     static loadingGameWindow = null;
 
-    constructor(os, name = Steam.name) {
+    constructor(os, name = Steam.name, fetchLang = false) {
         super(os, name, Steam.id, Steam.icon, "desktop");
 
         this.container = null;
@@ -30,9 +30,9 @@ export default class Steam extends Program {
         this.historyStack = [];
         this.currentIndex = -1;
 
-        this.addEventListener("localeSet", (e) => {
+        this.addEventListener("localeSet", async (e) => {
             this.setLanguage(os.locale);
-            this.getProgramData();
+            await this.getProgramData();
         });
 
         this.addEventListener("closeSubwindow", (e) => {
@@ -87,6 +87,8 @@ export default class Steam extends Program {
                 document.documentElement.style.setProperty("--paragraph-text-size", "12px");
             }
         });
+
+        if(fetchLang) this.dispatchEvent(new CustomEvent("localeSet", {}));
     }
 
     async getProgramData() {

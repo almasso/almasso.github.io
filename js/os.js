@@ -371,7 +371,7 @@ export default class OS extends EventTarget {
     }
     else {
       if(app.appClass === "game" && userCalled) {
-        let steamInstance = new Steam(this);
+        let steamInstance = new Steam(this, Steam.name, true);
         await steamInstance.ready();
         this.appInstances.set(steamInstance.instanceID, steamInstance);
         this.dispatchEvent(new CustomEvent("appsLoaded", {}));
