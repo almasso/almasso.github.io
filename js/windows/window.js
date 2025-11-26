@@ -1,3 +1,5 @@
+import WindowAnimator from "./windowanimator.js";
+
 export default class Window extends EventTarget{
     constructor(os, program, id, width = 400, height = 300, maxWidth = 800, maxHeight = 600) {
         super();
@@ -19,6 +21,9 @@ export default class Window extends EventTarget{
             this.win = document.createElement("div");
             this.win.className = "window";
             this.win.id = `${this.program.instanceID}`;
+
+            this.win.style.visibility = 'hidden';
+
             const bodyHTML = await this.program.getBodyHTML();
             this.win.innerHTML = `
                 <div class="window-header">
@@ -76,11 +81,30 @@ export default class Window extends EventTarget{
             container.appendChild(this.win);
             this.makeDraggable()
             dk.appendChild(container);
-            this.focus();
+
+            const iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}"]`);
+
+            const onWindowReady = () => {
+                this.focus();
+                this.dispatchEvent(new CustomEvent("ready", { 
+                    detail: { win: this.win } 
+                }));
+            };
+
+            if(iconEl) {
+                WindowAnimator.animateOpen(iconEl, this.win, () => {
+                    onWindowReady();
+                });
+            }
+            else {
+                this.win.style.visibility = 'visible';
+                onWindowReady();
+            }
         }
         else {
             existingWindow.style.display = "flex";
             this.focus();
+            this.dispatchEvent(new CustomEvent("ready", { detail: { win: existingWindow } }));
         }
         this.win.addEventListener("mousedown", () => {
             this.focus();
@@ -88,12 +112,38 @@ export default class Window extends EventTarget{
     }
 
     close() {
-        this.program.onClose();
-        this.os.dispatchEvent(new CustomEvent("closeWindow", {
-            detail: {windowId: this.id, app: this.program}
-        }));
-        this.win.remove();
-        this.win = null;
+        const performClose = () => {
+            if (this.program && typeof this.program.onClose === 'function') {
+                this.program.onClose();
+            }
+
+            this.os.dispatchEvent(new CustomEvent("closeWindow", {
+                detail: { windowId: this.id, app: this.program }
+            }));
+
+            this.dispatchEvent(new CustomEvent("closed", { 
+                detail: { windowId: this.id } 
+            }));
+
+            if (this.win) {
+                const container = this.win.parentElement; 
+                this.win.remove();
+                if (container && container.id.startsWith("windows-container")) {
+                    container.remove();
+                }
+                this.win = null;
+            }
+        };
+        
+        const iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}"]`);
+
+        if (this.win && iconEl && !this.minimized) {
+            WindowAnimator.animateClose(iconEl, this.win, () => {
+                performClose();
+            });
+        } else {
+            performClose();
+        }
     }
 
     minimize() {

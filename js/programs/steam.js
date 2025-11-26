@@ -143,7 +143,9 @@ export default class Steam extends Program {
                 setTimeout(async () => {
                     let wind = this.os.openWindow(Navigator);
                     wind = await wind;
-                    wind.program.navigate(game);
+                    wind.addEventListener("ready", (e) => {
+                        wind.program.navigate(game);
+                    });
                 }, 1000);
             }
         }, 3000);

@@ -442,6 +442,16 @@ body, html {
   left: 0;
 }
 
+.window-ghost {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  border: 2px dotted black;
+  background-color: transparent;
+  box-sizing: border-box;
+  transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 .window {
   position: absolute;
   top: 100px;
