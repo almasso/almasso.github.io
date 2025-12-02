@@ -1,6 +1,7 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 import ERPG from "./erpg.js";
+import NetscapeWeb from "./netscape_default.js";
 
 
 export default class Navigator extends Program {
@@ -22,6 +23,7 @@ export default class Navigator extends Program {
 
         this.specialURLS = new Map();
         this.specialURLS.set(ERPG.urlpage, ERPG);
+        this.specialURLS.set(NetscapeWeb.urlpage, NetscapeWeb);
 
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
@@ -37,6 +39,7 @@ export default class Navigator extends Program {
             navDiv.querySelector("#right-buttons button:nth-child(2) .label").innerText = this.interfaceTexts["stop"];
             navDiv.querySelector("#url p").innerText = this.interfaceTexts["location"];
         });
+
     }
 
     async getProgramData() {
@@ -83,7 +86,7 @@ export default class Navigator extends Program {
             });
 
             this.homeButton.addEventListener("click", () => {
-                this.navigate("http://home.mcom.com/home/welcome.html");
+                this.navigate(NetscapeWeb);
             })
 
             this.reloadButton.addEventListener("click", () => {
@@ -107,6 +110,7 @@ export default class Navigator extends Program {
 
             this.addedListeners = true;
             this.#updateButtons();
+            this.navigate(NetscapeWeb);
         }
     }
 
