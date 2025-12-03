@@ -1,18 +1,47 @@
 <div id="acrobat" class="acrobat">
     <div id="toolbar">
-        <div class="group">
-            <button id="prev">&lt;</button>
-            <button id="next">&gt;</button>
+        <div class="button-group" id="view-group">
+            <div class="button-border"><button class="button-selected" id="page-only"><img></button></div>
+            <div class=button-border><button id="bookmarks"><img></button></div>
+            <div class=button-border><button id="thumbnails"><img></button></div>
         </div>
-        <span id="page">
-            Page <span id="page_num">--</span> / <span id="page_count">--</span>
-        </span>
-        <div class="group" id="zoom_controls">
-            <button id="zoom_out">-</button>
-            <button id="zoom_in">+</button>
+        <div class="button-group" id="controls">
+            <div class=button-border><button id="zoom-in"><img></button></div>
+            <div class=button-border><button id="zoom-out"><img></button></div>
+        </div>
+        <div class="button-group" id="page-controls">
+            <div class="button-border"><button disabled id="first"><img></button></div>
+            <div class="button-border"><button disabled id="prev"><img></button></div>
+            <div class="button-border"><button id="next"><img></button></div>
+            <div class="button-border"><button id="last"><img></button></div>
+        </div>
+        <div class="button-group" id="zoom-options">
+            <div class="button-border"><button class="button-selected" id="actual-size"><img></button></div>
+            <div class="button-border"><button id="fit-width"><img></button></div>
+            <div class="button-border"><button id="fit-visible"><img></button></div>
         </div>
     </div>
     <div id="canvas-container">
         <canvas id="pdf-canvas"></canvas>
+    </div>
+    <div id="footer-bar">
+        <div class="footer-border">
+            <div id="page-footer">
+                <img class="icon-miniature">
+                <span id="page">Page</span> <span id="page_num">--</span> <span id="of">of</span> <span id="page_count">--</span>
+            </div>
+        </div>
+        <div class="footer-border">
+            <div id="zoom-percentage">
+                <img class="icon-miniature">
+                <span>%</span>
+            </div>
+        </div>
+        <div class="footer-border">
+            <div id="document-dimensions">
+                <img class="icon-miniature">
+                <span></span>
+            </div>
+        </div>
     </div>
 </div>

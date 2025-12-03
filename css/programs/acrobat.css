@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background: #525659;
+    background: #909090;
 }
 
 #toolbar {
-    background: #323639;
+    background: #C0C0C0;
     color: white;
     padding: 8px;
     display: flex;
@@ -15,13 +15,65 @@
     border-bottom: 1px solid #000;
 }
 
-.group {
-    display: flex;
-    gap: 5px;
+button {
+    width: 35px;
+    height: 35px;
+    background-color: #C0C0C0;
+    border-right: 2px solid #4E4E4E;
+    border-bottom: 2px solid #4E4E4E;
+    border-left: 2px solid #EAEAEA;
+    border-top: 2px solid #EAEAEA;
 }
 
-.group button {
-    cursor: pointer;
+button img {
+    height: 65%;
+}
+
+button:active:not(:disabled), .button-selected {
+    background-color: #909090;
+    border-left: 2px solid #4E4E4E;
+    border-top: 2px solid #4E4E4E;
+    border-right: 2px solid #EAEAEA;
+    border-bottom: 2px solid #EAEAEA;
+}
+
+button:disabled {
+    background-color: #E0E0E0;
+    border: 2px solid transparent;
+}
+
+button:active:not(:disabled) img, .button-selected img {
+    padding-top: 5px;
+    padding-left: 2px;
+}
+
+.button-border {
+    border: 1px solid black;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+}
+
+#footer-bar {
+    display: flex;
+    flex-direction: row;
+    background-color: #C0C0C0;
+    border-top: 1px solid black;
+}
+
+.footer-border {
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.footer-border div {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 2px;
 }
 
 #page {
@@ -38,6 +90,7 @@
     display: flex;
     justify-content: center;
     padding: 20px;
+    position: relative;
 }
 
 #pdf-canvas {

@@ -66,6 +66,18 @@
         }
     },
     {
+        "id" : "acrobat",
+        "texts" : {
+            "buttons" : {
+
+            },
+            "interface" : {
+                "page" : "Page",
+                "of" : "of"
+            }
+        }
+    },
+    {
         "id" : "steam",
         "texts" : {
             "buttons" : {
