@@ -73,7 +73,8 @@
             },
             "interface" : {
                 "page" : "Página",
-                "of" : "de"
+                "of" : "de",
+                "bookmarks" : "No se han encontrado marcadores"
             }
         }
     },

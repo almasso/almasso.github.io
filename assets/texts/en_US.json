@@ -73,7 +73,8 @@
             },
             "interface" : {
                 "page" : "Page",
-                "of" : "of"
+                "of" : "of",
+                "bookmarks" : "No bookmarks found"
             }
         }
     },

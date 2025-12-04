@@ -21,7 +21,7 @@ export default class Acrobat extends Program {
         this.scale = 1.0;
         this.canvas = null;
         this.ctx = null;
-        this.url = `${getRoot()}assets/pdf/TFG.pdf`;
+        this.url = `${getRoot()}assets/pdf/Acrobat.pdf`;
 
         this.addEventListener("localeSet", (e) => {
             this.setLanguage(os.locale);
@@ -94,14 +94,17 @@ export default class Acrobat extends Program {
             this.pageOnly.addEventListener("click", () => {
                 acrbt.querySelector("#view-group .button-selected").classList.remove("button-selected");
                 this.pageOnly.classList.add("button-selected");
+                this.switchLayout("none");
             });
             this.bookmarks.addEventListener("click", () => {
                 acrbt.querySelector("#view-group .button-selected").classList.remove("button-selected");
                 this.bookmarks.classList.add("button-selected");
+                this.switchLayout("bookmarks");
             });
             this.thumbnails.addEventListener("click", () => {
                 acrbt.querySelector("#view-group .button-selected").classList.remove("button-selected");
                 this.thumbnails.classList.add("button-selected");
+                this.switchLayout("thumbnails");
             });
             this.zoomIn.addEventListener('click', () => { 
                 this.scale += 0.2;
@@ -132,6 +135,7 @@ export default class Acrobat extends Program {
                 const page = await this.pdfDoc.getPage(this.pageNum);
                 const viewport = page.getViewport({ scale: 1.0 });
                 const container = this.canvas.parentElement;
+                console.log(container);
                 const scaleW = (container.clientWidth - 20) / viewport.width;
                 const scaleH = (container.clientHeight - 10) / viewport.height;
                 this.scale = Math.min(scaleW, scaleH);
@@ -229,12 +233,10 @@ export default class Acrobat extends Program {
 
         const layerDiv = document.createElement("div");
         layerDiv.className = "annotation-layer";
-        layerDiv.style.position = "absolute";
         layerDiv.style.left = `${this.canvas.offsetLeft}px`;
         layerDiv.style.top = `${this.canvas.offsetTop}px`;
         layerDiv.style.width = `${viewport.width}px`;
         layerDiv.style.height = `${viewport.height}px`;
-        layerDiv.style.pointerEvents = "none";
         layerDiv.style.border = this.canvas.style.border;
 
         canvasContainer.appendChild(layerDiv);
@@ -244,9 +246,7 @@ export default class Acrobat extends Program {
                 if (annotation.subtype === 'Link') {
                     const link = document.createElement('a');
                 
-                    link.style.position = 'absolute';
-                    link.style.cursor = 'pointer';
-                    link.style.pointerEvents = 'auto';
+                    link.className = "annotation-link";
                     
                     const rect = viewport.convertToViewportRectangle(annotation.rect);
                     
@@ -291,6 +291,7 @@ export default class Acrobat extends Program {
             
             if(pageNum > 0 && pageNum <= this.pdfDoc.numPages) {
                 this.pageNum = pageNum;
+                this.manageControlButtons();
                 this.queueRenderPage(pageNum);
             }
         } catch {
@@ -306,6 +307,143 @@ export default class Acrobat extends Program {
         win.querySelector("#acrobat #zoom-percentage span").innerText = `${percentage}%`;
     }
 
+    switchLayout(mode) {
+        const win = document.getElementById(this.instanceID);
+        const sidebar = win.querySelector("#sidebar");
+
+        sidebar.innerHTML = "";
+
+        if(mode === "none") {
+            sidebar.style.display = "none";
+        }
+        else {
+            sidebar.style.display = "block";
+            sidebar.style.padding = "5px";
+            if(mode === "bookmarks") this.renderBookmarks(sidebar);
+            else if(mode === "thumbnails") this.renderThumbnails(sidebar);
+        }
+    }
+
+    async renderBookmarks(sidebar) {
+        sidebar.style.background = "#e0e0e0";
+
+        const outline = await this.pdfDoc.getOutline();
+
+        if(!outline || outline.length === 0) {
+            sidebar.innerText = this.interfaceTexts["bookmarks"];
+            return;
+        }
+
+        const createList = (items) => {
+            const ul = document.createElement("ul");
+            ul.className = "bookmark-list";
+
+            items.forEach(item => {
+                const li = document.createElement("li");
+                li.className = "bookmark-element";
+
+                const icon = document.createElement("img");
+                icon.src = `${getRoot()}assets/icons/programs/acrobat/page.png`;
+
+                const text = document.createElement("span");
+                text.innerText = item.title;
+
+                li.appendChild(icon);
+                li.appendChild(text);
+
+                li.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    if(item.dest) this.goToDestination(item.dest);
+                    else if(item.url) window.open(item.url, '_blank');
+
+                    sidebar.querySelectorAll("span").forEach(s => s.style.fontWeight = "normal");
+                    text.style.fontWeight = "bold";
+                });
+
+                ul.appendChild(li);
+
+                if(item.items && item.items.length > 0) {
+                    ul.appendChild(createList(item.items));
+                }
+            });
+            return ul;
+        };
+
+        sidebar.appendChild(createList(outline))
+    }
+
+    async renderThumbnails(sidebar) {
+        sidebar.style.background = "transparent";
+
+        sidebar.style.display = "flex";
+        sidebar.style.flexDirection = "column";
+        sidebar.style.alignItems = "center";
+        sidebar.style.gap = "10px";
+
+        const numPages = this.pdfDoc.numPages;
+
+        for(let i = 1; i <= numPages; i++) {
+            const thumbDiv = document.createElement("div");
+            thumbDiv.className = "thumbnail";
+
+            const canvas = document.createElement("canvas");
+            canvas.style.border = "1px solid black";
+            canvas.style.background = "white";
+
+            const label = document.createElement("div");
+            label.innerText = i;
+            label.className = "thumbnail-label";
+
+            thumbDiv.appendChild(canvas);
+            thumbDiv.appendChild(label);
+            sidebar.appendChild(thumbDiv);
+
+            thumbDiv.addEventListener("click", () => {
+                this.pageNum = i;
+                this.manageControlButtons();
+                this.queueRenderPage(this.pageNum);
+                
+                sidebar.querySelectorAll(".thumbnail-active").forEach(th => th.classList.remove("thumbnail-active"));
+                sidebar.querySelectorAll(".thumbnail-canvas-active").forEach(th => th.classList.remove("thumbnail-canvas-active"));
+                canvas.classList.add("thumbnail-canvas-active");
+                label.classList.add("thumbnail-active");
+            });
+
+            this.pdfDoc.getPage(i).then(page => {
+                const viewport = page.getViewport({scale: 0.15});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                const ctx = canvas.getContext("2d");
+                page.render({
+                    canvasContext: ctx,
+                    viewport: viewport
+                });
+            });
+        }
+    }
+
+    manageControlButtons() {
+        if(this.pageNum === 1) {
+            this.next.disabled = false;
+            this.last.disabled = false;
+            this.first.disabled = true;
+            this.prev.disabled = true;
+        }
+        else if(this.pageNum === this.pdfDoc.numPages) {
+            this.next.disabled = true;
+            this.last.disabled = true;
+            this.first.disabled = false;
+            this.prev.disabled = false;
+        }
+        else {
+            this.next.disabled = false;
+            this.last.disabled = false;
+            this.first.disabled = false;
+            this.prev.disabled = false;
+        }
+    }
+
     queueRenderPage(num) {
         if (this.pageRendering) {
             this.pageNumPending = num;
@@ -316,43 +454,27 @@ export default class Acrobat extends Program {
 
     goToFirstPage() {
         this.pageNum = 1;
-        this.next.disabled = false;
-        this.last.disabled = false;
-        this.first.disabled = true;
-        this.prev.disabled = true;
+        this.manageControlButtons();
         this.queueRenderPage(this.pageNum);
     }
 
     goToLastPage() {
         this.pageNum = this.pdfDoc.numPages;
-        this.next.disabled = true;
-        this.last.disabled = true;
-        this.first.disabled = false;
-        this.prev.disabled = false;
+        this.manageControlButtons();
         this.queueRenderPage(this.pageNum);
     }
 
     onPrevPage() {
         if (this.pageNum <= 1) return;
         this.pageNum--;
-        this.next.disabled = false;
-        this.last.disabled = false;
-        if (this.pageNum <= 1) {
-            this.first.disabled = true;
-            this.prev.disabled = true;
-        }
+        this.manageControlButtons();
         this.queueRenderPage(this.pageNum);
     }
 
     onNextPage() {
         if (this.pageNum >= this.pdfDoc.numPages) return;
         this.pageNum++;
-        this.first.disabled = false;
-        this.prev.disabled = false;
-        if(this.pageNum >= this.pdfDoc.numPages) {
-            this.next.disabled = true;
-            this.last.disabled = true;
-        }
+        this.manageControlButtons();
         this.queueRenderPage(this.pageNum);
     }
 

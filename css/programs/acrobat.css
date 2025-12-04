@@ -15,7 +15,7 @@
     border-bottom: 1px solid #000;
 }
 
-button {
+.acrobat button {
     width: 35px;
     height: 35px;
     background-color: #C0C0C0;
@@ -25,11 +25,11 @@ button {
     border-top: 2px solid #EAEAEA;
 }
 
-button img {
+.acrobat button img {
     height: 65%;
 }
 
-button:active:not(:disabled), .button-selected {
+.acrobat button:active:not(:disabled), .acrobat .button-selected {
     background-color: #909090;
     border-left: 2px solid #4E4E4E;
     border-top: 2px solid #4E4E4E;
@@ -37,12 +37,12 @@ button:active:not(:disabled), .button-selected {
     border-bottom: 2px solid #EAEAEA;
 }
 
-button:disabled {
+.acrobat button:disabled {
     background-color: #E0E0E0;
     border: 2px solid transparent;
 }
 
-button:active:not(:disabled) img, .button-selected img {
+.acrobat button:active:not(:disabled) img, .acrobat .button-selected img {
     padding-top: 5px;
     padding-left: 2px;
 }
@@ -84,15 +84,96 @@ button:active:not(:disabled) img, .button-selected img {
     margin-left: auto;
 }
 
+#content-section {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+    width: 100%;
+}
+
+#sidebar {
+    width: 220px;
+    background: #e0e0e0;
+    border-right: 2px solid black;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex-shrink: 0;
+    display: none;
+}
+
 #canvas-container {
     flex: 1;
     overflow: auto;
-    display: flex;
+    display: block;
     justify-content: center;
+    text-align: center;
     padding: 20px;
     position: relative;
+    scrollbar-width: none;
+}
+
+#canvas-container::-webkit-scrollbar {
+    display: none;
 }
 
 #pdf-canvas {
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    vertical-align: middle;
+}
+
+.annotation-layer {
+    position: absolute;
+    pointer-events: none;
+}
+
+.annotation-link {
+    position: absolute;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.bookmark-list {
+    list-style: none;
+    padding-left: 15px;
+    margin: 0;
+}
+
+.bookmark-element {
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.bookmark-element span {
+    padding-left: 10px;
+}
+
+.thumbnail {
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thumbnail-label {
+    font-size: 11px;
+    margin-top: 2px;
+    background-color: white;
+    color: black;
+    width: 30px;
+}
+
+.thumbnail-active {
+    background-color: black !important;
+    color: white !important;
+}
+
+.thumbnail-canvas-active {
+    border: 2px dotted #000080 !important;
 }

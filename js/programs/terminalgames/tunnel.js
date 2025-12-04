@@ -5,7 +5,7 @@ import {clamp, rndNext, formatString} from "../../utils.js";
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
 export default class Tunnel {
-    static VERSION = "1.0 (JS port) - Alejandro Massó Martínez & Raúl Pérez Cogoulludo - 2021";
+    static VERSION = "1.0 (JS port) - Alejandro Massó Martínez & Raúl Pérez Cogolludo - 2021";
     ANCHO = 30;
     ALTO = 15;
     DEBUG = false;

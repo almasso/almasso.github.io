@@ -73,7 +73,8 @@
             },
             "interface" : {
                 "page" : "Seit",
-                "of" : "von"
+                "of" : "von",
+                "bookmarks" : "Keine Lesezeichen gefunden"
             }
         }
     },
