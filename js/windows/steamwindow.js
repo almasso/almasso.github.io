@@ -1,4 +1,5 @@
 import Window from "./window.js";
+import WindowAnimator from "./windowanimator.js";
 
 export default class SteamWindow extends Window {
     constructor(os, program, id, width = 400, height = 300, maxWidth = 800, maxHeight = 600) {
@@ -11,6 +12,9 @@ export default class SteamWindow extends Window {
             this.win = document.createElement("div");
             this.win.className = "steam-window";
             this.win.id = `${this.program.instanceID}`;
+
+            this.win.style.visibility = 'hidden';
+
             const bodyHTML = await this.program.getBodyHTML();
             this.win.innerHTML = `
                 <div class="steam-window-header">
@@ -60,11 +64,30 @@ export default class SteamWindow extends Window {
             container.appendChild(this.win);
             this.makeDraggable()
             dk.appendChild(container);
-            this.focus();
+
+            const iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}"]`);
+            
+            const onWindowReady = () => {
+                this.focus();
+                this.dispatchEvent(new CustomEvent("ready", { 
+                    detail: { win: this.win } 
+                }));
+            };
+
+            if(iconEl) {
+                WindowAnimator.animateOpen(iconEl, this.win, () => {
+                    onWindowReady();
+                });
+            }
+            else {
+                this.win.style.visibility = 'visible';
+                onWindowReady();
+            }
         }
         else {
             existingWindow.style.display = "flex";
             this.focus();
+            this.dispatchEvent(new CustomEvent("ready", { detail: { win: existingWindow } }));
         }
         this.win.addEventListener("mousedown", () => {
             this.focus();

@@ -188,11 +188,20 @@ export default class Terminal extends Program {
                 this.container.addEventListener("click", () => {
                     this.input.focus();
                 });
+
+                this.input.addEventListener("keypress", e => {
+                    if(e.key === "Enter") e.preventDefault();
+                });
+            }
+
+            if(this.input && this._keydownListener) {
+                this.input.removeEventListener("keydown", this._keydownListener);
             }
 
             this._keydownListener = async (e) => {
                 if(e.key === "Enter") {
                     e.preventDefault();
+                    e.stopImmediatePropagation();
                     let commandLine = this.input.innerText.trim();
 
                     if(this.#pendingInput) {
@@ -265,9 +274,6 @@ export default class Terminal extends Program {
             };
 
             this.input.addEventListener("keydown", this._keydownListener);
-            this.input.addEventListener("keypress", e => {
-                if(e.key === "Enter") e.preventDefault();
-            });
         });
     }
 
