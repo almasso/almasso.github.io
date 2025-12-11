@@ -12,7 +12,7 @@ import Acrobat from "./programs/acrobat.js";
 import Steam from "./programs/steam.js";
 import ERPG from "./programs/erpg.js";
 import Icon from "./icon.js";
-import {getRoot, shuffle} from "./utils.js";
+import {clamp, getRoot, shuffle} from "./utils.js";
 
 const debugVar = false;
 
@@ -40,7 +40,6 @@ export default class OS extends EventTarget {
     this.appInstances = new Map();
     this.appRegistered = new Map();
     this.icons = new Array();
-
 
     this.currentApp = null;
     this.windows = new Array();
@@ -212,6 +211,7 @@ export default class OS extends EventTarget {
   }
 
   async init() {
+    this.#initControlStrip();
     this.#getLocale();
     await this.#loadPrograms();
     this.#loadIcons();
@@ -470,6 +470,192 @@ export default class OS extends EventTarget {
       </div>
       ${buttonsHtml}
     `;
+  }
+
+  #initControlStrip() {
+      const controlStrip = document.getElementById("control-strip");
+      const closeButton = document.getElementById("ctrl-close");
+      const mainArrow = document.getElementById("ctrl-arrow-main");
+      const stripContainer = document.getElementById("control-non-movable");
+      const controlsContainer = document.getElementById("controls");
+      const leftArrow = document.getElementById("ctrl-arrow-left");
+      const rightArrow = document.getElementById("ctrl-arrow-right");
+
+      const SAFETY_MARGIN = 2; 
+
+      const getIconWidth = () => {
+          const img = controlsContainer.querySelector('img');
+          if (img && img.offsetWidth > 0) {
+              const style = getComputedStyle(img);
+              return img.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+          }
+          return 48;
+      };
+      
+      const REAL_ICON_WIDTH = getIconWidth();
+      const MAX_ICONS = controlsContainer.children.length;
+      let showedIcons = MAX_ICONS;
+      let scrollOffset = 0;
+
+      const getBaseWidth = () => {
+          const closeW = closeButton.offsetWidth || 22.5;
+          const leftW = leftArrow.offsetWidth || 22.5;
+          const rightW = rightArrow.offsetWidth || 22.5;
+          const containerMargins = -2; 
+          return closeW + leftW + rightW + containerMargins;
+      };
+
+      const baseWidth = getBaseWidth();
+      const minOpenWidth = baseWidth + REAL_ICON_WIDTH;
+      const fullWidth = baseWidth + (MAX_ICONS * REAL_ICON_WIDTH);
+      const dragLimit = fullWidth + 100;
+
+      let isResizing = false;
+      let didDrag = false;
+      let startX = 0;
+      let startWidth = 0;
+      let lastOpenWidth = fullWidth;
+
+      const updateCarouselState = () => {
+        const maxOffset = Math.max(0, MAX_ICONS - showedIcons);
+        scrollOffset = Math.max(0, Math.min(scrollOffset, maxOffset));
+
+        const firstIcon = controlsContainer.firstElementChild;
+        if(firstIcon) {
+          firstIcon.style.marginLeft = `-${scrollOffset * REAL_ICON_WIDTH}px`;
+          firstIcon.style.transition = 'margin-left 0.2s ease-out';
+        }
+
+        if (scrollOffset > 0) {
+          leftArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_left_enabled.png`; 
+          leftArrow.style.cursor = 'pointer';
+        } else {
+          leftArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_left.png`;
+          leftArrow.style.cursor = 'default';
+        }
+
+        if (scrollOffset < maxOffset) {
+          rightArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_right_enabled.png`;
+          rightArrow.style.cursor = 'pointer';
+        } else {
+          rightArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_right.png`;
+          rightArrow.style.cursor = 'default';
+        }
+      };
+
+      leftArrow.addEventListener("mousedown", () => {
+        if(scrollOffset > 0) leftArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_left_pressed.png`;
+      });
+      leftArrow.addEventListener("click", () => {
+        if(scrollOffset > 0) {
+          scrollOffset--;
+          updateCarouselState();
+        }
+      });
+
+      rightArrow.addEventListener("mousedown", () => {
+        const maxOffset = Math.max(0, MAX_ICONS - showedIcons);
+        if(scrollOffset < maxOffset) rightArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_right_pressed.png`;
+      })
+      rightArrow.addEventListener("click", () => {
+        const maxOffset = Math.max(0, MAX_ICONS - showedIcons);
+        if(scrollOffset < maxOffset) {
+          scrollOffset++;
+          updateCarouselState();
+        }
+      });
+
+      const setStripWidth = (width) => {
+        if (width < baseWidth / 2) {
+          stripContainer.style.width = '0px';
+          stripContainer.classList.add('closed');
+          stripContainer.style.border = 'none';
+        }
+        else {
+          const visibleWidth = Math.max(baseWidth, Math.min(width, dragLimit));
+          stripContainer.style.width = `${visibleWidth}px`;
+          stripContainer.classList.remove('closed');
+          stripContainer.style.removeProperty('border');
+          stripContainer.style.borderRight = 'none';
+        }
+      };
+
+      const toggleCollapse = () => {
+        if (didDrag) { didDrag = false; return; }
+        
+        const currentWidth = stripContainer.getBoundingClientRect().width;
+        if (currentWidth > 10) {
+          const availableSpace = Math.max(0, currentWidth - baseWidth);
+          const icons = Math.round(availableSpace / REAL_ICON_WIDTH);
+          lastOpenWidth = baseWidth + (Math.max(1, Math.min(icons, MAX_ICONS)) * REAL_ICON_WIDTH);
+            
+          setStripWidth(0);
+        }
+        else {
+          const targetWidth = lastOpenWidth < minOpenWidth ? fullWidth : lastOpenWidth;
+          setStripWidth(targetWidth + SAFETY_MARGIN);
+
+          const availableSpace = Math.max(0, targetWidth - baseWidth);
+          showedIcons = Math.round(availableSpace / REAL_ICON_WIDTH);
+          showedIcons = Math.max(1, Math.min(showedIcons, MAX_ICONS));
+          updateCarouselState();
+        }
+      };
+
+      closeButton.addEventListener("click", () => setStripWidth(0));
+      closeButton.addEventListener("mousedown", () => closeButton.src = `${getRoot()}assets/icons/system/control_strip/close_button_pressed.png`);
+      closeButton.addEventListener("mouseup", () => closeButton.src = `${getRoot()}assets/icons/system/control_strip/close_button.png`);
+
+      mainArrow.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isResizing = true;
+        didDrag = false;
+        mainArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow_pressed.png`;
+        startX = e.clientX;
+        startWidth = stripContainer.getBoundingClientRect().width;
+        document.body.style.cursor = 'w-resize';
+        stripContainer.style.transition = 'none';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+        const delta = (e.clientX - startX); 
+        if (Math.abs(delta) > 3) didDrag = true;
+        setStripWidth(startWidth + delta);
+      });
+
+      document.addEventListener("mouseup", () => {
+        mainArrow.src = `${getRoot()}assets/icons/system/control_strip/arrow.png`;
+          
+        if (isResizing) {
+          isResizing = false;
+          document.body.style.cursor = 'default';
+          stripContainer.style.transition = 'width 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+
+          const currentWidth = stripContainer.getBoundingClientRect().width;
+
+          if (currentWidth < baseWidth + (REAL_ICON_WIDTH * 0.5)) {
+            setStripWidth(0);
+            return;
+          }
+
+          const availableSpace = currentWidth - baseWidth;
+          let iconsToShow = Math.round(availableSpace / REAL_ICON_WIDTH);
+          
+          iconsToShow = Math.max(1, Math.min(iconsToShow, MAX_ICONS));
+          showedIcons = iconsToShow;
+
+          const finalWidth = baseWidth + (iconsToShow * REAL_ICON_WIDTH) + SAFETY_MARGIN;
+
+          if(didDrag) lastOpenWidth = finalWidth;
+          
+          stripContainer.style.width = `${finalWidth}px`;
+          stripContainer.classList.remove('closed');
+          updateCarouselState();
+        }
+      });
+
+    mainArrow.addEventListener("click", toggleCollapse);
   }
 
   updateTime() {

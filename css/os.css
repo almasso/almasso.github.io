@@ -665,49 +665,64 @@ body, html {
   left: 0px;
   display: flex;
   flex-direction: row;
-  gap: 0px;
-  align-items: center;
 }
 
 #control-non-movable {
   display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: auto;
+  min-width: 0px;
   flex-direction: row;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  transition: width 0.3s ease-in-out;
 }
 
-#control-strip button {
-  background-color: transparent;
+#controls {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  overflow: hidden;
+  justify-content: flex-start;
+  gap: 0px;
+  padding: 0;
 }
 
-#ctrl-close, #ctrl-arrow-right {
-  width: 25px;
-  height: 40px;
-  padding: 0 0 0 0;
-  border: 0;
+#ctrl-close, #ctrl-arrow-left, #ctrl-arrow-right {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+  width: 22.5px;
+  height: 36px;
 }
 
-#ctrl-close img, #ctrl-arrow-right img{
-  width: 25px;
-  height: 40px;
-}
-
-#ctrl-arrow-left {
-  width: 25px;
-  height: 40px;
-  border-left: 2px solid black;
+#controls img {
+  flex-shrink: 0;
+  display: block;
+  width: 48px;
+  height: 36px;
 }
 
 #ctrl-arrow-main {
-  width: 30px;
-  height: 44px;
-  padding: 0 0 0 0;
-  border: 0;
+  position: relative;
+  width: 25.5px;
+  height: 36px;
+  cursor: w-resize;
+  z-index: 10;
 }
 
-#ctrl-arrow-main img {
-  width: 30px;
-  height: 44px;
+#control-strip.collapsed #control-non-movable {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.3s ease-in-out;
+}
+
+#control-strip.collapsed #controls {
+  display: none;
+}
+
+#control-non-movable.closed {
+  border: none;
+  width: 0 !important;
 }
 
 /*#endregion*/
