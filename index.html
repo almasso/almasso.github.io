@@ -60,10 +60,29 @@
                         <img id="ctrl-close" src="assets/icons/system/control_strip/close_button.png">
                         <img id="ctrl-arrow-left" src="assets/icons/system/control_strip/arrow_left.png">
                         <div id="control-strip-controls">
-                            <img id="lock" src="assets/icons/system/control_strip/lock.png">
-                            <img id="monitor-color" src="assets/icons/system/control_strip/colors.png">
-                            <img id="monitor-resolution" src="assets/icons/system/control_strip/resolution.png">
-                            <img id="sound-slider" src="assets/icons/system/control_strip/sound.png">
+                            <div id="lock-div">
+                                <img id="lock" src="assets/icons/system/control_strip/lock.png">
+                            </div>
+                            <div id="monitor-color-div">
+                                <img id="monitor-color" src="assets/icons/system/control_strip/colors.png">
+                                <div id="monitor-color-menu" class="control-strip-menu">
+                                    <button data-action="black-white">Black & White</button>
+                                    <button data-action="4-gray">4 Grays</button>
+                                    <button data-action="4-color">4 Colors</button>
+                                    <button data-action="16-gray">16 Grays</button>
+                                    <button data-action="16-color">16 Colors</button>
+                                    <button data-action="256-gray">256 Grays</button>
+                                    <button data-action="256-color">256 Colors</button>
+                                    <button data-action="thousand-color">Thousands of Colors</button>
+                                    <button data-action="million-color" class="btn-selected">Millions of Colors</button>
+                                </div>
+                            </div>
+                            <div id="monitor-resolution-div">
+                                <img id="monitor-resolution" src="assets/icons/system/control_strip/resolution.png">
+                            </div>
+                            <div id="sound-slider-div">
+                                <img id="sound-slider" src="assets/icons/system/control_strip/sound.png">
+                            </div>
                         </div>
                         <img id="ctrl-arrow-right" src="assets/icons/system/control_strip/arrow_right.png">
                     </div>

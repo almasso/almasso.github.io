@@ -725,6 +725,54 @@ body, html {
   width: 0 !important;
 }
 
+.control-strip-menu {
+  position: fixed;
+  background: #DDDDDD;
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+  padding: 2px;
+  z-index: 9999 !important;
+  display: none;
+  flex-direction: column;
+}
+
+.control-strip-menu button {
+  position: relative;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 2px 5px 2px 15px;
+  font-family: 'Chicago', sans-serif;
+  font-size: 10px;
+  width: 100%;
+  display: block;
+}
+
+.control-strip-menu button.btn-selected::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.control-strip-menu button:hover {
+  background: #3531A2;
+  color: white;
+}
+
+.control-strip-menu button.btn-selected:hover::before {
+  background-color: white;
+}
+
+.control-strip-menu.visible {
+  display: flex;
+}
+
 /*#endregion*/
 /*#endregion*/
 /*#endregion*/
