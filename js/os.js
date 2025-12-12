@@ -477,7 +477,7 @@ export default class OS extends EventTarget {
       const closeButton = document.getElementById("ctrl-close");
       const mainArrow = document.getElementById("ctrl-arrow-main");
       const stripContainer = document.getElementById("control-non-movable");
-      const controlsContainer = document.getElementById("controls");
+      const controlsContainer = document.getElementById("control-strip-controls");
       const leftArrow = document.getElementById("ctrl-arrow-left");
       const rightArrow = document.getElementById("ctrl-arrow-right");
 

@@ -677,7 +677,7 @@ body, html {
   transition: width 0.3s ease-in-out;
 }
 
-#controls {
+#control-strip-controls {
   display: flex;
   align-items: center;
   flex-grow: 1;
@@ -695,7 +695,7 @@ body, html {
   height: 36px;
 }
 
-#controls img {
+#control-strip-controls img {
   flex-shrink: 0;
   display: block;
   width: 48px;
