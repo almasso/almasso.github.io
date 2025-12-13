@@ -51,6 +51,8 @@ export default class OS extends EventTarget {
 
     this.addEventListener("langLoaded", () => this.#setButtons());
 
+    this.addEventListener("localeSet", () => this.#setOSLangStrings());
+
     this.addEventListener("focusWindow", (e) => {
       this.setCurrentApp(e.detail.app);
       e.detail.app.gainedFocus();
@@ -235,7 +237,7 @@ export default class OS extends EventTarget {
    * Sets a certain locale
    * @param {string} code Locale code (de_DE, en_US, es_ES)
    */
-  #setLocale(code) {
+  async #setLocale(code) {
     this.locale = code;
     document.getElementById("lang-flag").innerHTML = `
       <button id="lang-button"><img src="assets/icons/system/flags/${this.locale}.png" /></button>
@@ -284,6 +286,24 @@ export default class OS extends EventTarget {
           detail: {langcode : this.locale}
       }))});
     });
+
+    await fetch(`${getRoot()}assets/texts/${this.locale}.json`).then(response => {
+      if(!response.ok) throw new Error("HTTP error" + response.status);
+      return response.json();
+    }).then(data => {
+      this.osStrings = data?.find(e => e.id === "os") || null;
+    }).catch(error => {
+      console.error("Error fetching strings: ", error);
+      throw error;
+    });
+
+    this.dispatchEvent(new CustomEvent("localeSet", {}));
+  }
+
+  #setOSLangStrings() {
+    let mcm = document.getElementById("monitor-color-menu");
+    mcm.querySelector("button:nth-child(1)").innerHTML = `${this.osStrings["controlStrip"]["colors"]["256-g"]}`;
+    mcm.querySelector("button:nth-child(2)").innerHTML = `${this.osStrings["controlStrip"]["colors"]["normal"]}`;
   }
 
   /**
@@ -666,25 +686,35 @@ export default class OS extends EventTarget {
     });
 
     controlsArray.forEach(ctrl => {
+      let ctrlImg = ctrl.querySelector("img");
       ctrl.addEventListener("mousedown", () => {
-        if(!ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('.png', '') + '_pressed.png';
+        if(!ctrlImg.src.includes('_pressed.png')) ctrlImg.src = ctrlImg.src.replace('.png', '') + '_pressed.png';
+      });
+      ctrl.addEventListener("mouseup", () => {
+        if(ctrlImg.src.includes('_pressed.png')) ctrlImg.src = ctrlImg.src.replace('_pressed.png', '') + '.png';
       });
       ctrl.addEventListener("click", (e) => {
-        document.querySelectorAll('.control-strip-menu').forEach(m => m.classList.remove('visible'));
         const menuId = e.currentTarget.id.replace('-div', '') + '-menu';
         const menu = document.getElementById(menuId);
+        document.querySelectorAll('.control-strip-menu').forEach(m => {
+          if(m !== menu) {
+            m.classList.remove('visible');
+          }
+        });
         if(!menu) return;
 
         if(menu.parentElement !== document.getElementById("desktop")) {
           document.getElementById("desktop").appendChild(menu);
         }
 
-        menu.classList.toggle('visible');
+        ctrlImg.src = menu.classList.toggle('visible') ? 
+          (ctrlImg.src.includes('_pressed.png') ? ctrlImg.src : ctrlImg.src.replace('.png', '') + '_pressed.png') : 
+          (ctrlImg.src.includes('_pressed.png') ? ctrlImg.src.replace('_pressed.png', '') + '.png' : ctrlImg.src);
 
         if(menu.classList.contains('visible')) {
           const controlRect = e.currentTarget.getBoundingClientRect();
 
-          menu.style.left = `${controlRect.left - 5}px`;
+          menu.style.left = `${controlRect.left - 8}px`;
           const menuHeight = menu.offsetHeight;
           menu.style.top = `${controlRect.top - menuHeight - 40}px`;
         }
@@ -692,18 +722,29 @@ export default class OS extends EventTarget {
       });
     });
 
+    document.querySelectorAll('.control-strip-menu input').forEach(slider => {
+      slider.addEventListener('mouseup', (e) => {
+        const menu = slider.closest('.control-strip-menu');
+
+        if(menu.id.includes("sound-slider")) this.#changeVolume(slider.value);
+
+        menu.classList.remove('visible');
+        controlsArray.forEach(ctrl => {
+          if(ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('_pressed.png', '') + '.png';
+        });
+      });
+    });
+
     document.querySelectorAll('.control-strip-menu button').forEach(button => {
       button.addEventListener('click', (e) => {
         const btn = e.currentTarget;
         const menu = btn.closest('.control-strip-menu');
+        const action = btn.dataset.action;
 
-        menu.querySelectorAll('button.btn-selected').forEach(selectedBtn => {
-          selectedBtn.classList.remove('btn-selected');
-        });
-
+        menu.querySelectorAll('button.btn-selected').forEach(selectedBtn => selectedBtn.classList.remove('btn-selected'));
         btn.classList.add('btn-selected');
 
-        const action = btn.dataset.action;
+        if(menu.id.includes("monitor-color")) this.#applyMonitorFilter(action);
 
         menu.classList.remove('visible');
         controlsArray.forEach(ctrl => {
@@ -713,6 +754,28 @@ export default class OS extends EventTarget {
     });
 
     mainArrow.addEventListener("click", toggleCollapse);
+  }
+
+  #applyMonitorFilter(filter) {
+    const monitor = document.getElementById("monitor");
+    monitor.classList.remove("mode-black-white", "mode-4-gray", "mode-16-gray", "mode-256-gray", "mode-4-color", "mode-16-color", "mode-256-color", "mode-normal");
+    monitor.classList.add("mode-" + filter);
+  }
+
+  #changeVolume(volume) {
+    const vol = clamp(volume / 100, 0 , 1);
+
+    window.ALMASSO_AUDIO.volume = vol;
+
+    window.ALMASSO_AUDIO.contexts.forEach(ctx => {
+      if(ctx.state !== 'closed' && ctx.osMasterGainNode) ctx.osMasterGainNode.gain.setTargetAtTime(vol, ctx.currentTime, 0.05);
+    });
+
+    window.ALMASSO_AUDIO.elements.forEach(audio => {
+      audio.volume = vol;
+    });
+
+    document.querySelectorAll("video, audio").forEach(el => el.volume = vol);
   }
 
   updateTime() {

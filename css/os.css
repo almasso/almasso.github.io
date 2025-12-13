@@ -1,4 +1,4 @@
-/*#region FONTS AND CURSOR*/
+/*#region FONTS, CURSOR AND FILTERS*/
 @font-face {
     font-family: 'Chicago';
     src: url('./../assets/fonts/ChicagoFLF.ttf');
@@ -24,6 +24,14 @@ body, html {
   background: black;
   overflow: hidden;
   font-family: 'Chicago', sans-serif;
+}
+
+.mode-256-gray {
+  filter: url(#f-256-gray);
+}
+
+.mode-normal {
+  filter: none;
 }
 /*#endregion*/
 
@@ -727,7 +735,7 @@ body, html {
 
 .control-strip-menu {
   position: fixed;
-  background: #DDDDDD;
+  background: #C1C1C1;
   border: 1px solid black;
   box-shadow: 2px 2px black;
   padding: 2px;
@@ -771,6 +779,79 @@ body, html {
 
 .control-strip-menu.visible {
   display: flex;
+}
+
+#sound-slider-menu {
+  width: 30px;
+  height: 120px;
+  align-items: center;
+  justify-content: center;
+}
+
+.slider-wrapper {
+  width: 100px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(270deg);
+}
+
+#volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 20px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+}
+
+#volume-slider::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 10px;
+  background: #AAAAAA;
+  border: 2px solid black;
+  border-radius: 4px;
+}
+
+#volume-slider::-moz-range-track {
+  width: 100%;
+  height: 4px;
+  background: black;
+  border: 0;
+}
+
+#volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 34px;
+  width: 26px;
+  background-image: url('../assets/icons/system/control_strip/slider_thumb.png');
+  transform: rotate(90deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin-top: -14px;
+}
+
+#volume-slider::-moz-range-thumb {
+  height: 34px;
+  width: 26px;
+  background-image: url('../assets/icons/system/control_strip/slider_thumb.png');
+  transform: rotate(90deg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  cursor: pointer;
 }
 
 /*#endregion*/

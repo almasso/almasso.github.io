@@ -10,6 +10,15 @@
         }
     },
     {
+        "id" : "os",
+        "controlStrip" : {
+            "colors" : {
+                "256-g" : "256 Grises",
+                "normal" : "Millones de Colores"
+            }
+        }
+    },
+    {
         "id" : "terminal",
         "texts" : {
             "cmdhelp" : "Comandos disponibles:\n\t help -- muestra esta lista\n\t echo -- permite imprimir texto en la terminal\n\t clear -- limpia la terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
