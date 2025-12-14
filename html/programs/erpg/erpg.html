@@ -2,6 +2,41 @@
 <html lang="es_ES">
 
     <head>
+        <script>
+            (function () {
+                var AUDIO_SYSTEM = null;
+                try {
+                if(window.parent && window.parent.ALMASSO_AUDIO) AUDIO_SYSTEM = window.parent.ALMASSO_AUDIO;
+                } catch (e) {
+                console.warn("[ÑRPG] Could not connect with parent audio system");
+                }
+
+                if(!AUDIO_SYSTEM) AUDIO_SYSTEM = {volume: 1.0, contexts: new Set()};
+
+                const originalAudioContext = window.AudioContext || window.webkitAudioContext;
+                window.AudioContext = window.webkitAudioContext = function(options) {
+                const ctx = new originalAudioContext(options);
+                const masterGain = ctx.createGain();
+                masterGain.gain.value = AUDIO_SYSTEM.volume;
+                masterGain.connect(ctx.destination);
+                ctx.osMasterGainNode = masterGain;
+                AUDIO_SYSTEM.contexts.add(ctx);
+                ctx.addEventListener('statechange', () => {
+                    if(ctx.state === 'closed') AUDIO_SYSTEM.contexts.delete(ctx);
+                });
+
+                return new Proxy(ctx, {
+                    get(target, prop) {
+                    if(prop === 'destination') return masterGain;
+                    let value = target[prop];
+                    if(typeof value === 'function') return value.bind(target);
+                    return value;
+                    }
+                });
+                };
+                window.AudioContext.prototype = originalAudioContext.prototype;
+            })();
+        </script>
         <meta charset="UTF-8">
 
         <!--Fuentes-->

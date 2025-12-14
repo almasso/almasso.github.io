@@ -758,7 +758,7 @@ export default class OS extends EventTarget {
 
   #applyMonitorFilter(filter) {
     const monitor = document.getElementById("monitor");
-    monitor.classList.remove("mode-black-white", "mode-4-gray", "mode-16-gray", "mode-256-gray", "mode-4-color", "mode-16-color", "mode-256-color", "mode-normal");
+    monitor.classList.remove("mode-256-gray", "mode-normal");
     monitor.classList.add("mode-" + filter);
   }
 
