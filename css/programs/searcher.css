@@ -1,0 +1,36 @@
+.searcher-toolbar {
+    height: 24px;
+    background: #DDD;
+    border-bottom: 1px solid #000;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    font-size: 12px;
+}
+
+.searcher-content {
+    flex: 1;
+    background: #FFFFFF;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    padding: 10px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+.searcher-content .desktop-icon {
+    margin: 10px;
+    color: black;
+}
+
+.searcher-content .desktop-icon #prog-name {
+    color: black;
+    background: transparent;
+}
+
+.searcher-content .desktop-icon.selected #prog-name {
+    background: black;
+    color: white;
+}

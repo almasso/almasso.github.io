@@ -1,6 +1,7 @@
 // Original code in C#, translated into JS
 
 import {clamp, rndNext, formatString} from "../../utils.js";
+import LocalizationManager from "../../localizationmanager.js";
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 
@@ -12,7 +13,6 @@ export default class Tunnel {
 
     constructor(terminal) {
         this.terminal = terminal;
-        this.strings = this.terminal.gameStrings["tunnel"];
 
         this.ejecutando = true;
         this.pausa = false;
@@ -78,7 +78,7 @@ export default class Tunnel {
         }
         
         const total = this.puntos + this.kills + 1;
-        const msg = formatString(this.strings["total_label"], { total: total });
+        const msg = formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["total_label"], { total: total });
         this.terminal.writeLine(msg, "magenta");
         return;
     }
@@ -205,8 +205,8 @@ export default class Tunnel {
         
         const html = `
             <div style="display: flex; justify-content: center; align-items: center; height: 100%; flex-direction: column; color: red;">
-                <div>${this.strings["paused"]}</div>
-                <div style="color: white; font-size: 0.8em;">${this.strings["continue"]}</div>
+                <div>${LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["paused"]}</div>
+                <div style="color: white; font-size: 0.8em;">${LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["continue"]}</div>
             </div>
         `;
         this.terminal.output.innerHTML = html;
@@ -270,14 +270,14 @@ export default class Tunnel {
             bufferHTML += `<div>${lineHTML}</div>`;
         }
 
-        const puntosStr = formatString(this.strings["score_label"], { pts: this.puntos });
-        const killsStr = formatString(this.strings["kills_label"], { kills: this.kills });
+        const puntosStr = formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["score_label"], { pts: this.puntos });
+        const killsStr = formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["kills_label"], { kills: this.kills });
         
         bufferHTML += `<div style="color: lime; margin-top: 10px; border-top: 1px solid gray;">${puntosStr}</div>`;
         bufferHTML += `<div style="color: yellow;">${killsStr}</div>`;
 
         if (!this.ejecutando) {
-             bufferHTML += `<div style="color: magenta; margin-top: 5px; font-weight: bold;">${this.strings["game_over"]}</div>`;
+             bufferHTML += `<div style="color: magenta; margin-top: 5px; font-weight: bold;">${LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["tunnel"]["game_over"]}</div>`;
         }
 
         this.terminal.output.innerHTML = bufferHTML;

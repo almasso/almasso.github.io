@@ -16,6 +16,10 @@
                 "256-g" : "256 Graus",
                 "normal" : "Millionen von Farben"
             }
+        },
+        "boot" : {
+            "welcome" : "Willkommen in almasso OS",
+            "starting" : "Hochfahren Gerade..."
         }
     },
     {

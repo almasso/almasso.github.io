@@ -1,17 +1,10 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
+import LocalizationManager from "../localizationmanager.js";
 
 export default class Acrobat extends Program {
-    static icon = "acrobat.png";
-    static id = "acrobat";
-    static name = "Acrobat Reader";
-    static unique = false;
-    static width = 960;
-    static height = 720;
-    static appClass = "program";
-
-    constructor(os) {
-        super(os, Acrobat.name, Acrobat.id, Acrobat.icon, "desktop");
+    constructor(processId, instanceData) {
+        super(processId, instanceData);
 
         this.container = null;
         this.pdfDoc = null;
@@ -21,33 +14,14 @@ export default class Acrobat extends Program {
         this.scale = 1.0;
         this.canvas = null;
         this.ctx = null;
-        this.url = `${getRoot()}assets/pdf/Acrobat.pdf`;
-
-        this.addEventListener("localeSet", (e) => {
-            this.setLanguage(os.locale);
-            this.getProgramData();
-        });
-
-        this.addEventListener("langChanged", () => {
-            const navDiv = document.getElementById(this.instanceID).querySelector("#acrobat");
-            navDiv.querySelector("#page").innerText = this.interfaceTexts["page"];
-            navDiv.querySelector("#of").innerText = this.interfaceTexts["of"];
-            this.updateZoomUI();
-        });
+        this.url = `${getRoot()}assets/pdf/${this.instanceData.metadata ? this.instanceData.metadata.pdf : "Acrobat"}.pdf`;
     }
 
-    async getProgramData() {
-        await this.langReady();
-        const programData = this.searchForProgramInData();
-        if(programData) {
-            this.strings = programData["texts"]["buttons"];
-            this.interfaceTexts = programData["texts"]["interface"];
-        } else {
-            console.warn("No data found for program", this.id);
-            this.strings = {};
-        }
-        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
-        this.dispatchEvent(new CustomEvent("langChanged", {}));
+    changeLang() {
+        const navDiv = document.getElementById(this.instanceID).querySelector("#acrobat");
+        navDiv.querySelector("#page").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["page"];
+        navDiv.querySelector("#of").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["of"];
+        this.updateZoomUI();
     }
 
     gainedFocus() {
@@ -160,6 +134,7 @@ export default class Acrobat extends Program {
             } else {
                 this.loadDocument();
             }
+            this.changeLang();
         });
     }
 
@@ -488,10 +463,6 @@ export default class Acrobat extends Program {
     async getBodyHTML() {
         const response = await fetch(`${getRoot()}html/programs/acrobat.html`);
         return await response.text();
-    }
-
-    static getIcons() {
-        return [{route : "desktop", isAlias : false}];
     }
 
     getButtons() {

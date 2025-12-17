@@ -2,28 +2,45 @@ import Program from "../program.js";
 import {getRoot} from "../utils.js";
 import Car from "./terminalgames/car.js";
 import Tunnel from "./terminalgames/tunnel.js";
+import LocalizationManager from "../localizationmanager.js";
 
 export default class Terminal extends Program {
-
-    static icon = "terminal.png";
-    static id = "terminal";
-    static name = "Terminal";
-    static unique = false;
-    static appClass = "program";
-
     #pendingInput = null;
 
-    constructor(os) {
-        super(os, Terminal.name, Terminal.id, Terminal.icon, "desktop");
+    constructor(processId, instanceData) {
+        super(processId, instanceData);
 
         this.container = null;
         this.output = null; 
-        this.input = null; 
+        this.input = null;
+        this.changeLang();
+    }
 
-        this.addEventListener("localeSet", (e) => {
-            this.setLanguage(os.locale);
-            this.getProgramData();
-        });
+    changeLang() {
+        this.commands = {
+            help : LocalizationManager.getInstance().getStringsFromId("terminal")["texts"]["cmdhelp"],
+            echo: (args) => args.join(" "),
+            clear: () => {
+                this.output.innerHTML = "";
+                return null;
+            },
+            car: async (args) => {
+                if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
+                    return `Car Game v${Car.VERSION}`;
+                }
+                const game = new Car(this);
+                await game.start(); 
+                return null;
+            },
+            tunnel : async (args) => {
+                if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
+                    return `Tunnel Game v${Car.VERSION}`;
+                }
+                const game = new Tunnel(this);
+                await game.start();
+                return null;
+            }
+        }
     }
 
     #scrollToBottom() {
@@ -114,44 +131,6 @@ export default class Terminal extends Program {
             this.input.focus();
             this.#scrollToBottom();
         });
-    }
-
-    async getProgramData() {
-        await this.langReady();
-        const programData = this.searchForProgramInData();
-        if(programData) {
-            this.strings = programData["texts"];
-            this.gameStrings = programData["games"];
-
-            this.commands = {
-                help : this.strings["cmdhelp"],
-                echo: (args) => args.join(" "),
-                clear: () => {
-                    this.output.innerHTML = "";
-                    return null;
-                },
-                car: async (args) => {
-                    if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
-                        return `Car Game v${Car.VERSION}`;
-                    }
-                    const game = new Car(this);
-                    await game.start(); 
-                    return null;
-                },
-                tunnel : async (args) => {
-                    if (args.length > 0 && (args[0] === '-version' || args[0] === '-v')) {
-                        return `Tunnel Game v${Car.VERSION}`;
-                    }
-                    const game = new Tunnel(this);
-                    await game.start();
-                    return null;
-                }
-            }
-        } else {
-            console.warn("No data found for program", this.id);
-            this.strings = {};
-        }
-        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
     }
 
     async getBodyHTML() {
@@ -284,7 +263,4 @@ export default class Terminal extends Program {
         }
     }
 
-    static getIcons() {
-        return [{route : "desktop", isAlias : false}];
-    }
 }

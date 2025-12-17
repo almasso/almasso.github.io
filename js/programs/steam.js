@@ -5,35 +5,23 @@ import Arkanoid from "./arkanoid.js";
 import Asteroids from "./asteroids.js";
 import Galactic from "./galactic.js";
 import Navigator from "./navigator.js";
-import ERPG from "./erpg.js";
+import LocalizationManager from "../localizationmanager.js";
+import WindowManager from "../windows/windowmanager.js";
 
 
 export default class Steam extends Program {
 
-    static icon = "steam.png";
-    static id = "steam";
-    static name = "Steam";
-    static unique = true;
-    static width = 420;
-    static height = 320;
-    static appClass = "program";
-
     static gamesWindow = null;
     static loadingGameWindow = null;
 
-    constructor(os, name = Steam.name, fetchLang = false) {
-        super(os, name, Steam.id, Steam.icon, "desktop");
+    constructor(processId, instanceData) {
+        super(processId, instanceData);
 
         this.container = null;
         this.addedListeners = false;
 
         this.historyStack = [];
         this.currentIndex = -1;
-
-        this.addEventListener("localeSet", async (e) => {
-            this.setLanguage(os.locale);
-            await this.getProgramData();
-        });
 
         this.addEventListener("closeSubwindow", (e) => {
             switch(e.detail.windowName) {
@@ -46,63 +34,55 @@ export default class Steam extends Program {
             }
         });
 
-        this.addEventListener("langChanged", () => {
-            const steamDiv = document.getElementById(this.instanceID).querySelector("#steam");
-            const bG = steamDiv.querySelector("#steam-button-games");
-            bG.querySelector("button").innerText = this.interfaceTexts["games"];
-            bG.querySelector("p").textContent = this.interfaceTexts["gamesExplained"];
-            const bF = steamDiv.querySelector("#steam-button-friends");
-            bF.querySelector("button").innerText = this.interfaceTexts["friends"];
-            bF.querySelector("p").textContent = this.interfaceTexts["friendsExplained"]; 
-            const bS = steamDiv.querySelector("#steam-button-servers");
-            bS.querySelector("button").innerText = this.interfaceTexts["servers"];
-            bS.querySelector("p").textContent = this.interfaceTexts["serversExplained"]; 
-            const bM = steamDiv.querySelector("#steam-button-monitor");
-            bM.querySelector("button").innerText = this.interfaceTexts["monitor"];
-            bM.querySelector("p").textContent = this.interfaceTexts["monitorExplained"]; 
-            const bSt = steamDiv.querySelector("#steam-button-settings");
-            bSt.querySelector("button").innerText = this.interfaceTexts["settings"];
-            bSt.querySelector("p").textContent = this.interfaceTexts["settingsExplained"];
-            const bN = steamDiv.querySelector("#steam-button-news");
-            bN.querySelector("button").innerText = this.interfaceTexts["news"];
-            bN.querySelector("p").textContent = this.interfaceTexts["newsExplained"];
-
-            if(Steam.gamesWindow) {
-                Steam.gamesWindow.changeWindowName(this.interfaceTexts["games"]);
-                const gamesWindow = document.querySelector("#steam-games");
-                gamesWindow.querySelector("#my-games h1").textContent = this.interfaceTexts["myGames"];
-                gamesWindow.querySelector("#available-games h1").textContent = this.interfaceTexts["availableGames"];
-            }
-            
-            if(os.locale === "de_DE") {
-                document.documentElement.style.setProperty("--button-text-size", "10px");
-                document.documentElement.style.setProperty("--paragraph-text-size", "11px");
-            }
-            else if(os.locale === "es_ES") {
-                document.documentElement.style.setProperty("--button-text-size", "12px");
-                document.documentElement.style.setProperty("--paragraph-text-size", "11px");
-            }
-            else {
-                document.documentElement.style.setProperty("--button-text-size", "13px");
-                document.documentElement.style.setProperty("--paragraph-text-size", "12px");
-            }
-        });
-
-        if(fetchLang) this.dispatchEvent(new CustomEvent("localeSet", {}));
     }
 
-    async getProgramData() {
-        await this.langReady();
-        const programData = this.searchForProgramInData();
-        if(programData) {
-            this.strings = programData["texts"]["buttons"];
-            this.interfaceTexts = programData["texts"]["interface"];
-        } else {
-            console.warn("No data found for program", this.id);
-            this.strings = {};
+    async createWindow() {
+        if(!this.processWindow) {
+            return WindowManager.getInstance().createWindow(SteamWindow, this, this.instanceData.width, this.instanceData.height);
         }
-        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
-        this.dispatchEvent(new CustomEvent("langChanged", {}));
+        return null;
+    }
+
+    changeLang() {
+        const steamDiv = document.getElementById(this.instanceID).querySelector("#steam");
+        const bG = steamDiv.querySelector("#steam-button-games");
+        bG.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["games"];
+        bG.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["gamesExplained"];
+        const bF = steamDiv.querySelector("#steam-button-friends");
+        bF.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["friends"];
+        bF.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["friendsExplained"]; 
+        const bS = steamDiv.querySelector("#steam-button-servers");
+        bS.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["servers"];
+        bS.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["serversExplained"]; 
+        const bM = steamDiv.querySelector("#steam-button-monitor");
+        bM.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["monitor"];
+        bM.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["monitorExplained"]; 
+        const bSt = steamDiv.querySelector("#steam-button-settings");
+        bSt.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["settings"];
+        bSt.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["settingsExplained"];
+        const bN = steamDiv.querySelector("#steam-button-news");
+        bN.querySelector("button").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["news"];
+        bN.querySelector("p").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["newsExplained"];
+
+        if(Steam.gamesWindow) {
+            Steam.gamesWindow.changeWindowName(LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["games"]);
+            const gamesWindow = document.querySelector("#steam-games");
+            gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
+            gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
+        }
+        
+        if(LocalizationManager.getInstance().locale === "de_DE") {
+            document.documentElement.style.setProperty("--button-text-size", "10px");
+            document.documentElement.style.setProperty("--paragraph-text-size", "11px");
+        }
+        else if(LocalizationManager.getInstance().locale === "es_ES") {
+            document.documentElement.style.setProperty("--button-text-size", "12px");
+            document.documentElement.style.setProperty("--paragraph-text-size", "11px");
+        }
+        else {
+            document.documentElement.style.setProperty("--button-text-size", "13px");
+            document.documentElement.style.setProperty("--paragraph-text-size", "12px");
+        }
     }
 
     async initGame(game) {

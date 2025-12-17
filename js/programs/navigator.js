@@ -1,61 +1,39 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
-import ERPG from "./erpg.js";
-import NetscapeWeb from "./netscape_default.js";
+import LocalizationManager from "../localizationmanager.js";
 
 
 export default class Navigator extends Program {
 
-    static icon = "navigator.png";
-    static id = "navigator";
-    static name = "Navigator";
-    static unique = false;
-    static appClass = "program";
+    static #specialNames = new Map([
+        ["home", "http://home.mcom.com/home/welcome.html"],
+        ["erpg", "http://www.erpg.manininteractive.com"]
+    ]);
+    static #specialURLS = new Map([
+        ["http://home.mcom.com/home/welcome.html", `${getRoot()}html/programs/navigator/navigator_assets/welcome.html`],
+        ["http://www.erpg.manininteractive.com", `${getRoot()}html/programs/erpg/erpg.html`]
+    ]);
 
-    constructor(os) {
-        super(os, Navigator.name, Navigator.id, Navigator.icon, "desktop");
+    constructor(processId, instanceData) {
+        super(processId, instanceData);
 
         this.container = null;
         this.addedListeners = false;
 
         this.historyStack = [];
         this.currentIndex = -1;
-
-        this.specialURLS = new Map();
-        this.specialURLS.set(ERPG.urlpage, ERPG);
-        this.specialURLS.set(NetscapeWeb.urlpage, NetscapeWeb);
-
-        this.addEventListener("localeSet", (e) => {
-            this.setLanguage(os.locale);
-            this.getProgramData();
-        });
-
-        this.addEventListener("langChanged", () => {
-            const navDiv = document.getElementById(this.instanceID).querySelector("#navigator");
-            navDiv.querySelector("#left-buttons button:nth-child(1) .label").innerText = this.interfaceTexts["back"];
-            navDiv.querySelector("#left-buttons button:nth-child(2) .label").innerText = this.interfaceTexts["forward"];
-            navDiv.querySelector("#left-buttons button:nth-child(3) .label").innerText = this.interfaceTexts["home"];
-            navDiv.querySelector("#right-buttons button:nth-child(1) .label").innerText = this.interfaceTexts["reload"];
-            navDiv.querySelector("#right-buttons button:nth-child(2) .label").innerText = this.interfaceTexts["stop"];
-            navDiv.querySelector("#url p").innerText = this.interfaceTexts["location"];
-        });
-
     }
 
-    async getProgramData() {
-        await this.langReady();
-        const programData = this.searchForProgramInData();
-        if(programData) {
-            this.strings = programData["texts"]["buttons"];
-            this.interfaceTexts = programData["texts"]["interface"];
-        } else {
-            console.warn("No data found for program", this.id);
-            this.strings = {};
-        }
-        this.os.dispatchEvent(new CustomEvent("langLoaded", {}));
-        this.dispatchEvent(new CustomEvent("langChanged", {}));
+    changeLang() {
+        const navDiv = document.getElementById(this.instanceID).querySelector("#navigator");
+        navDiv.querySelector("#left-buttons button:nth-child(1) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["back"];
+        navDiv.querySelector("#left-buttons button:nth-child(2) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["forward"];
+        navDiv.querySelector("#left-buttons button:nth-child(3) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["home"];
+        navDiv.querySelector("#right-buttons button:nth-child(1) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["reload"];
+        navDiv.querySelector("#right-buttons button:nth-child(2) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["stop"];
+        navDiv.querySelector("#url p").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["location"];
     }
-
+ 
     gainedFocus() {
         const win = document.getElementById(this.instanceID);
         const navigatorDiv = win.querySelector("#navigator");
@@ -86,7 +64,7 @@ export default class Navigator extends Program {
             });
 
             this.homeButton.addEventListener("click", () => {
-                this.navigate(NetscapeWeb);
+                this.navigate(Navigator.#specialNames.get("home"));
             })
 
             this.reloadButton.addEventListener("click", () => {
@@ -110,8 +88,9 @@ export default class Navigator extends Program {
 
             this.addedListeners = true;
             this.#updateButtons();
-            this.navigate(NetscapeWeb);
+            this.navigate(this.instanceData.metadata.specialURL);
         }
+        this.changeLang();
     }
 
     async getBodyHTML() {
@@ -119,40 +98,21 @@ export default class Navigator extends Program {
         return await response.text();
     }
 
-    static getIcons() {
-        return [{route : "desktop", isAlias : false}];
-    }
-
     getButtons() {
         return this.strings;
     }
 
     navigate(url) {
-        if(typeof url === "string") {
-            if(this.specialURLS.get(url) !== undefined) return this.navigate(this.specialURLS.get(url));
-            this.iframe.src = url;
-            this.urlInput.value = url;
-            this.statusBar.textContent = "Loading...";
+        this.iframe.src = Navigator.#specialURLS.has(url) ? Navigator.#specialURLS.get(url) : url;
+        this.urlInput.value = url;
+        this.statusBar.textContent = "Loading...";
 
-            this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
-            this.historyStack.push(url);
-            this.currentIndex++;
-            this.stopButton.disabled = false;
+        this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
+        this.historyStack.push(url);
+        this.currentIndex++;
+        this.stopButton.disabled = false;
 
-            this.#updateButtons();
-        }
-        else {
-            this.iframe.src = url.src;
-            this.urlInput.value = url.urlpage;
-            this.statusBar.textContent = "Loading...";
-
-            this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
-            this.historyStack.push(url.src);
-            this.currentIndex++;
-            this.stopButton.disabled = false;
-
-            this.#updateButtons();
-        }
+        this.#updateButtons();
     }
 
     #updateButtons() {

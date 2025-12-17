@@ -1,5 +1,6 @@
 // Original code in C#, translated into JS
 
+import LocalizationManager from "../../localizationmanager.js";
 import {clamp, rndNext, formatString} from "../../utils.js";
 
 const sleep = (ms) => new Promise(r => setTimeout(r, ms));
@@ -12,7 +13,6 @@ export default class Car {
 
     constructor(terminal) {
         this.terminal = terminal;
-        this.strings = this.terminal.gameStrings["car"];
 
         this.delta = 0;
         this.pistaIzq = 0;
@@ -69,11 +69,11 @@ export default class Car {
 
     async #instrucciones() {
         this.dificultad = false;
-        this.terminal.writeLine(this.strings["instructions"], 'yellow');
+        this.terminal.writeLine(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["instructions"], 'yellow');
 
         let modoValido = false;
         while (!modoValido) {
-            const modo = (await this.terminal.readLine(this.strings["difficulty"], 'white')).toLowerCase();
+            const modo = (await this.terminal.readLine(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["difficulty"], 'white')).toLowerCase();
 
             if (modo === "n") {
                 this.dificultad = false;
@@ -88,7 +88,7 @@ export default class Car {
     async #pideDelta(min, max) {
         let delta = 0;
         while (delta < min || delta > max || isNaN(delta)) {
-            const input = await this.terminal.readLine(formatString(this.strings["refresh"], {min : min, max : max}), 'white');
+            const input = await this.terminal.readLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["refresh"], {min : min, max : max}), 'white');
             delta = parseInt(input);
         }
         this.delta = delta;
@@ -192,8 +192,8 @@ export default class Car {
             lineHTML += "|";
 
             this.terminal.writeLine(lineHTML, 'white');
-            this.terminal.writeLine(formatString(this.strings["crash"], {tamano : this.tamano}), 'darkred');
-            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}), 'darkred');
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["crash"], {tamano : this.tamano}), 'darkred');
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["points"], {points : this.pts}), 'darkred');
         }
         else if (this.colDcha && !this.stop) {
             lineHTML += "&nbsp;".repeat(Math.max(0, this.pistaIzq - 1));
@@ -206,12 +206,12 @@ export default class Car {
             lineHTML += `<span style="color: red">&lt;o*</span>`;
 
             this.terminal.writeLine(lineHTML, 'white');
-            this.terminal.writeLine(formatString(this.strings["crash"], {tamano : this.tamano}), 'darkred');
-            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}), 'darkred');
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["crash"], {tamano : this.tamano}), 'darkred');
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["points"], {points : this.pts}), 'darkred');
         }
         else if (this.stop) {
-            this.terminal.writeLine(formatString(this.strings["pause"], {tamano : this.tamano}));
-            this.terminal.writeLine(formatString(this.strings["points"], {points : this.pts}));
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["pause"], {tamano : this.tamano}));
+            this.terminal.writeLine(formatString(LocalizationManager.getInstance().getStringsFromId("terminal")["games"]["car"]["points"], {points : this.pts}));
         }
     }
 

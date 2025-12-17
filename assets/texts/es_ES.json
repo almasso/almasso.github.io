@@ -16,6 +16,10 @@
                 "256-g" : "256 Grises",
                 "normal" : "Millones de Colores"
             }
+        },
+        "boot" : {
+            "welcome" : "Bienvenid@ a almasso OS",
+            "starting" : "Arrancando..."
         }
     },
     {
