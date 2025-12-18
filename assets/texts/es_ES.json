@@ -112,7 +112,7 @@
                 "newsExplained" : "Mantente al tanto de las últimas noticias de Steam",
                 "myGames" : "MIS JUEGOS",
                 "availableGames" : "JUEGOS DISPONIBLES",
-                "preparing" : "Preparando para jugar "
+                "preparing" : "Preparando para jugar {game}"
             }
         }
     }

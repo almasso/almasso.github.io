@@ -166,7 +166,8 @@ export const Filesystem = {
                         programId: "navigator",
                         metadata: {
                             isAlias: true,
-                            specialURL: "http://www.erpg.manininteractive.com"
+                            specialURL: "http://www.erpg.manininteractive.com",
+                            unique: true
                         }
                     },
                     {
@@ -201,12 +202,13 @@ export const Filesystem = {
                             {
                                 desktopName: "ÑRPG",
                                 desktopIcon: "erpg.png",
+                                steamId: "erpg",
                                 appClass: "webgame",
                                 type: "file",
                                 programId: "navigator",
                                 metadata: {
                                     isAlias: true,
-                                    specialURL: "http://www.erpg.manininteractive.com"
+                                    specialURL: "http://www.erpg.manininteractive.com",
                                 }
                             }
                         ]
@@ -250,4 +252,35 @@ function findPath(node, targetName, currentPath = []) {
 
 export function getFullPath(folder) {
     return "/" + findPath(Filesystem.root, folder).join("/");
+}
+
+export function findNodeByProgramId(programId, currentNode = Filesystem.root, currentPath = []) {
+    const folderName = currentNode.desktopName || currentNode.name;
+    const myPath = folderName ? [...currentPath, folderName] : currentPath;
+    if(currentNode.programId === programId) {
+        return {node: currentNode, path: "/" + myPath.join("/")};
+    }
+    if(currentNode.children) {
+        for(const child of currentNode.children) {
+            const result = findNodeByProgramId(programId, child, myPath);
+            if(result) return result;
+        }
+    }
+    return null;
+}
+
+export function findAllNodesByProgramId(programId, currentNode = Filesystem.root, currentPath = []) {
+    let matches = [];
+    const folderName = currentNode.desktop || currentNode.name;
+    const myPath = folderName ? [...currentPath, folderName] : currentPath;
+    if(currentNode.programId === programId) {
+        matches.push({node: currentNode, path: "/" + myPath.join("/")});
+    }
+    if(currentNode.children) {
+        for(const child of currentNode.children) {
+            const childMatches = findAllNodesByProgramId(programId, child, myPath);
+            matches = matches.concat(childMatches);
+        }
+    }
+    return matches;
 }

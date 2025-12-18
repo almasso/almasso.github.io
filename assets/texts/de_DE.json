@@ -112,7 +112,7 @@
                 "newsExplained" : "Bleibe auf dem Laufenden mit den neuesten Steam-Nachrichten",
                 "myGames" : "MEINE SPIELE",
                 "availableGames" : "VERFÜGBARE SPIELE",
-                "preparing" : " wird gestartet"
+                "preparing" : "{game} wird gestartet"
             }
         }
     }

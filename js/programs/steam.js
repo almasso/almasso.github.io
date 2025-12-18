@@ -1,18 +1,24 @@
 import Program from "../program.js";
-import {getRoot, isPromise} from "../utils.js";
+import {getRoot, isPromise, formatString} from "../utils.js";
 import SteamWindow from "../windows/steamwindow.js";
-import Arkanoid from "./arkanoid.js";
-import Asteroids from "./asteroids.js";
-import Galactic from "./galactic.js";
+import SteamSubwindow from "../windows/steamsubwindow.js";
 import Navigator from "./navigator.js";
 import LocalizationManager from "../localizationmanager.js";
 import WindowManager from "../windows/windowmanager.js";
+import ProcessManager from "../processmanager.js";
+import { ClassMap } from "../registry.js";
+import { Filesystem, findNodeByProgramId, getFullPath, findAllNodesByProgramId } from "../filesystem.js";
 
 
 export default class Steam extends Program {
 
     static gamesWindow = null;
     static loadingGameWindow = null;
+
+    #FnMap = {
+        "game" : this.initGame.bind(this),
+        "webgame" : this.initWebgame.bind(this)
+    };
 
     constructor(processId, instanceData) {
         super(processId, instanceData);
@@ -70,6 +76,13 @@ export default class Steam extends Program {
             gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
             gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
         }
+
+        if(Steam.loadingGameWindow) {
+            const loadingWindow = document.querySelector("#steam-loading");
+            const lgwTitle = loadingWindow.parentElement.parentElement.querySelector(".steam-window-title").innerText;
+            let textToDisplay = formatString(LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["preparing"], {game: lgwTitle.split(" ")[0]});
+            loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
+        }
         
         if(LocalizationManager.getInstance().locale === "de_DE") {
             document.documentElement.style.setProperty("--button-text-size", "10px");
@@ -85,52 +98,115 @@ export default class Steam extends Program {
         }
     }
 
-    async initGame(game) {
-        Steam.loadingGameWindow = this.os.openSubwindow(this, game.name + " - Steam", 
-            `${getRoot()}html/programs/steam/loading.html`,
-            Steam.width / 1.5, Steam.height / 4, Steam.width / 1.5, Steam.height);
+    async #openLoadingWindow(gameTitle) {
+        Steam.loadingGameWindow = WindowManager.getInstance().createWindow(SteamSubwindow, this,
+            this.instanceData.width / 1.5, this.instanceData.height / 4, this.instanceData.width / 1.5, this.instanceData.height / 4, 
+            {name: `${gameTitle} - Steam`, contentRoute: `${getRoot()}html/programs/steam/loading.html`});
         Steam.loadingGameWindow = await Steam.loadingGameWindow;
         const loadingWindow = document.querySelector("#steam-loading");
-        let textToDisplay = this.os.locale === "de_DE" ? game.name + this.interfaceTexts["preparing"] : 
-            this.interfaceTexts["preparing"] + game.name;
+        let textToDisplay = formatString(LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["preparing"], {game: gameTitle});
         loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
-                                
+    }
+
+    /**
+     * 
+     * @param {Object} game Registry app name
+     */
+    async initGame(rg) {
+        let game = Filesystem.registry[rg];
+        await this.#openLoadingWindow(game.name);
+
         setTimeout(() => {
             if(Steam.loadingGameWindow != null) {
-                this.os.closeSubwindow(Steam.loadingGameWindow.id);
-                Steam.loadingGameWindow.close();
+                WindowManager.getInstance().remove(Steam.loadingGameWindow.id);
                 Steam.loadingGameWindow = null;
                 setTimeout(() => {
-                    this.os.openWindow(game, false);
+                    const fileResult = findNodeByProgramId(rg);
+                    let launchData = {};
+                    if(fileResult) launchData = {...game, ...fileResult.node, route: fileResult.path, metadata: {...(fileResult.node.metadata || {}), unique: true}};
+                    const AppClass = ClassMap[game.classRef];
+                    if(AppClass) AppClass.launch(launchData);
                 }, 1000);
             }
         }, 3000);
     }
 
-    async initWebgame(game) {
-        Steam.loadingGameWindow = this.os.openSubwindow(this, game.name + " - Steam", 
-            `${getRoot()}html/programs/steam/loading.html`,
-            Steam.width / 1.5, Steam.height / 4, Steam.width / 1.5, Steam.height);
-        Steam.loadingGameWindow = await Steam.loadingGameWindow;
-        const loadingWindow = document.querySelector("#steam-loading");
-        let textToDisplay = this.os.locale === "de_DE" ? game.name + this.interfaceTexts["preparing"] : 
-            this.interfaceTexts["preparing"] + game.name;
-        loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
+    /**
+     * 
+     * @param {String} web Web to open
+     */
+    async initWebgame(web) {
+        let nv = Filesystem.registry["navigator"];
+        const allNavs = findAllNodesByProgramId("navigator");
 
-        setTimeout(() => {
-            if(Steam.loadingGameWindow != null) {
-                this.os.closeSubwindow(Steam.loadingGameWindow.id);
-                Steam.loadingGameWindow.close();
-                Steam.loadingGameWindow = null;
-                setTimeout(async () => {
-                    let wind = this.os.openWindow(Navigator);
-                    wind = await wind;
-                    wind.addEventListener("ready", (e) => {
-                        wind.program.navigate(game);
+        const targetGame = allNavs.find(match => {
+            if(match.node.steamId && match.node.steamId === web) return true;
+            else return false;
+        });
+
+        if(targetGame) {
+            await this.#openLoadingWindow(targetGame.node.desktopName);
+
+            setTimeout(() => {
+                if(Steam.loadingGameWindow != null) {
+                    WindowManager.getInstance().remove(Steam.loadingGameWindow.id);
+                    Steam.loadingGameWindow = null;
+                    setTimeout(async () => {
+                        let launchData = {};
+                        if(targetGame) launchData = {...nv, ...targetGame.node, route: targetGame.path, metadata:{...(targetGame.node.metadata || {}), unique: true}};
+                        const AppClass = ClassMap[nv.classRef];
+                        if(AppClass) AppClass.launch(launchData);
+                    }, 1000);
+                }
+            }, 3000);
+        }
+    }
+
+    async #openGamesWindow() {
+        Steam.gamesWindow = WindowManager.getInstance().createWindow(SteamSubwindow, this,
+            this.instanceData.width / 1.5, this.instanceData.height, this.instanceData.width / 1.5, this.instanceData.height, 
+            {name: LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["games"], contentRoute: `${getRoot()}html/programs/steam/games.html`});
+
+        Steam.gamesWindow = await Steam.gamesWindow;
+        
+        const gamesWindow = document.querySelector("#steam-games");
+        gamesWindow.querySelector("#game-arkanoid img").src = `${getRoot()}assets/icons/programs/arkanoid.png`;
+        gamesWindow.querySelector("#game-asteroids img").src = `${getRoot()}assets/icons/programs/asteroids.png`;
+        gamesWindow.querySelector("#game-galactic img").src = `${getRoot()}assets/icons/programs/galactic.png`;
+        gamesWindow.querySelector("#webgame-erpg img").src = `${getRoot()}assets/icons/programs/erpg.png`;
+        gamesWindow.querySelector("#game-chillout img").src = `${getRoot()}assets/icons/programs/chillout.png`;
+        gamesWindow.querySelector("#game-ott img").src = `${getRoot()}assets/icons/programs/ott.png`;
+        gamesWindow.querySelector("#game-geoguide img").src = `${getRoot()}assets/icons/programs/geoguide.png`;
+        gamesWindow.querySelector("#game-damn img").src = `${getRoot()}assets/icons/programs/damn.png`;
+        gamesWindow.querySelector("#game-ctp img").src = `${getRoot()}assets/icons/programs/ctp.bmp`;
+        gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
+        gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
+
+        gamesWindow.querySelectorAll(".steam-game").forEach(button => {
+            button.addEventListener("click", async () => {
+                if(!button.classList.contains("gameselected")) {
+                    gamesWindow.querySelectorAll(".steam-game").forEach(bt2 => {
+                        bt2.dispatchEvent(new CustomEvent("unclicked", {}));
                     });
-                }, 1000);
-            }
-        }, 3000);
+                    button.classList.add('gameselected');
+                }
+                else {
+                    button.classList.remove("gameselected");
+                    this.#FnMap[button.id.split("-")[0]](button.id.split("-")[1]);
+                }
+            });
+            button.addEventListener("unclicked", () => {
+                button.classList.remove("gameselected");
+            });
+        });
+    }
+
+    closeSubwindow(sw) {
+        if(sw !== null) {
+            if(sw === Steam.gamesWindow) Steam.gamesWindow = null;
+            else if(sw === Steam.loadingGameWindow) Steam.loadingGameWindow = null;
+            WindowManager.getInstance().remove(sw.id);
+        }
     }
 
     gainedFocus() {
@@ -139,45 +215,7 @@ export default class Steam extends Program {
 
         if(!this.addedListeners) {
             steamDiv.querySelector("#steam-button-games button").addEventListener("click", async () => {
-                if(!Steam.gamesWindow) {
-                    Steam.gamesWindow = this.os.openSubwindow(this, this.interfaceTexts["games"], `${getRoot()}html/programs/steam/games.html`, 
-                    Steam.width / 1.5, Steam.height, Steam.width / 1.5, Steam.height);
-                    Steam.gamesWindow = await Steam.gamesWindow;
-
-                    const gamesWindow = document.querySelector("#steam-games");
-                    gamesWindow.querySelector("#game-arkanoid img").src = `${getRoot()}assets/icons/programs/arkanoid.png`;
-                    gamesWindow.querySelector("#game-asteroids img").src = `${getRoot()}assets/icons/programs/asteroids.png`;
-                    gamesWindow.querySelector("#game-galactic img").src = `${getRoot()}assets/icons/programs/galactic.png`;
-                    gamesWindow.querySelector("#game-erpg img").src = `${getRoot()}assets/icons/programs/erpg.png`;
-                    gamesWindow.querySelector("#game-chillout img").src = `${getRoot()}assets/icons/programs/chillout.png`;
-                    gamesWindow.querySelector("#game-ott img").src = `${getRoot()}assets/icons/programs/ott.png`;
-                    gamesWindow.querySelector("#game-geoguide img").src = `${getRoot()}assets/icons/programs/geoguide.png`;
-                    gamesWindow.querySelector("#game-damn img").src = `${getRoot()}assets/icons/programs/damn.png`;
-                    gamesWindow.querySelector("#game-ctp img").src = `${getRoot()}assets/icons/programs/ctp.bmp`;
-                    gamesWindow.querySelector("#my-games h1").textContent = this.interfaceTexts["myGames"];
-                    gamesWindow.querySelector("#available-games h1").textContent = this.interfaceTexts["availableGames"];
-
-                    gamesWindow.querySelectorAll(".steam-game").forEach(button => {
-                        button.addEventListener("click", async () => {
-                            if(!button.classList.contains("gameselected")) {
-                                gamesWindow.querySelectorAll(".steam-game").forEach(bt2 => {
-                                    bt2.dispatchEvent(new CustomEvent("unclicked", {}));
-                                });
-                                button.classList.add('gameselected');
-                            }
-                            else {
-                                button.classList.remove("gameselected");
-                                if(button.id === "game-arkanoid") this.initGame(Arkanoid);
-                                else if(button.id === "game-asteroids") this.initGame(Asteroids);
-                                else if(button.id === "game-galactic") this.initGame(Galactic);
-                                else if(button.id === "game-erpg") this.initWebgame(ERPG);
-                            }
-                        });
-                        button.addEventListener("unclicked", () => {
-                            button.classList.remove("gameselected");
-                        });
-                    });
-                }
+                if(!Steam.gamesWindow) await this.#openGamesWindow();
             });
             steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
             });
@@ -190,29 +228,18 @@ export default class Steam extends Program {
             steamDiv.querySelector("#steam-button-news button").addEventListener("click", () => {
             });
             this.addedListeners = true;
+            this.changeLang();
         }
     }
 
     async onClose() {
-        if(Steam.gamesWindow) {
-            this.os.closeSubwindow(Steam.gamesWindow.id);
-            Steam.gamesWindow.close();
-            Steam.gamesWindow = null;
-        }
-        if(Steam.loadingGameWindow) {
-            this.os.closeSubwindow(Steam.loadingGameWindow.id);
-            Steam.loadingGameWindow.close();
-            Steam.loadingGameWindow = null;
-        }
+        this.closeSubwindow(Steam.loadingGameWindow);
+        this.closeSubwindow(Steam.gamesWindow);
     }
 
     async getBodyHTML() {
         const response = await fetch(`${getRoot()}html/programs/steam/steam.html`);
         return await response.text();
-    }
-
-    static getIcons() {
-        return [{route : "desktop", isAlias : false}];
     }
 
     getButtons() {

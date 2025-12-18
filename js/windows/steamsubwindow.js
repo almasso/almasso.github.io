@@ -2,7 +2,7 @@ import SteamWindow from "./steamwindow.js";
 
 export default class SteamSubwindow extends SteamWindow {
     constructor(programInstance, windowId, width = 400, height = 300, maxWidth = width * 2, maxHeight = height * 2, data = {}) {
-        super(programInstance, windowId, width = 400, height = 300, maxWidth = width * 2, maxHeight = height * 2);
+        super(programInstance, windowId, width, height, maxWidth, maxHeight = height);
         this.name = data.name ? data.name : "Steam";
         this.contentRoute = data.contentRoute;
     }
@@ -36,5 +36,9 @@ export default class SteamSubwindow extends SteamWindow {
         pageStyle.rel = "stylesheet";
         pageStyle.href = `css/programs/${this.program.id}.css`;
         this.win.appendChild(pageStyle);
+    }
+
+    close() {
+        this.program.closeSubwindow(this);
     }
 }
