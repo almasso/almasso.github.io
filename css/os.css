@@ -24,10 +24,12 @@ body, html {
   background: black;
   overflow: hidden;
   font-family: 'Chicago', sans-serif;
+  image-rendering: pixelated; 
+  image-rendering: crisp-edges;
 }
 
 .mode-256-gray {
-  filter: url(#f-256-gray);
+  filter: grayscale(100%);
 }
 
 .mode-normal {
@@ -286,7 +288,15 @@ body, html {
 }
 
 #mac-icon img {
-  width: 20px;
+  width: 18px;
+}
+
+#mac-icon {
+  transform: translateX(5px);
+}
+
+#monitor.mode-256-gray #mac-icon {
+  transform: translateX(-5px);
 }
 
 .right-group {
@@ -421,7 +431,7 @@ body, html {
 
 .icon-stack {
   position: relative;
-  width: 45px;
+  width: 35px;
   margin: 0 auto 5px auto;
   height: 32px;
 }
@@ -445,7 +455,7 @@ body, html {
 
 .alias-arrow {
   position: absolute;
-  width: 10px;
+  width: 8px;
   bottom: 0;
   left: 0;
 }

@@ -2,30 +2,29 @@ import {getRoot} from "./utils.js";
 
 export const Filesystem = {
     registry: {
-        "searcher": {
-            name: "Searcher",
+        "finder": {
+            name: "Finder",
             icon: "searcher.png",
-            desktopName: "Searcher",
-            desktopIcon: "searcher.png",
-            classRef: "Searcher",
+            classRef: "Finder",
             type: "systemfile",
             width: 600,
-            height: 400
+            height: 400,
+            maxWidth: 800,
+            maxHeight: 620,
+            availableStorage: "13.2 GB"
         },
         "terminal": {
-            name: "Terminal",
+            name: "Shell",
             icon: "terminal.png",
-            desktopName: "Terminal",
-            desktopIcon: "terminal.png",
             classRef: "Terminal",
             width: 600,
-            height: 400
+            height: 400,
+            maxWidth: 800,
+            maxHeight: 620
         },
         "navigator": {
             name: "Navigator",
             icon: "navigator.png",
-            desktopName: "Navigator",
-            desktopIcon: "navigator.png",
             classRef: "Navigator",
             width: 600,
             height: 400,
@@ -38,17 +37,15 @@ export const Filesystem = {
         "acrobat": {
             name: "Acrobat Reader",
             icon: "acrobat.png",
-            desktopName: "Acrobat Reader",
-            desktopIcon: "acrobat.png",
             classRef: "Acrobat",
             width: 960,
-            height: 720
+            height: 720,
+            maxWidth: 960,
+            maxHeight: 720
         },
         "steam": {
             name: "Steam",
             icon: "steam.png",
-            desktopName: "Steam",
-            desktopIcon: "steam.png",
             classRef: "Steam",
             width: 420,
             height: 320
@@ -56,46 +53,50 @@ export const Filesystem = {
         "arkanoid": {
             name: "Arkanoid",
             icon: "arkanoid.png",
-            desktopName: "Arkanoid",
-            desktopIcon: "arkanoid.png",
             classRef: "Arkanoid",
             width: 800,
             height: 620,
+            maxWidth: 800,
+            maxHeight: 620,
             appClass: "game"
         },
         "asteroids": {
             name: "Asteroids",
             icon: "asteroids.png",
-            desktopName: "Asteroids",
-            desktopIcon: "asteroids.png",
             classRef: "Asteroids",
             width: 800,
             height: 620,
+            maxWidth: 800,
+            maxHeight: 620,
             appClass: "game"
         },
         "galactic": {
             name: "The Galactic Plague",
             icon: "galactic.png",
-            desktopName: "The Galactic Plague",
-            desktopIcon: "galactic.png",
             classRef: "Galactic",
             width: 1280,
             height: 720,
+            maxWidth: 1280,
+            maxHeight: 720,
             appClass: "game"
         }
     },
     root: {
+        nodeId: "root",
         desktopName: "Macintosh HD",
+        desktopIcon: "drive.png",
+        availableStorage: "13.2 GB",
         type: "folder",
         children: [
             {
                 desktopName: "System Folder",
                 type: "folder",
                 desktopIcon: "folder.png",
+                availableStorage: "13.2 GB",
                 children: [
                     {
                         type: "systemfile",
-                        programId: "searcher"
+                        programId: "finder"
                     }
                 ]
             },
@@ -103,17 +104,13 @@ export const Filesystem = {
                 desktopName: "Desktop",
                 type: "folder",
                 desktopIcon: `folder.png`,
+                availableStorage: "13.2 GB",
                 children: [
                     {
                         desktopName: "Macintosh HD",
-                        type: "systemfile",
-                        programId: "searcher",
                         desktopIcon: "drive.png",
-                        metadata: {
-                            path: [],
-                            isVolume: true,
-                            desktopNameOverride: "Macintosh HD"
-                        }
+                        type: "link",
+                        targetId: "root"
                     },
                     {
                         type: "systemfile",
@@ -135,45 +132,10 @@ export const Filesystem = {
                         }
                     },
                     {
-                        type: "file",
-                        programId: "arkanoid",
-                        metadata: {
-                            unique: true,
-                            isAlias: true
-                        }
-                    },
-                    {
-                        type: "file",
-                        programId: "asteroids",
-                        metadata: {
-                            isAlias: true,
-                            unique: true
-                        }
-                    },
-                    {
-                        type: "file",
-                        programId: "galactic",
-                        metadata: {
-                            isAlias: true,
-                            unique: true
-                        }
-                    },
-                    {
-                        desktopName: "ÑRPG",
-                        desktopIcon: "erpg.png",
-                        appClass: "webgame",
-                        type: "file",
-                        programId: "navigator",
-                        metadata: {
-                            isAlias: true,
-                            specialURL: "http://www.erpg.manininteractive.com",
-                            unique: true
-                        }
-                    },
-                    {
                         desktopName: "Games",
                         type: "folder",
                         desktopIcon: "folder.png",
+                        availableStorage: "13.2 GB",
                         children: [
                             {
                                 type: "file",
@@ -202,13 +164,30 @@ export const Filesystem = {
                             {
                                 desktopName: "ÑRPG",
                                 desktopIcon: "erpg.png",
-                                steamId: "erpg",
                                 appClass: "webgame",
                                 type: "file",
                                 programId: "navigator",
                                 metadata: {
                                     isAlias: true,
                                     specialURL: "http://www.erpg.manininteractive.com",
+                                    unique: true
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        desktopName: "UNI",
+                        type: "folder",
+                        desktopIcon: "folder.png",
+                        availableStorage: "13.2 GB",
+                        children: [
+                            {
+                                desktopName: "TFG",
+                                type: "file",
+                                programId : "acrobat",
+                                desktopIcon: "pdf.png",
+                                metadata : {
+                                    pdf: "TFG"
                                 }
                             }
                         ]
@@ -219,18 +198,35 @@ export const Filesystem = {
     }
 };
 
-export function getFolderContent(pathArray) {
-    let current = Filesystem.root;
-    if(!pathArray || pathArray.length === 0) return current;
-
-    for(let folderdesktopName of pathArray) {
-        if(current.children) {
-            current = current.children.find(child => child.desktopName === folderdesktopName);
-            if(!current) return null;
+function findNodeById(targetId, currentNode = Filesystem.root) {
+    if(currentNode.nodeId === targetId) return currentNode;
+    if(currentNode.children) {
+        for(const child of currentNode.children) {
+            const result = findNodeById(targetId, child);
+            if(result) return result;
         }
-        else return null;
     }
-    return current;
+    return null;
+}
+
+export function getFolderContent(pathArray) {
+    let currentNode = Filesystem.root;
+    
+    if (!pathArray || pathArray.length === 0) return currentNode;
+
+    for (let folderName of pathArray) {
+        if (!currentNode.children) return null;
+        
+        const childNode = currentNode.children.find(c => (c.desktopName || c.name) === folderName);
+
+        if (!childNode) return null;
+
+        if (childNode.type === "link") {
+            const targetNode = findNodeById(childNode.targetId);
+            currentNode = targetNode;
+        } else currentNode = childNode;
+    }
+    return currentNode;
 }
 
 function findPath(node, targetName, currentPath = []) {

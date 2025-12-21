@@ -18,7 +18,7 @@ export default class OS extends EventTarget {
      */
     static #Instance = null;
 
-    #baseSearcher = null;
+    #baseFinder = null;
 
     constructor() {
         super();
@@ -31,8 +31,8 @@ export default class OS extends EventTarget {
         });
 
         WindowManager.getInstance().subscribeToCloseWindowEvent((e) => {
-            this.#setCurrentApp(this.#baseSearcher);
-            Icon.onProcessClosed(e.detail.window.program.instanceData, e.detail.window.program.route);
+            this.#setCurrentApp(this.#baseFinder);
+            Icon.onProcessClosed(e.detail.window.program.instanceData);
         });
 
         WindowManager.getInstance().subscribeToFocusWindowEvent((e) => {
@@ -63,7 +63,7 @@ export default class OS extends EventTarget {
             if(e.target === e.currentTarget) {
                 WindowManager.getInstance().unfocusAllWindows();
                 Icon.unclickAllIcons();
-                this.#setCurrentApp(this.#baseSearcher);
+                this.#setCurrentApp(this.#baseFinder);
             }
         });
 
@@ -199,9 +199,9 @@ export default class OS extends EventTarget {
 
     async init() {
         this.#initControlStrip();
-        await this.#loadSearcher();
+        await this.#loadFinder();
         this.#loadDesktop();
-        this.#setCurrentApp(this.#baseSearcher);
+        this.#setCurrentApp(this.#baseFinder);
     }
 
 // #region UI text management
@@ -266,15 +266,24 @@ export default class OS extends EventTarget {
     #loadDesktop() {
         const desktopNode = Filesystem.root.children.find(c => c.desktopName === "Desktop");
         if(desktopNode && desktopNode.children) {
+            const rootName = Filesystem.root.desktopName;
+            const desktopName = desktopNode.desktopName;
+            const desktopPath = `/${rootName}/${desktopName}`;
             desktopNode.children.forEach(ch => {
-                new Icon(ch, getFullPath("Desktop"));
+                let itemData = {...ch};
+                if(ch.type === "folder" || ch.type === "link") {
+                    const itemName = ch.desktopName || ch.name;
+                    itemData.route = `${desktopPath}/${itemName}`;
+                }
+                else itemData.route = desktopPath;
+                new Icon(itemData, "desktop");
             });
         }
     }
 
-    async #loadSearcher() {
-        const searcherData = {...Filesystem.registry.searcher}
-        this.#baseSearcher = await ProcessManager.getInstance().createProcess("searcher", searcherData);
+    async #loadFinder() {
+        const finderData = {...Filesystem.registry.finder}
+        this.#baseFinder = await ProcessManager.getInstance().createProcess("finder", finderData);
     }
 
     #setCurrentApp(app) {
@@ -286,7 +295,7 @@ export default class OS extends EventTarget {
     #setCurrentAppTopbarButton() {
         const currentAppBut = document.querySelector(".app-button-content");
         currentAppBut.innerHTML = `
-            <img src="assets/icons/${(this.currentApp.instanceData.type === "systemfile" || this.currentApp.instanceData.type === "folder") ? 
+            <img src="assets/icons/${(this.currentApp.instanceData.type === "systemfile" || this.currentApp.instanceData.type === "folder" || this.currentApp.instanceData.type === "link") ? 
                 "system" : "programs"
                 }/${this.currentApp.icon}" />
             ${this.currentAppResumed ? ``: `<span>${this.currentApp.name}</span>`}
@@ -306,7 +315,7 @@ export default class OS extends EventTarget {
 
         buttons.innerHTML = `
             <div id="mac-icon">
-                <button><img src="assets/icons/system/macs/happy.png" /></button>
+                <button><img src="assets/icons/system/apple.png" /></button>
             </div>
             ${buttonsHtml}
         `;

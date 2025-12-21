@@ -60,12 +60,14 @@ export default class SteamWindow extends Window {
 
     focus() {
         if(this.win) {
+            this.win.style.zIndex = 3;
             this.program.gainedFocus();
         }
     }
 
     unfocus() {
         if(this.win) {
+            this.win.style.zIndex = 2;
             this.program.lostFocus();
         }
     }

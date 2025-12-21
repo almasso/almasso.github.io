@@ -28,22 +28,34 @@ export default class Program extends EventTarget {
     }
 
     static async launch(metadata) {
-        if(metadata.metadata && metadata.metadata.unique) {
-            const existing = ProcessManager.getInstance().findProcessByProgramId(metadata.programId);
-            if(existing.length > 0) return;
+        let existingProcess = null;
+
+        if(metadata.programId === "finder") {
+            existingProcess = ProcessManager.getInstance().findProcess(p => p.id === "finder" && p.instanceData.route === metadata.route);
         }
+        else if(metadata.metadata && metadata.metadata.unique) {
+            const results = ProcessManager.getInstance().findProcessByProgramId(metadata.programId);
+            if(results.length > 0) existingProcess = results[0];
+        }
+
+        if(existingProcess) {
+            const existingWindow = WindowManager.getInstance().findWindowByProcessId(existingProcess.pid);
+            if(existingWindow) WindowManager.getInstance().focus(existingWindow);
+            return;
+        }
+
         const process = await ProcessManager.getInstance().createProcess(metadata.programId, metadata);
         if(!process) return;
 
-        const win = process.createWindow();
-        if(win) this.processWindow = win;
-        else WindowManager.getInstance().focus(this.processWindow);
+        const win = await process.createWindow();
+        if(win) process.processWindow = win;
+        else WindowManager.getInstance().focus(process.processWindow);
         
     }
 
-    createWindow() {
+    async createWindow() {
         if(!this.processWindow) {
-            return WindowManager.getInstance().createWindow(Window, this, this.instanceData.width, this.instanceData.height, this.instanceData.maxWidth, this.instanceData.maxHeight);
+            return await WindowManager.getInstance().createWindow(Window, this, this.instanceData.width, this.instanceData.height, this.instanceData.maxWidth, this.instanceData.maxHeight);
         }
         return null;
     }

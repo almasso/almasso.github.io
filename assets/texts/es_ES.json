@@ -1,12 +1,19 @@
 [
     {
-        "id" : "searcher",
+        "id" : "finder",
         "texts" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "view" : "Visualización",
-            "special" : "Especial",
-            "help" : "Ayuda"
+            "buttons" : {
+                "file" : "Archivo",
+                "edit" : "Edición",
+                "view" : "Visualización",
+                "special" : "Especial",
+                "help" : "Ayuda"
+            },
+            "interface" : {
+                "items" : "{items} elementos",
+                "item" : "{items} elemento",
+                "storage" : "{storage} disponible"
+            }
         }
     },
     {
@@ -18,7 +25,7 @@
             }
         },
         "boot" : {
-            "welcome" : "Bienvenid@ a almasso OS",
+            "welcome" : "Bienvenid@ a Mac OS",
             "starting" : "Arrancando..."
         }
     },

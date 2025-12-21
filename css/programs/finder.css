@@ -1,11 +1,16 @@
-.searcher-toolbar {
-    height: 24px;
-    background: #DDD;
-    border-bottom: 1px solid #000;
+.finder {
     display: flex;
-    align-items: center;
-    padding-left: 10px;
+    flex-direction: column;
+}
+
+.searcher-summary {
+    background: #bbbbbb;
+    color: black;
+    padding: 4px;
+    user-select: none;
+    border-bottom: 2px solid #000;
     font-size: 12px;
+    text-align: center;
 }
 
 .searcher-content {
@@ -13,6 +18,7 @@
     background: #FFFFFF;
     position: relative;
     display: flex;
+    flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-start;
     padding: 10px;
@@ -27,10 +33,10 @@
 
 .searcher-content .desktop-icon #prog-name {
     color: black;
-    background: transparent;
+    background-color: transparent;
 }
 
-.searcher-content .desktop-icon.selected #prog-name {
-    background: black;
-    color: white;
+.searcher-content .selected-name {
+    background-color: black !important;
+    color: white !important;
 }

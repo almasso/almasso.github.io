@@ -3,7 +3,7 @@ import Arkanoid from "./programs/arkanoid.js";
 import Asteroids from "./programs/asteroids.js";
 import Galactic from "./programs/galactic.js";
 import Navigator from "./programs/navigator.js";
-import Searcher from "./programs/searcher.js";
+import Finder from "./programs/finder.js";
 import Steam from "./programs/steam.js";
 import Terminal from "./programs/terminal.js";
 
@@ -13,7 +13,7 @@ export const ClassMap = {
     "Asteroids" : Asteroids,
     "Galactic" : Galactic,
     "Navigator" : Navigator,
-    "Searcher" : Searcher,
+    "Finder" : Finder,
     "Steam" : Steam,
     "Terminal" : Terminal
 }

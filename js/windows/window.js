@@ -9,7 +9,6 @@ export default class Window extends EventTarget{
         this.program = programInstance;
         this.id = windowId;
         this.win = null;
-        this.showDetails = false;
         this.width = width;
         this.height = height;
         this.maxWidth = maxWidth;
@@ -37,7 +36,6 @@ export default class Window extends EventTarget{
                 <img class="maxim-button" src="assets/icons/system/window/maximize.png"/>
                 <img class="minim-button" src="assets/icons/system/window/minimize.png"/>
             </div>
-            ${this.showDetails ? `<div class="window-details"></div>` : ``}
             <div class="window-body">${bodyHTML}</div>
         `;
 
@@ -99,7 +97,10 @@ export default class Window extends EventTarget{
      * Animates the window opening
      */
     #animateWindowOpening() {
-        const iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}-${this.program.instanceData.desktopName}"]`);
+        const launcherId = this.program.instanceData.launcherId;
+        let iconEl = null;
+        if(launcherId) iconEl = document.querySelector(`.desktop-icon[data-launcher-id="${launcherId}"]`);
+        if(!iconEl) iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}-${this.program.instanceData.desktopName}"]`);
 
         const onWindowReady = () => {
             WindowManager.getInstance().focus(this);
@@ -108,7 +109,7 @@ export default class Window extends EventTarget{
             }));
         };
 
-        if(iconEl) WindowAnimator.animateOpen(iconEl, this.win, () => onWindowReady());
+        if(iconEl && document.body.contains(iconEl)) WindowAnimator.animateOpen(iconEl, this.win, () => onWindowReady());
         else {
             this.win.style.visibility = 'visible';
             onWindowReady();
@@ -140,6 +141,10 @@ export default class Window extends EventTarget{
         ProcessManager.getInstance().killProcess(this.program.pid);
     }
 
+    changeWindowName(newName) {
+        this.win.querySelector(".window-title").innerHTML = `${newName}`;
+    }
+
     destroy() {
         const performClose = () => {
             if (this.win) {
@@ -152,7 +157,10 @@ export default class Window extends EventTarget{
             }
         };
 
-        const iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}-${this.program.instanceData.desktopName}"]`);
+        const launcherId = this.program.instanceData.launcherId;
+        let iconEl = null;
+        if(launcherId) iconEl = document.querySelector(`.desktop-icon[data-launcher-id="${launcherId}"]`);
+        if(!iconEl) iconEl = document.querySelector(`.desktop-icon[data-app="${this.program.id}-${this.program.instanceData.desktopName}"]`);
 
         if (this.win && iconEl && !this.minimized) {
             WindowAnimator.animateClose(iconEl, this.win, () => {

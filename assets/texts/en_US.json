@@ -1,12 +1,19 @@
 [
     {
-        "id" : "searcher",
+        "id" : "finder",
         "texts" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "view" : "View",
-            "special" : "Special",
-            "help" : "Help"
+            "buttons" : {
+                "file" : "File",
+                "edit" : "Edit",
+                "view" : "View",
+                "special" : "Special",
+                "help" : "Help"
+            },
+            "interface" : {
+                "items" : "{items} items",
+                "item" : "{items} item",
+                "storage" : "{storage} available"
+            }
         }
     },
     {
@@ -18,7 +25,7 @@
             }
         },
         "boot" : {
-            "welcome" : "Welcome to almasso OS",
+            "welcome" : "Welcome to Mac OS",
             "starting" : "Starting Up..."
         }
     },

@@ -61,6 +61,21 @@ export default class ProcessManager {
         }
     }
 
+    countProcessesByLauncher(launcherId) {
+        let count = 0;
+        for(let instance of this.#processes.values()) {
+            if(instance.instanceData && instance.instanceData.launcherId === launcherId) count++;
+        }
+        return count;
+    }
+
+    findProcess(predicate) {
+        for(let instance of this.#processes.values()) {
+            if(predicate(instance)) return instance;
+        }
+        return null;
+    }
+
     /**
      * Finds a process given the program ID
      * @param {String} programId Program identifier

@@ -150,7 +150,7 @@ export default class Terminal extends Program {
                 if (inputParent && !inputParent.querySelector('.prompt')) {
                     const promptSpan = document.createElement('span');
                     promptSpan.className = 'prompt';
-                    promptSpan.textContent = 'user@terminal > ';
+                    promptSpan.textContent = 'almasso@macintosh > ';
                     inputParent.prepend(promptSpan);
                 }
 
@@ -207,7 +207,7 @@ export default class Terminal extends Program {
 
                     if(commandLine) {
                         const commandDiv = document.createElement('div');
-                        commandDiv.innerHTML = `<span class="prompt">user@terminal ></span> ${commandLine}`;
+                        commandDiv.innerHTML = `<span class="prompt">almasso@macintosh ></span> ${commandLine}`;
                         this.output.appendChild(commandDiv);
                         
                         this.#scrollToBottom();
@@ -225,7 +225,7 @@ export default class Terminal extends Program {
                         } else if (commandFunc !== undefined) {
                             result = commandFunc;
                         } else {
-                            result = `${this.strings["cmdcommandnf"]}${cmd}`;
+                            result = `${LocalizationManager.getInstance().getStringsFromId("terminal")["texts"]["cmdcommandnf"]}${cmd}`;
                         }
 
                         if(result !== null && result !== undefined) {
@@ -236,7 +236,7 @@ export default class Terminal extends Program {
                     }
                     else {
                         const commandDiv = document.createElement('div');
-                        commandDiv.innerHTML = `<span class="prompt">user@terminal ></span>`;
+                        commandDiv.innerHTML = `<span class="prompt">almasso@macintosh ></span>`;
                         this.output.appendChild(commandDiv);
                         setTimeout(() => this.input.focus(), 0);
                         this.#scrollToBottom();

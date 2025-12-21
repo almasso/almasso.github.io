@@ -106,6 +106,10 @@ export default class WindowManager extends EventTarget {
         return this.#windows.find(w => w.program.id === programId);
     }
 
+    findWindowByProcessId(pid) {
+        return this.#windows.find(w => w.program.pid === pid);
+    }
+
     /**
      * Returns the current window identifier value
      * @returns Window identifier value
