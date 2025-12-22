@@ -282,7 +282,7 @@ export default class OS extends EventTarget {
     }
 
     async #loadFinder() {
-        const finderData = {...Filesystem.registry.finder}
+        const finderData = {...Filesystem.registry.finder, programId: "finder"};
         this.#baseFinder = await ProcessManager.getInstance().createProcess("finder", finderData);
     }
 

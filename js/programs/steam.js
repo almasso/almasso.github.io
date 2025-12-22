@@ -242,7 +242,4 @@ export default class Steam extends Program {
         return await response.text();
     }
 
-    getButtons() {
-        return this.strings;
-    }
 }

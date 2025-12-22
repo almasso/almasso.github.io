@@ -1,14 +1,14 @@
 [
     {
         "id" : "finder",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "view" : "Visualización",
+            "special" : "Especial",
+            "help" : "Ayuda"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "Archivo",
-                "edit" : "Edición",
-                "view" : "Visualización",
-                "special" : "Especial",
-                "help" : "Ayuda"
-            },
             "interface" : {
                 "items" : "{items} elementos",
                 "item" : "{items} elemento",
@@ -18,6 +18,9 @@
     },
     {
         "id" : "os",
+        "buttons" : {
+
+        },
         "controlStrip" : {
             "colors" : {
                 "256-g" : "256 Grises",
@@ -31,6 +34,11 @@
     },
     {
         "id" : "terminal",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "help" : "Ayuda"
+        },
         "texts" : {
             "cmdhelp" : "Comandos disponibles:\n\t help -- muestra esta lista\n\t echo -- permite imprimir texto en la terminal\n\t clear -- limpia la terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
             "cmdcommandnf" : "No se ha encontrado el comando: "
@@ -57,7 +65,25 @@
     },
     {
         "id" : "arkanoid",
-        "texts" : {
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "play" : "Jugar",
+            "help" : "Ayuda"
+        }
+    },
+    {
+        "id" : "asteroids",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "play" : "Jugar",
+            "help" : "Ayuda"
+        }
+    },
+    {
+        "id" : "galactic",
+        "buttons" : {
             "file" : "Archivo",
             "edit" : "Edición",
             "play" : "Jugar",
@@ -66,15 +92,15 @@
     },
     {
         "id" : "navigator",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "view" : "Visualización",
+            "go" : "Ir",
+            "bookmarks" : "Marcadores",
+            "help" : "Ayuda"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "Archivo",
-                "edit" : "Edición",
-                "view" : "Visualización",
-                "go" : "Ir",
-                "bookmarks" : "Marcadores",
-                "help" : "Ayuda"
-            },
             "interface" : {
                 "back" : "Atrás",
                 "forward" : "Avanzar",
@@ -87,10 +113,12 @@
     },
     {
         "id" : "acrobat",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "help" : "Ayuda"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "page" : "Página",
                 "of" : "de",
@@ -100,10 +128,12 @@
     },
     {
         "id" : "steam",
+        "buttons" : {
+            "file" : "Archivo",
+            "edit" : "Edición",
+            "help" : "Ayuda"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "games" : "Juegos",
                 "gamesExplained" : "¡Elige un juego y empieza a jugar!",

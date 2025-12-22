@@ -337,13 +337,14 @@ noscript .noscript-js-message p {
   width: 18px;
 }
 
-#mac-icon {
+#buttons div {
   transform: translateX(5px);
 }
 
-#monitor.mode-256-gray #mac-icon {
+#monitor.mode-256-gray #buttons div {
   transform: translateX(-5px);
 }
+
 
 .right-group {
   margin-left: auto;
@@ -397,6 +398,54 @@ noscript .noscript-js-message p {
 
 #topbar-slider img {
   height: 30px;
+}
+
+.topbar-button-menu {
+  position: fixed;
+  background: #C1C1C1;
+  border: 1px solid black;
+  box-shadow: 2px 2px black;
+  padding: 2px;
+  z-index: 9999 !important;
+  display: none;
+  flex-direction: column;
+}
+
+.topbar-button-menu button {
+  position: relative;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 2px 5px 2px 15px;
+  font-family: 'Chicago', sans-serif;
+  font-size: 10px;
+  width: 100%;
+  display: block;
+}
+
+.topbar-button-menu button.btn-selected::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+.topbar-button-menu button:hover {
+  background: #3531A2;
+  color: white;
+}
+
+.topbar-button-menu button.btn-selected:hover::before {
+  background-color: white;
+}
+
+.topbar-button-menu.visible {
+  display: flex;
 }
 /*#endregion*/
 

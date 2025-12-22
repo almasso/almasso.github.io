@@ -98,10 +98,6 @@ export default class Navigator extends Program {
         return await response.text();
     }
 
-    getButtons() {
-        return this.strings;
-    }
-
     navigate(url) {
         this.iframe.src = Navigator.#specialURLS.has(url) ? Navigator.#specialURLS.get(url) : url;
         this.urlInput.value = url;

@@ -2,6 +2,7 @@ import {sha256} from "./utils.js"
 import ProcessManager from "./processmanager.js";
 import WindowManager from "./windows/windowmanager.js";
 import Window from "./windows/window.js";
+import LocalizationManager from "./localizationmanager.js";
 
 export default class Program extends EventTarget {
     
@@ -64,7 +65,9 @@ export default class Program extends EventTarget {
         await this._ready;
     }
  
-    getButtons() {}
+    getButtons() {
+        return LocalizationManager.getInstance().getStringsFromId(this.id)["buttons"];
+    }
 
     gainedFocus() {}
 

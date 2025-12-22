@@ -1,14 +1,14 @@
 [
     {
         "id" : "finder",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "view" : "Darstellung",
+            "special" : "Spezial",
+            "help" : "Hilfe"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "Ablage",
-                "edit" : "Bearbeiten",
-                "view" : "Darstellung",
-                "special" : "Spezial",
-                "help" : "Hilfe"
-            },
             "interface" : {
                 "items" : "{items} Elemente",
                 "item" : "{items} Element",
@@ -18,6 +18,9 @@
     },
     {
         "id" : "os",
+        "buttons" : {
+
+        },
         "controlStrip" : {
             "colors" : {
                 "256-g" : "256 Graus",
@@ -31,6 +34,11 @@
     },
     {
         "id" : "terminal",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "help" : "Hilfe"
+        },
         "texts" : {
             "cmdhelp" : "Verfügbare Befehle:\n\t help -- zeigt diese Liste an\n\t echo -- gibt Text im Terminal aus\n\t clear -- leert das Terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
             "cmdcommandnf" : "Befehl nicht gefunden: "
@@ -57,7 +65,25 @@
     },
     {
         "id" : "arkanoid",
-        "texts" : {
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "play" : "Spielen",
+            "help" : "Hilfe"
+        }
+    },
+    {
+        "id" : "asteroids",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "play" : "Spielen",
+            "help" : "Hilfe"
+        }
+    },
+        {
+        "id" : "galactic",
+        "buttons" : {
             "file" : "Ablage",
             "edit" : "Bearbeiten",
             "play" : "Spielen",
@@ -66,15 +92,15 @@
     },
     {
         "id" : "navigator",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "view" : "Darstellung",
+            "go" : "Gehen",
+            "bookmarks" : "Lesezeichen",
+            "help" : "Hilfe"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "Ablage",
-                "edit" : "Bearbeiten",
-                "view" : "Darstellung",
-                "go" : "Gehen",
-                "bookmarks" : "Lesezeichen",
-                "help" : "Hilfe"
-            },
             "interface" : {
                 "back" : "Zurück",
                 "forward" : "Weiter",
@@ -87,10 +113,12 @@
     },
     {
         "id" : "acrobat",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "help" : "Hilfe"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "page" : "Seit",
                 "of" : "von",
@@ -100,10 +128,12 @@
     },
     {
         "id" : "steam",
+        "buttons" : {
+            "file" : "Ablage",
+            "edit" : "Bearbeiten",
+            "help" : "Hilfe"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "games" : "Spiele",
                 "gamesExplained" : "Wähle ein Spiel und starte sofort!",

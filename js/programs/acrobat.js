@@ -464,8 +464,4 @@ export default class Acrobat extends Program {
         const response = await fetch(`${getRoot()}html/programs/acrobat.html`);
         return await response.text();
     }
-
-    getButtons() {
-        return this.strings;
-    }
 }

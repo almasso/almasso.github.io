@@ -1,14 +1,14 @@
 [
     {
         "id" : "finder",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "view" : "View",
+            "special" : "Special",
+            "help" : "Help"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "File",
-                "edit" : "Edit",
-                "view" : "View",
-                "special" : "Special",
-                "help" : "Help"
-            },
             "interface" : {
                 "items" : "{items} items",
                 "item" : "{items} item",
@@ -18,6 +18,9 @@
     },
     {
         "id" : "os",
+        "buttons" : {
+
+        },
         "controlStrip" : {
             "colors" : {
                 "256-g" : "256 Grays",
@@ -31,6 +34,11 @@
     },
     {
         "id" : "terminal",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "help" : "Help"
+        },
         "texts" : {
             "cmdhelp" : "Available commands:\n\t help -- shows this list\n\t echo -- prints text in the terminal\n\t clear -- clears the terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
             "cmdcommandnf" : "Command not found: "
@@ -57,7 +65,25 @@
     },
     {
         "id" : "arkanoid",
-        "texts" : {
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "play" : "Play",
+            "help" : "Help"
+        }
+    },
+    {
+        "id" : "asteroids",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "play" : "Play",
+            "help" : "Help"
+        }
+    },
+    {
+        "id" : "galactic",
+        "buttons" : {
             "file" : "File",
             "edit" : "Edit",
             "play" : "Play",
@@ -66,15 +92,15 @@
     },
     {
         "id" : "navigator",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "view" : "View",
+            "go" : "Go",
+            "bookmarks" : "Bookmarks",
+            "help" : "Help"
+        },
         "texts" : {
-            "buttons" : {
-                "file" : "File",
-                "edit" : "Edit",
-                "view" : "View",
-                "go" : "Go",
-                "bookmarks" : "Bookmarks",
-                "help" : "Help"
-            },
             "interface" : {
                 "back" : "Back",
                 "forward" : "Forward",
@@ -87,10 +113,12 @@
     },
     {
         "id" : "acrobat",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "help" : "Help"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "page" : "Page",
                 "of" : "of",
@@ -100,10 +128,12 @@
     },
     {
         "id" : "steam",
+        "buttons" : {
+            "file" : "File",
+            "edit" : "Edit",
+            "help" : "Help"
+        },
         "texts" : {
-            "buttons" : {
-
-            },
             "interface" : {
                 "games" : "Games",
                 "gamesExplained" : "Choose a game and start playing!",

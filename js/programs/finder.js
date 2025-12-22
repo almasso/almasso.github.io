@@ -85,8 +85,4 @@ export default class Finder extends Program {
             this.rendered = true;
         }
     }
-
-    getButtons() {
-        return this.strings;
-    }
 }
