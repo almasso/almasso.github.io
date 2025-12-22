@@ -24,7 +24,22 @@
         <link rel="icon" type="image/x-icon" href="assets/icons/system/searcher.png" />
     </head>
     <body>
-        <div id="monitor">
+        <noscript id="noscript-part">
+            <div class="sadmac">
+                <img src="assets/icons/system/macs/sadmac.png">
+            </div>
+            <div class="noscript-error-message">
+                <p>0000000F</p>
+                <p>0000000B</p>
+            </div>
+            <div class="noscript-js-message">
+                <p>JavaScript está desactivado. Activa JavaScript para continuar.</p>
+                <p>JavaScript is disabled. Enable JavaScript to continue.</p>
+                <p>JavaScript ist deaktiviert. Aktivieren Sie JavaScript, um fortzufahren.</p>
+            </div>
+        </noscript>
+
+        <div id="monitor" class="js-disabled">
             <div id="bootup-screen" class="checkered">
                 <img src="assets/icons/system/load.png" id="load-diskette" class="flicker">
                 <img src="assets/icons/system/macs/happy.png" id="bootup-macicon" class="invisible">
@@ -105,6 +120,10 @@
             </div>
         </div>
 
+        <script>
+            document.getElementById("monitor").classList.remove("js-disabled");
+            document.getElementById("noscript-part").classList.add("js-disabled");
+        </script>
         <script type="module" src="js/os.js"></script>
     </body>
 </html>

@@ -13,6 +13,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Apple II';
+  src: url('./../assets/fonts/AppleII.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 * {
   cursor: url('./../assets/icons/system/cursor.png') 1 1, auto;
 }
@@ -35,6 +42,45 @@ body, html {
 .mode-normal {
   filter: none;
 }
+/*#endregion*/
+
+/*#region NOSCRIPT*/
+.js-disabled {
+  display: none !important;
+}
+
+noscript {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  gap: 20px;
+}
+
+noscript img {
+  display: block;
+  margin: auto;
+  width: 148px;
+  max-width: none;
+}
+
+noscript .noscript-error-message p {
+  color: white;
+  font-family: 'Apple II';
+  text-align: center;
+  font-size: 25px;
+}
+
+noscript .noscript-js-message p {
+  color: white;
+  font-family: 'Apple II';
+  text-align: center;
+  font-size: 15px;
+}
+
 /*#endregion*/
 
 /*#region MONITOR*/
