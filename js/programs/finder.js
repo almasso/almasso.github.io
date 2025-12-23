@@ -7,7 +7,10 @@ import LocalizationManager from "../localizationmanager.js";
 export default class Finder extends Program {
     constructor(processId, instanceData) {
         super(processId, instanceData);
-        if(!this.instanceData.route) this.instanceData.route = "/Macintosh HD";
+        if(!this.instanceData.route || this.instanceData.route.includes("undefined")) {
+            this.instanceData.route = "/Macintosh HD";
+            this.instanceData.desktopName = "Macintosh HD";
+        }
         this.#setId();
         this.rendered = false;
     }
