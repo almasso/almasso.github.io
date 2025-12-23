@@ -177,6 +177,10 @@ export default class Icon extends EventTarget {
                 const AppClass = ClassMap[this.fileData.classRef];
                 if(AppClass) {
                     const launchMetadata = {...this.fileData, launcherId: this.uuid};
+                    if(launchMetadata.appClass && launchMetadata.appClass.includes("game")) {
+                        await this.#launchSteamGame(this.fileData.programId, launchMetadata);
+                        return;
+                    }
                     await AppClass.launch(launchMetadata);
                 }
             }
@@ -184,6 +188,15 @@ export default class Icon extends EventTarget {
         
         const dk = document.getElementById(this.containerId);
         dk.appendChild(this.iconDiv);
+    }
+
+    async #launchSteamGame(appRef, metadata) {
+        const steamData = {...Filesystem.registry.steam, programId: "steam"};
+        let steamProcess = await ProcessManager.getInstance().createProcess("steam", steamData);
+        if(metadata.appClass.includes("webgame")) steamProcess.initWebgame(appRef);
+        else steamProcess.initGame(appRef);
+
+        ProcessManager.getInstance().killProcess(steamProcess.pid);
     }
     
 }

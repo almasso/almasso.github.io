@@ -38,7 +38,7 @@ export default class OS extends EventTarget {
         WindowManager.getInstance().subscribeToFocusWindowEvent((e) => {
             this.#setCurrentApp(e.detail.window.program);
             this.#setButtons();
-            Icon.selectIcon(e.detail.window.program.instanceData, e.detail.window.program.route);
+            Icon.selectIcon(e.detail.window.program.instanceData);
         });
 
         if(!debugVar) {

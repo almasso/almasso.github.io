@@ -1,13 +1,12 @@
 import Program from "../program.js";
-import {getRoot, isPromise, formatString} from "../utils.js";
+import {getRoot, formatString} from "../utils.js";
 import SteamWindow from "../windows/steamwindow.js";
 import SteamSubwindow from "../windows/steamsubwindow.js";
-import Navigator from "./navigator.js";
 import LocalizationManager from "../localizationmanager.js";
 import WindowManager from "../windows/windowmanager.js";
-import ProcessManager from "../processmanager.js";
 import { ClassMap } from "../registry.js";
-import { Filesystem, findNodeByProgramId, getFullPath, findAllNodesByProgramId } from "../filesystem.js";
+import { Filesystem, findNodeByProgramId, findAllNodesByProgramId } from "../filesystem.js";
+import Icon from "./../icon.js";
 
 
 export default class Steam extends Program {
@@ -28,18 +27,6 @@ export default class Steam extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
-
-        this.addEventListener("closeSubwindow", (e) => {
-            switch(e.detail.windowName) {
-                case this.interfaceTexts["games"]:
-                    Steam.gamesWindow = null;
-                    break;
-                default:
-                    Steam.loadingGameWindow = null;
-                    break;
-            }
-        });
-
     }
 
     async createWindow() {
@@ -125,6 +112,7 @@ export default class Steam extends Program {
                     let launchData = {};
                     if(fileResult) launchData = {...game, ...fileResult.node, route: fileResult.path, metadata: {...(fileResult.node.metadata || {}), unique: true}};
                     const AppClass = ClassMap[game.classRef];
+                    Icon.selectIcon(launchData);
                     if(AppClass) AppClass.launch(launchData);
                 }, 1000);
             }
@@ -210,25 +198,27 @@ export default class Steam extends Program {
     }
 
     gainedFocus() {
-        const win = document.getElementById(this.instanceID);
-        const steamDiv = win.querySelector("#steam");
+        if(this.processWindow) {
+            const win = document.getElementById(this.instanceID);
+            const steamDiv = win.querySelector("#steam");
 
-        if(!this.addedListeners) {
-            steamDiv.querySelector("#steam-button-games button").addEventListener("click", async () => {
-                if(!Steam.gamesWindow) await this.#openGamesWindow();
-            });
-            steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
-            });
-            steamDiv.querySelector("#steam-button-servers button").addEventListener("click", () => {
-            });
-            steamDiv.querySelector("#steam-button-monitor button").addEventListener("click", () => {
-            });
-            steamDiv.querySelector("#steam-button-settings button").addEventListener("click", () => {
-            });
-            steamDiv.querySelector("#steam-button-news button").addEventListener("click", () => {
-            });
-            this.addedListeners = true;
-            this.changeLang();
+            if(!this.addedListeners) {
+                steamDiv.querySelector("#steam-button-games button").addEventListener("click", async () => {
+                    if(!Steam.gamesWindow) await this.#openGamesWindow();
+                });
+                steamDiv.querySelector("#steam-button-friends button").addEventListener("click", () => {
+                });
+                steamDiv.querySelector("#steam-button-servers button").addEventListener("click", () => {
+                });
+                steamDiv.querySelector("#steam-button-monitor button").addEventListener("click", () => {
+                });
+                steamDiv.querySelector("#steam-button-settings button").addEventListener("click", () => {
+                });
+                steamDiv.querySelector("#steam-button-news button").addEventListener("click", () => {
+                });
+                this.addedListeners = true;
+                this.changeLang();
+            }
         }
     }
 
