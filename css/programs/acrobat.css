@@ -3,6 +3,7 @@
     flex-direction: column;
     height: 100%;
     background: #909090;
+    image-rendering: smooth !important; 
 }
 
 #toolbar {

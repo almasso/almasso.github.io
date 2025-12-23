@@ -193,7 +193,7 @@ export default class Icon extends EventTarget {
     async #launchSteamGame(appRef, metadata) {
         const steamData = {...Filesystem.registry.steam, programId: "steam"};
         let steamProcess = await ProcessManager.getInstance().createProcess("steam", steamData);
-        if(metadata.appClass.includes("webgame")) steamProcess.initWebgame(appRef);
+        if(metadata.appClass.includes("webgame")) steamProcess.initWebgame(metadata.steamId);
         else steamProcess.initGame(appRef);
 
         ProcessManager.getInstance().killProcess(steamProcess.pid);

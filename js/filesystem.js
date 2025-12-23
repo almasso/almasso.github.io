@@ -165,6 +165,7 @@ export const Filesystem = {
                                 desktopName: "ÑRPG",
                                 desktopIcon: "erpg.png",
                                 appClass: "webgame",
+                                steamId: "erpg",
                                 type: "file",
                                 programId: "navigator",
                                 metadata: {
