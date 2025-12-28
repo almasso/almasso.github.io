@@ -306,14 +306,22 @@ export default class OS extends EventTarget {
         const buttons = document.getElementById("buttons");
         let buttonsHtml = "";
         for(const key in this.currentApp.getButtons()) {
+            //if(this.currentApp.getButtons()[key].options)
             buttonsHtml += `
                 <div id="${key}-button">
                     <div id="${key}-text">
                         <button>${this.currentApp.getButtons()[key]["text"]}</button>
                     </div>
-
                 </div>
             `;
+
+            /*
+                                <div id="${key}-settings" class="topbar-button-menu">
+                        ${this.currentApp.getButtons()[key].options.map(option => `
+                            <button data-action="${option.function}">${option.text}</button>
+                        `).join("")}
+                    </div>
+            */
         }
 
         let idx = 0;
@@ -331,12 +339,11 @@ export default class OS extends EventTarget {
             </div>
             ${buttonsHtml}
         `;
-
         this.#setTopbarButtonsListeners();
     }
 
     #setTopbarButtonsListeners() {
-        document.querySelectorAll("#topbar > div").forEach(container => {
+        document.querySelectorAll("#buttons > div").forEach(container => {
             const button = container.querySelector("button");
             const menu = container.querySelector(".topbar-button-menu");
             if(!button || !menu) return;

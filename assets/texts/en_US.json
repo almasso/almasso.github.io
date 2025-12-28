@@ -15,7 +15,9 @@
                 "text" : "Special"  
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                ]
             }
         },
         "texts" : {
@@ -27,7 +29,11 @@
                 "bimemory" : "Built-in Memory: ",
                 "vmemory" : "Virtual Memory: ",
                 "on" : "On",
-                "lublock" : "Largest Unused Block: "
+                "lublock" : "Largest Unused Block: ",
+                "copy" : "Apple, Mac OS, Macintosh, Finder and the Apple logo are registered trademarks of Apple Inc.",
+                "ip" : "All graphics, icons, sounds, and interface elements are the intellectual property of Apple Inc. and are used here solely for educational, nostalgic and historical preservation purposes.",
+                "expl" : "This website is an independent, non-profit, fan-made project and is not affiliated with, endorsed by, or sponsored by Apple Inc.",
+                "resources" : "Resources"
             }
         }
     },
@@ -37,7 +43,7 @@
             "apple" : {
                 "options" : [
                     {
-                        "text" : "About This Computer",
+                        "text" : "About This Website",
                         "function" : "showAbout"
                     }
                 ]

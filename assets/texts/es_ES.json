@@ -15,7 +15,9 @@
                 "text" : "Especial"
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                ]
             }
         },
         "texts" : {
@@ -27,7 +29,11 @@
                 "bimemory" : "Memoria Integrada: ",
                 "vmemory" : "Memoria Virtual: ",
                 "on" : "Sí",
-                "lublock" : "Bloque sin usar más grande: "
+                "lublock" : "Bloque sin usar más grande: ",
+                "copy" : "Apple, Mac OS, Macintosh, Finder y el logotipo de Apple son marcas registradas de Apple Inc.",
+                "ip" : "Todos los gráficos, iconos, sonidos y elementos de la interfaz son propiedad intelectual de Apple Inc. y se utilizan aquí únicamente con fines educativos, nostálgicos y de preservación histórica.",
+                "expl" : "Este sitio web es un proyecto independiente creado por fans, sin ánimo de lucro, y no está afiliado, respaldado ni patrocinado por Apple Inc.",
+                "resources" : "Recursos"
             }
         }
     },
@@ -37,7 +43,7 @@
             "apple" : {
                 "options" : [
                     {
-                        "text" : "Acerca de este Ordenador",
+                        "text" : "Acerca de esta Web",
                         "function" : "showAbout"
                     }
                 ]

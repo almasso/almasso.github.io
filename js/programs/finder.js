@@ -19,7 +19,7 @@ export default class Finder extends Program {
         this.rendered = false;
 
         this.functionMap = {
-            showAbout : () => this.#showAboutInfo()
+            showAbout : () => this.#showAboutInfo(),
         };
     }
 
@@ -63,6 +63,64 @@ export default class Finder extends Program {
                     ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["on"]}`;
             Finder.#thisComputer.win.querySelector("#lublock").innerHTML = `<b>
                 ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["lublock"]}</b> 5.2 GB`;
+
+            Finder.#thisComputer.win.querySelector("#computer-sizes").innerHTML = `
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span>${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["copy"]}</span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span>${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["ip"]}</span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span>${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["expl"]}</span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span>&nbsp</span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["resources"]}</b></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>Infinite Mac</b> - <a href="https://infinitemac.org/" target="_blank">https://infinitemac.org</a></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>Siddharta77 OS9</b> - <a href="https://os9.ca" target="_blank">https://os9.ca</a></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>Apple Garamond</b> - <a href="https://online-fonts.com/fonts/apple-garamond" target="_blank">https://online-fonts.com/fonts/apple-garamond</a></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>Chicago</b> - <a href="https://www.1001freefonts.com/es/chicago.font" target="_blank">https://www.1001freefonts.com/es/chicago.font</a></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span><b>Apple II</b> - <a href="https://www.kreativekorp.com/software/fonts/apple2/" target="_blank">https://www.kreativekorp.com/software/fonts/apple2/</a></span>
+                    </div>
+                </div>
+                <div class="memory-row">
+                    <div class="app-info">
+                        <span>&nbsp</span>
+                    </div>
+                </div>
+            `;
         }
     }
 

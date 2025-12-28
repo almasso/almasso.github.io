@@ -15,7 +15,9 @@
                 "text" : "Spezial"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                ]
             }
         },
         "texts" : {
@@ -27,7 +29,11 @@
                 "bimemory" : "Integrierter Speicher: ",
                 "vmemory" : "Virtueller Speicher: ",
                 "on" : "Ja",
-                "lublock" : "Größter Ungenutzter Block: "
+                "lublock" : "Größter Ungenutzter Block: ",
+                "copy" : "Apple, Mac OS, Macintosh, Finder und das Apple-Logo sind eingetragene Marken der Apple Inc.",
+                "ip" : "Alle Grafiken, Symbole, Klänge und Oberflächenelemente sind geistiges Eigentum der Apple Inc. und werden hier ausschließlich zu Bildungs-, nostalgischen und historischen Erhaltungszwecken verwendet.",
+                "expl" : "Diese Website ist ein unabhängiges, nicht gewinnorientiertes Fanprojekt und steht in keiner Verbindung zu Apple Inc. und wird weder von Apple Inc. unterstütz noch gesponsert.",
+                "resources" : "Ressourcen"
             }
         }
     },
@@ -37,7 +43,7 @@
             "apple" : {
                 "options" : [
                     {
-                        "text" : "Über Diesen Computer",
+                        "text" : "Über Diese Website",
                         "function" : "showAbout"
                     }
                 ]
