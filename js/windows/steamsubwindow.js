@@ -16,6 +16,8 @@ export default class SteamSubwindow extends SteamWindow {
         this.win = document.createElement("div");
         this.win.className = "steam-window";
         this.win.id = `${this.program.instanceID}`;
+        this.win.style.visibility = 'hidden';
+        
         const response = await fetch(this.contentRoute);
         const bodyHTML = await response.text();
         this.win.innerHTML = `
