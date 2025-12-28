@@ -2,24 +2,46 @@
     {
         "id" : "finder",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "view" : "Visualización",
-            "special" : "Especial",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "view" : {
+                "text" : "Visualización"
+            },
+            "special" : {
+                "text" : "Especial"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         },
         "texts" : {
             "interface" : {
                 "items" : "{items} elementos",
                 "item" : "{items} elemento",
-                "storage" : "{storage} disponible"
+                "storage" : "{storage} disponible",
+                "version" : "Versión: ",
+                "bimemory" : "Memoria Integrada: ",
+                "vmemory" : "Memoria Virtual: ",
+                "on" : "Sí",
+                "lublock" : "Bloque sin usar más grande: "
             }
         }
     },
     {
         "id" : "os",
         "buttons" : {
-
+            "apple" : {
+                "options" : [
+                    {
+                        "text" : "Acerca de este Ordenador",
+                        "function" : "showAbout"
+                    }
+                ]
+            }
         },
         "controlStrip" : {
             "colors" : {
@@ -35,9 +57,15 @@
     {
         "id" : "terminal",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         },
         "texts" : {
             "cmdhelp" : "Comandos disponibles:\n\t help -- muestra esta lista\n\t echo -- permite imprimir texto en la terminal\n\t clear -- limpia la terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
@@ -66,39 +94,75 @@
     {
         "id" : "arkanoid",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "play" : "Jugar",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "play" : {
+                "text" : "Jugar"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         }
     },
     {
         "id" : "asteroids",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "play" : "Jugar",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "play" : {
+                "text" : "Jugar"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         }
     },
     {
         "id" : "galactic",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "play" : "Jugar",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "play" : {
+                "text" : "Jugar"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         }
     },
     {
         "id" : "navigator",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "view" : "Visualización",
-            "go" : "Ir",
-            "bookmarks" : "Marcadores",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "view" : {
+                "text" : "Visualización"
+            },
+            "go" : {
+                "text" : "Ir"
+            },
+            "bookmarks" : {
+                "text" : "Marcadores"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         },
         "texts" : {
             "interface" : {
@@ -114,9 +178,15 @@
     {
         "id" : "acrobat",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "help" : "Ayuda"
+           "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         },
         "texts" : {
             "interface" : {
@@ -129,9 +199,15 @@
     {
         "id" : "steam",
         "buttons" : {
-            "file" : "Archivo",
-            "edit" : "Edición",
-            "help" : "Ayuda"
+            "file" : {
+                "text" : "Archivo"
+            },
+            "edit" : {
+                "text" : "Edición"
+            },
+            "help" : {
+                "text" : "Ayuda"
+            }
         },
         "texts" : {
             "interface" : {

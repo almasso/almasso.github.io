@@ -3,8 +3,12 @@ import Program from "../program.js";
 import {getRoot, formatString} from "../utils.js";
 import Icon from "../icon.js";
 import LocalizationManager from "../localizationmanager.js";
+import WindowManager from "../windows/windowmanager.js";
+import Subwindow from "../windows/subwindow.js";
 
 export default class Finder extends Program {
+    static #thisComputer = null;
+
     constructor(processId, instanceData) {
         super(processId, instanceData);
         if(!this.instanceData.route || this.instanceData.route.includes("undefined")) {
@@ -13,6 +17,19 @@ export default class Finder extends Program {
         }
         this.#setId();
         this.rendered = false;
+
+        this.functionMap = {
+            showAbout : () => this.#showAboutInfo()
+        };
+    }
+
+    async #showAboutInfo() {
+        if(!Finder.#thisComputer) {
+            Finder.#thisComputer = WindowManager.getInstance().createWindow(Subwindow, this, 600, 400, 600, 400, 
+                {name: LocalizationManager.getInstance().getStringsFromId("os").buttons.apple.options[0].text, contentRoute: `${getRoot()}html/system/about.html`});
+            Finder.#thisComputer = await Finder.#thisComputer;
+            this.changeLang();
+        }
     }
 
     async #setId() {
@@ -34,6 +51,18 @@ export default class Finder extends Program {
             fnDiv.querySelector(".searcher-summary").innerText = `${formatString(LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"][itemTxt], 
                 {items: nElements})}, ${formatString(LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["storage"], 
                     {storage: this.instanceData.availableStorage})}`
+        }
+        if(Finder.#thisComputer) {
+            Finder.#thisComputer.changeWindowName(LocalizationManager.getInstance().getStringsFromId("os").buttons.apple.options[0].text);
+            Finder.#thisComputer.win.querySelector("#version").innerHTML = `<b>
+                ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["version"]}</b> Mac OS 9.0`;
+            Finder.#thisComputer.win.querySelector("#bimemory").innerHTML = `<b>
+                ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["bimemory"]}</b> 1 GB`;
+            Finder.#thisComputer.win.querySelector("#vmemory").innerHTML = `<b>
+                ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["vmemory"]}</b> 
+                    ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["on"]}`;
+            Finder.#thisComputer.win.querySelector("#lublock").innerHTML = `<b>
+                ${LocalizationManager.getInstance().getStringsFromId("finder")["texts"]["interface"]["lublock"]}</b> 5.2 GB`;
         }
     }
 
@@ -86,6 +115,13 @@ export default class Finder extends Program {
         if(!this.rendered) {
             this.renderIcons();
             this.rendered = true;
+        }
+    }
+
+    closeSubwindow(sw) {
+        if(sw !== null) {
+            if(sw === Finder.#thisComputer) Finder.#thisComputer = null;
+            WindowManager.getInstance().remove(sw.id);
         }
     }
 }

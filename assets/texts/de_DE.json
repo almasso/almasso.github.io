@@ -2,24 +2,46 @@
     {
         "id" : "finder",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "view" : "Darstellung",
-            "special" : "Spezial",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "view" : {
+                "text" : "Darstellung"
+            },
+            "special" : {
+                "text" : "Spezial"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         },
         "texts" : {
             "interface" : {
                 "items" : "{items} Elemente",
                 "item" : "{items} Element",
-                "storage" : "{storage} verfügbar"
+                "storage" : "{storage} verfügbar",
+                "version" : "Version: ",
+                "bimemory" : "Integrierter Speicher: ",
+                "vmemory" : "Virtueller Speicher: ",
+                "on" : "Ja",
+                "lublock" : "Größter Ungenutzter Block: "
             }
         }
     },
     {
         "id" : "os",
         "buttons" : {
-
+            "apple" : {
+                "options" : [
+                    {
+                        "text" : "Über Diesen Computer",
+                        "function" : "showAbout"
+                    }
+                ]
+            }
         },
         "controlStrip" : {
             "colors" : {
@@ -35,9 +57,15 @@
     {
         "id" : "terminal",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         },
         "texts" : {
             "cmdhelp" : "Verfügbare Befehle:\n\t help -- zeigt diese Liste an\n\t echo -- gibt Text im Terminal aus\n\t clear -- leert das Terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
@@ -66,39 +94,75 @@
     {
         "id" : "arkanoid",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "play" : "Spielen",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "play" : {
+                "text" : "Spielen"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         }
     },
     {
         "id" : "asteroids",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "play" : "Spielen",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "play" : {
+                "text" : "Spielen"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         }
     },
         {
         "id" : "galactic",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "play" : "Spielen",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "play" : {
+                "text" : "Spielen"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         }
     },
     {
         "id" : "navigator",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "view" : "Darstellung",
-            "go" : "Gehen",
-            "bookmarks" : "Lesezeichen",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "view" : {
+                "text" : "Darstellung"
+            },
+            "go" : {
+                "text" : "Gehen"
+            },
+            "bookmarks" : {
+                "text" : "Lesezeichen"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         },
         "texts" : {
             "interface" : {
@@ -114,9 +178,15 @@
     {
         "id" : "acrobat",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         },
         "texts" : {
             "interface" : {
@@ -129,9 +199,15 @@
     {
         "id" : "steam",
         "buttons" : {
-            "file" : "Ablage",
-            "edit" : "Bearbeiten",
-            "help" : "Hilfe"
+            "file" : {
+                "text" : "Ablage"
+            },
+            "edit" : {
+                "text" : "Bearbeiten"
+            },
+            "help" : {
+                "text" : "Hilfe"
+            }
         },
         "texts" : {
             "interface" : {

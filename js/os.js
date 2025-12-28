@@ -308,17 +308,66 @@ export default class OS extends EventTarget {
         for(const key in this.currentApp.getButtons()) {
             buttonsHtml += `
                 <div id="${key}-button">
-                <button>${this.currentApp.getButtons()[key]}</button>
+                    <div id="${key}-text">
+                        <button>${this.currentApp.getButtons()[key]["text"]}</button>
+                    </div>
+
                 </div>
             `;
         }
 
+        let idx = 0;
+        let macOptions = LocalizationManager.getInstance().getStringsFromId("os")["buttons"]["apple"]["options"];
         buttons.innerHTML = `
-            <div id="mac-icon">
-                <button><img src="assets/icons/system/apple.png" /></button>
+            <div id="mac-button">
+                <div id="mac-icon">
+                    <button><img src="assets/icons/system/apple.png" /></button>
+                </div>
+                <div id="mac-settings" class="topbar-button-menu">
+                    ${macOptions.map(option => `
+                        <button data-action="${option.function}">${option.text}</button>
+                    `).join("")}
+                </div>
             </div>
             ${buttonsHtml}
         `;
+
+        this.#setTopbarButtonsListeners();
+    }
+
+    #setTopbarButtonsListeners() {
+        document.querySelectorAll("#topbar > div").forEach(container => {
+            const button = container.querySelector("button");
+            const menu = container.querySelector(".topbar-button-menu");
+            if(!button || !menu) return;
+
+            const closeAllMenus = () => {
+                document.querySelectorAll('.topbar-button-menu.visible').forEach(m => m.classList.remove("visible"));
+                document.querySelectorAll('#topbar button').forEach(b => b.classList.remove("btn-selected"));
+            }
+
+            button.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                const isOpen = menu.classList.contains("visible");
+                closeAllMenus();
+                if(!isOpen) {
+                    button.classList.add("btn-selected");
+                    menu.classList.add("visible");
+                }
+            });
+
+            menu.querySelectorAll("button").forEach(menuBtn => {
+                menuBtn.addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    const action = menuBtn.dataset.action;
+                    this.#baseFinder.functionMap[action]?.();
+                    closeAllMenus();
+                });
+            });
+
+            document.addEventListener("click", closeAllMenus);
+        });
     }
 
     #initControlStrip() {
@@ -555,34 +604,34 @@ export default class OS extends EventTarget {
         });
 
         document.querySelectorAll('.control-strip-menu input').forEach(slider => {
-        slider.addEventListener('mouseup', (e) => {
-            const menu = slider.closest('.control-strip-menu');
+            slider.addEventListener('mouseup', (e) => {
+                const menu = slider.closest('.control-strip-menu');
 
-            if(menu.id.includes("sound-slider")) this.#changeVolume(slider.value);
+                if(menu.id.includes("sound-slider")) this.#changeVolume(slider.value);
 
-            menu.classList.remove('visible');
-            controlsArray.forEach(ctrl => {
-            if(ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('_pressed.png', '') + '.png';
+                menu.classList.remove('visible');
+                controlsArray.forEach(ctrl => {
+                    if(ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('_pressed.png', '') + '.png';
+                });
             });
-        });
         });
 
         document.querySelectorAll('.control-strip-menu button').forEach(button => {
-        button.addEventListener('click', (e) => {
-            const btn = e.currentTarget;
-            const menu = btn.closest('.control-strip-menu');
-            const action = btn.dataset.action;
+            button.addEventListener('click', (e) => {
+                const btn = e.currentTarget;
+                const menu = btn.closest('.control-strip-menu');
+                const action = btn.dataset.action;
 
-            menu.querySelectorAll('button.btn-selected').forEach(selectedBtn => selectedBtn.classList.remove('btn-selected'));
-            btn.classList.add('btn-selected');
+                menu.querySelectorAll('button.btn-selected').forEach(selectedBtn => selectedBtn.classList.remove('btn-selected'));
+                btn.classList.add('btn-selected');
 
-            if(menu.id.includes("monitor-color")) this.#applyMonitorFilter(action);
+                if(menu.id.includes("monitor-color")) this.#applyMonitorFilter(action);
 
-            menu.classList.remove('visible');
-            controlsArray.forEach(ctrl => {
-            if(ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('_pressed.png', '') + '.png';
+                menu.classList.remove('visible');
+                controlsArray.forEach(ctrl => {
+                    if(ctrl.querySelector("img").src.includes('_pressed.png')) ctrl.querySelector("img").src = ctrl.querySelector("img").src.replace('_pressed.png', '') + '.png';
+                });
             });
-        });
         });
 
         mainArrow.addEventListener("click", toggleCollapse);

@@ -2,24 +2,46 @@
     {
         "id" : "finder",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "view" : "View",
-            "special" : "Special",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "view" : {
+                "text" : "View"
+            },
+            "special" : {
+                "text" : "Special"  
+            },
+            "help" : {
+                "text" : "Help"
+            }
         },
         "texts" : {
             "interface" : {
                 "items" : "{items} items",
                 "item" : "{items} item",
-                "storage" : "{storage} available"
+                "storage" : "{storage} available",
+                "version" : "Version: ",
+                "bimemory" : "Built-in Memory: ",
+                "vmemory" : "Virtual Memory: ",
+                "on" : "On",
+                "lublock" : "Largest Unused Block: "
             }
         }
     },
     {
         "id" : "os",
         "buttons" : {
-
+            "apple" : {
+                "options" : [
+                    {
+                        "text" : "About This Computer",
+                        "function" : "showAbout"
+                    }
+                ]
+            }
         },
         "controlStrip" : {
             "colors" : {
@@ -35,9 +57,15 @@
     {
         "id" : "terminal",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         },
         "texts" : {
             "cmdhelp" : "Available commands:\n\t help -- shows this list\n\t echo -- prints text in the terminal\n\t clear -- clears the terminal\n\t car [-v/-version] -- car game\n\t tunnel [-v/-version] -- tunnel game",
@@ -66,39 +94,75 @@
     {
         "id" : "arkanoid",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "play" : "Play",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "play" : {
+                "text" : "Play"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         }
     },
     {
         "id" : "asteroids",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "play" : "Play",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "play" : {
+                "text" : "Play"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         }
     },
     {
         "id" : "galactic",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "play" : "Play",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "play" : {
+                "text" : "Play"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         }
     },
     {
         "id" : "navigator",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "view" : "View",
-            "go" : "Go",
-            "bookmarks" : "Bookmarks",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "view" : {
+                "text" : "View"
+            },
+            "go" : {
+                "text" : "Go"  
+            },
+            "bookmarks" : {
+                "text" : "Bookmarks"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         },
         "texts" : {
             "interface" : {
@@ -114,9 +178,15 @@
     {
         "id" : "acrobat",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         },
         "texts" : {
             "interface" : {
@@ -129,9 +199,15 @@
     {
         "id" : "steam",
         "buttons" : {
-            "file" : "File",
-            "edit" : "Edit",
-            "help" : "Help"
+            "file" : {
+                "text" : "File"
+            },
+            "edit" : {
+                "text" : "Edit"
+            },
+            "help" : {
+                "text" : "Help"
+            }
         },
         "texts" : {
             "interface" : {
