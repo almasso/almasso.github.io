@@ -626,31 +626,8 @@ noscript .noscript-js-message p {
   height: 12px;
   transform: translateY(-5px);
   background: repeating-linear-gradient(
-    to bottom,
-    #FFF 0px,
-    #FFF 1px,
-    #777 1px,
-    #777 2px,
-    #FFF 2px,
-    #FFF 3px,
-    #777 3px,
-    #777 4px,
-    #FFF 4px,
-    #FFF 5px,
-    #777 5px,
-    #777 6px,
-    #FFF 6px,
-    #FFF 7px,
-    #777 7px,
-    #777 8px,
-    #FFF 8px,
-    #FFF 9px,
-    #777 9px,
-    #777 10px,
-    #FFF 10px,
-    #FFF 11px,
-    #777 11px,
-    #777 12px
+    #fff 0 1px,
+    #737373 0 2px
   );
   margin: 0 4px;
   opacity: 0.6;

@@ -306,22 +306,24 @@ export default class OS extends EventTarget {
         const buttons = document.getElementById("buttons");
         let buttonsHtml = "";
         for(const key in this.currentApp.getButtons()) {
-            //if(this.currentApp.getButtons()[key].options)
-            buttonsHtml += `
+            buttonsHtml += !this.currentApp.getButtons()[key].options ? `
                 <div id="${key}-button">
                     <div id="${key}-text">
                         <button>${this.currentApp.getButtons()[key]["text"]}</button>
                     </div>
                 </div>
-            `;
-
-            /*
-                                <div id="${key}-settings" class="topbar-button-menu">
+            ` : `
+                <div id="${key}-button">
+                    <div id="${key}-text">
+                        <button>${this.currentApp.getButtons()[key]["text"]}</button>
+                    </div>
+                    <div id="${key}-settings" class="topbar-button-menu">
                         ${this.currentApp.getButtons()[key].options.map(option => `
                             <button data-action="${option.function}">${option.text}</button>
                         `).join("")}
                     </div>
-            */
+                </div>
+            `;
         }
 
         let idx = 0;
@@ -368,7 +370,7 @@ export default class OS extends EventTarget {
                 menuBtn.addEventListener("click", (e) => {
                     e.stopPropagation();
                     const action = menuBtn.dataset.action;
-                    this.#baseFinder.functionMap[action]?.();
+                    menu.id === "mac-settings" ? this.#baseFinder.functionMap[action]?.() : this.currentApp.functionMap[action]?.();
                     closeAllMenus();
                 });
             });

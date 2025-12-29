@@ -15,9 +15,7 @@
                 "text" : "Especial"
             },
             "help" : {
-                "text" : "Ayuda",
-                "options" : [
-                ]
+                "text" : "Ayuda"
             }
         },
         "texts" : {
@@ -191,7 +189,16 @@
                 "text" : "Edición"
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                    {
+                        "text" : "Sobre Acrobat Reader",
+                        "function" : "showInfo",
+                        "adobe" : "Adobe, el logitipo de Adobe, Acrobat y el logitpo de Acrobat son marcas registradas o marcas comerciales de Adobe Inc.",
+                        "expl" : "Esta aplicación es una recreación histórica con fines educativos y de preservación, desarrollada por fans mediante tecnología de código abierto (PDF.js) y sin ánimo de lucro.",
+                        "aff" : "Este proyecto no está afiliado, respaldado ni patrocinado por Adobe Inc."
+                    }
+                ]
             }
         },
         "texts" : {

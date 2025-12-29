@@ -15,9 +15,7 @@
                 "text" : "Spezial"
             },
             "help" : {
-                "text" : "Hilfe",
-                "options" : [
-                ]
+                "text" : "Hilfe"
             }
         },
         "texts" : {
@@ -191,7 +189,17 @@
                 "text" : "Bearbeiten"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Acrobat Reader",
+                        "function" : "showInfo",
+                        "adobe" : "Adobe, das Adobe-Logo, Acrobat und das Acrobat-Logo sind eingetragene Marken oder Marken der Adobe Inc.",
+                        "expl" : "Diese Anwendung ist eine historische Rekonstruktion zu Bildungs- und Erhaltungszwecken, die von Fans unter Verwendung von Open-Source-Technologie (PDF.js) und ohne Gewinnerzielungsabsicht entwickelt wurde.",
+                        "aff" : "Dieses Projekt steht in keiner Verbindung zu Adobe Inc. und wird weder von Adobe Inc. unterstützt noch gesponsert."
+
+                    }
+                ]
             }
         },
         "texts" : {

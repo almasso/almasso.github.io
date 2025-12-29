@@ -178,3 +178,52 @@
 .thumbnail-canvas-active {
     border: 2px dotted #000080 !important;
 }
+
+/*SUBWINDOWS*/
+#about-acrobat {
+    padding: 15px 15px;
+}
+
+#superior-part {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#adobe-identifier {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#adobe-identifier p {
+    transform: translateY(-12px);
+}
+
+#acrobat-reader-text {
+    color: black;
+    font-family: "myriad-pro-condensed", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 28px;
+    display: flex;
+}
+
+#acrobat-reader-text small {
+    font-size: 10px;
+    transform: translateY(-50px);
+}
+
+#acrobat-reader-text span {
+    font-weight: 100;
+    color: red;
+}
+
+#ar-image img {
+    width: 300px;
+    height: 70px;
+}
+
+#about-acrobat hr {
+    border-color: #008787;
+}

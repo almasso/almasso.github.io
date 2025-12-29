@@ -1,8 +1,12 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 import LocalizationManager from "../localizationmanager.js";
+import Subwindow from "../windows/subwindow.js";
+import WindowManager from "../windows/windowmanager.js";
 
 export default class Acrobat extends Program {
+    static #info = null;
+
     constructor(processId, instanceData) {
         super(processId, instanceData);
 
@@ -15,13 +19,37 @@ export default class Acrobat extends Program {
         this.canvas = null;
         this.ctx = null;
         this.url = `${getRoot()}assets/pdf/${this.instanceData.metadata ? this.instanceData.metadata.pdf : "Acrobat"}.pdf`;
+
+        this.functionMap = {
+            showInfo : () => this.#showAboutInfo(),
+        };
     }
+
+    async #showAboutInfo() {
+            if(!Acrobat.#info) {
+                Acrobat.#info = WindowManager.getInstance().createWindow(Subwindow, this, 650, 350, 650, 350, 
+                    {name: LocalizationManager.getInstance().getStringsFromId("acrobat").buttons.help.options[0].text, contentRoute: `${getRoot()}html/programs/acrobat/about.html`});
+                Acrobat.#info = await Acrobat.#info;
+                this.changeLang();
+            }
+        }
 
     changeLang() {
         const navDiv = document.getElementById(this.instanceID).querySelector("#acrobat");
         navDiv.querySelector("#page").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["page"];
         navDiv.querySelector("#of").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["of"];
         this.updateZoomUI();
+
+        if(Acrobat.#info) {
+            Acrobat.#info.changeWindowName(LocalizationManager.getInstance().getStringsFromId("acrobat").buttons.help.options[0].text);
+            Acrobat.#info.win.querySelector("#acrobat-texts").innerHTML = `
+                <p>${LocalizationManager.getInstance().getStringsFromId("acrobat").buttons.help.options[0].adobe}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("acrobat").buttons.help.options[0].expl}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("acrobat").buttons.help.options[0].aff}</p>
+                <hr>
+                <small><b>Myriad</b> - <a href="https://fonts.adobe.com/fonts/myriad" target="_blank">https://fonts.adobe.com/fonts/myriad</a></small>
+            `;
+        }
     }
 
     gainedFocus() {
@@ -460,8 +488,19 @@ export default class Acrobat extends Program {
         }
     }
 
+    async onClose() {
+        this.closeSubwindow(Acrobat.#info);
+    }
+
     async getBodyHTML() {
-        const response = await fetch(`${getRoot()}html/programs/acrobat.html`);
+        const response = await fetch(`${getRoot()}html/programs/acrobat/acrobat.html`);
         return await response.text();
+    }
+
+    closeSubwindow(sw) {
+        if(sw !== null) {
+            if(sw === Acrobat.#info) Acrobat.#info = null;
+            WindowManager.getInstance().remove(sw.id);
+        }
     }
 }
