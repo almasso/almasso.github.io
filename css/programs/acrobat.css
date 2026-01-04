@@ -184,7 +184,7 @@
     padding: 15px 15px;
 }
 
-#superior-part {
+#about-acrobat #superior-part {
     display: flex;
     flex-direction: row;
     justify-content: space-between;

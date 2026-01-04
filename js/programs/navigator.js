@@ -1,6 +1,8 @@
 import Program from "../program.js";
 import {getRoot} from "../utils.js";
 import LocalizationManager from "../localizationmanager.js";
+import Subwindow from "../windows/subwindow.js";
+import WindowManager from "../windows/windowmanager.js";
 
 
 export default class Navigator extends Program {
@@ -14,6 +16,8 @@ export default class Navigator extends Program {
         ["http://www.erpg.manininteractive.com", `${getRoot()}html/programs/erpg/erpg.html`]
     ]);
 
+    static #info = null;
+
     constructor(processId, instanceData) {
         super(processId, instanceData);
 
@@ -22,6 +26,19 @@ export default class Navigator extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
+
+        this.functionMap = {
+            showInfo : () => this.#showAboutInfo(),
+        };
+    }
+
+    async #showAboutInfo() {
+        if(!Navigator.#info) {
+            Navigator.#info = WindowManager.getInstance().createWindow(Subwindow, this, 650, 350, 650, 350, 
+                {name: LocalizationManager.getInstance().getStringsFromId("navigator").buttons.help.options[0].text, contentRoute: `${getRoot()}html/programs/navigator/about.html`});
+            Navigator.#info = await Navigator.#info;
+            this.changeLang();
+        }
     }
 
     changeLang() {
@@ -32,6 +49,15 @@ export default class Navigator extends Program {
         navDiv.querySelector("#right-buttons button:nth-child(1) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["reload"];
         navDiv.querySelector("#right-buttons button:nth-child(2) .label").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["stop"];
         navDiv.querySelector("#url p").innerText = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["location"];
+        
+        if(Navigator.#info) {
+            Navigator.#info.changeWindowName(LocalizationManager.getInstance().getStringsFromId("navigator").buttons.help.options[0].text);
+            Navigator.#info.win.querySelector("#copy-texts").innerHTML = `
+                <p>${LocalizationManager.getInstance().getStringsFromId("navigator").buttons.help.options[0].ns}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("navigator").buttons.help.options[0].expl}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("navigator").buttons.help.options[0].aff}</p>
+            `;
+        }
     }
  
     gainedFocus() {
@@ -120,5 +146,16 @@ export default class Navigator extends Program {
         this.forwardButton.querySelector("img").src = this.forwardButton.disabled ? `${getRoot()}assets/icons/programs/navigator/forward.png` : `${getRoot()}assets/icons/programs/navigator/forward_active.png`;
         this.reloadButton.disabled = false;
         this.stopButton.querySelector("img").src = this.stopButton.disabled ? `${getRoot()}assets/icons/programs/navigator/stop.png` : `${getRoot()}assets/icons/programs/navigator/stop_active.png`;
+    }
+
+    async onClose() {
+        this.closeSubwindow(Navigator.#info);
+    }
+    
+    closeSubwindow(sw) {
+        if(sw !== null) {
+            if(sw === Navigator.#info) Navigator.#info = null;
+            WindowManager.getInstance().remove(sw.id);
+        }
     }
 }

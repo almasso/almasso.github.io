@@ -107,3 +107,33 @@
     font-size: 12px;
     border-top: 2px solid #000;
 }
+
+/*SUBWINDOWS*/
+#about-navigator {
+    padding: 15px 15px;
+    background-color: #C0C0C0;
+    height: 100%;
+}
+
+#netscape-logo img{
+    width: 128px;
+}
+
+#about-navigator #superior-part {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+#navigator-texts {
+    display: flex;
+    flex-direction: column;
+}
+
+#navigator-text {
+    text-align: center;
+}
+
+#copy-text {
+
+}

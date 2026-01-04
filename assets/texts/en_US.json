@@ -165,7 +165,16 @@
                 "text" : "Bookmarks"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About Netscape Navigator",
+                        "function" : "showInfo",
+                        "ns" : "Netscape, Netscape Navigator, and the ship’s wheel logo are registered trademarks or trademarks of Netscape Communications (currently owned by AOL / Yahoo Inc.).",
+                        "expl" : "This application is a historical tribute created by fans for educational and digital preservation purposes and is entirely non-profit.",
+                        "aff" : "This project is not affiliated with, endorsed by, or sponsored by the current owners of the Netscape brand."
+                    }
+                ]
             }
         },
         "texts" : {

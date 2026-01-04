@@ -165,7 +165,16 @@
                 "text" : "Lesezeichen"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Netscape Navigator",
+                        "function" : "showInfo",
+                        "ns" : "Netscape, Netscape Navigator und das Steuerrad-Logo sind eingetragene Marken oder Marken der Netscape Communications (derzeit im Besitz von AOL / Yahoo Inc.).",
+                        "expl" : "Diese Anwendung ist eine historische Hommage, die von Fans zu Bildungs- und digitalen Erhaltungszwecken erstellt wurde und vollständig ohne Gewinnerzielungsabsicht ist.",
+                        "aff" : "Dieses Projekt steht in keiner Verbindung zu den aktuellen Inhabern der Marke Netscape und wird weder von diesen unterstützt noch gesponsert."
+                    }
+                ]
             }
         },
         "texts" : {

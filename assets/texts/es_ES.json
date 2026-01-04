@@ -165,7 +165,16 @@
                 "text" : "Marcadores"
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                    {
+                        "text" : "Sobre Netscape Navigator",
+                        "function" : "showInfo",
+                        "ns" : "Netscape, Netscape Navigator y el logotipo del timón son marcas registradas o marcas comerciales de Netscape Communications (actualmente propiedad de AOL / Yahoo Inc.).",
+                        "expl" : "Esta aplicación es un homenaje histórico creado por fans con fines educativos y de preservación digital, totalmente sin ánimo de lucro.",
+                        "aff" : "Este proyecto no está afiliado, respaldado ni patrocinado por los propietarios actuales de la marca Nestcape."
+                    }
+                ]
             }
         },
         "texts" : {
