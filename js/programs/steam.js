@@ -183,7 +183,7 @@ export default class Steam extends Program {
         gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
         gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
 
-        gamesWindow.querySelectorAll(".steam-game").forEach(button => {
+        gamesWindow.querySelectorAll(".steam-game:not(.game-not-available)").forEach(button => {
             button.addEventListener("click", async () => {
                 if(!button.classList.contains("gameselected")) {
                     gamesWindow.querySelectorAll(".steam-game").forEach(bt2 => {
@@ -194,6 +194,24 @@ export default class Steam extends Program {
                 else {
                     button.classList.remove("gameselected");
                     this.#FnMap[button.id.split("-")[0]](button.id.split("-")[1]);
+                }
+            });
+            button.addEventListener("unclicked", () => {
+                button.classList.remove("gameselected");
+            });
+        });
+
+        gamesWindow.querySelectorAll(".steam-game.game-not-available").forEach(button => {
+            button.addEventListener("click", () => {
+                if(!button.classList.contains("gameselected")) {
+                    gamesWindow.querySelectorAll(".steam-game").forEach(bt2 => {
+                        bt2.dispatchEvent(new CustomEvent("unclicked", {}));
+                    });
+                    button.classList.add('gameselected');
+                }
+                else {
+                    button.classList.remove("gameselected");
+                    open(button.dataset.url, "_blank");
                 }
             });
             button.addEventListener("unclicked", () => {
