@@ -228,7 +228,16 @@
                 "text" : "Edición"
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                    {
+                        "text" : "Sobre Steam",
+                        "function" : "showInfo",
+                        "valve" : "Valve, el logotipo de Valve, Steam y el logotipo de Steam son marcas comerciales y/o marcas registradas de Valve Corporation.",
+                        "expl" : "Esta aplicación es una recreación histórica creada por fans, sin ánimo de lucro, con fines educativos y de preservación digital.",
+                        "aff" : "Este proyecto no está afiliado, respaldado ni patrocinado por Valve Corporation."
+                    }
+                ]
             }
         },
         "texts" : {

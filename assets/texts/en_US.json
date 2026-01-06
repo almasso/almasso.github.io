@@ -228,7 +228,16 @@
                 "text" : "Edit"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About Steam",
+                        "function" : "showInfo",
+                        "valve" : "Valve, the Valve logo, Steam, and the Steam logo are trademarks and/or registered trademarks of Valve Corporation.",
+                        "expl" : "This application is a historical recreation created by fans, on a non-profit basis, for educational and digital preservation purposes.",
+                        "aff" : "This project is not affiliated with, endorsed by, or sponsored by Valve Corporation."
+                    }
+                ]
             }
         },
         "texts" : {

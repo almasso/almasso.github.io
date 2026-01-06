@@ -13,6 +13,7 @@ export default class Steam extends Program {
 
     static gamesWindow = null;
     static loadingGameWindow = null;
+    static #info = null;
 
     #FnMap = {
         "game" : this.initGame.bind(this),
@@ -27,6 +28,9 @@ export default class Steam extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
+        this.functionMap = {
+            showInfo : () => this.#showAboutInfo(),
+        };
     }
 
     async createWindow() {
@@ -69,6 +73,15 @@ export default class Steam extends Program {
             const lgwTitle = loadingWindow.parentElement.parentElement.querySelector(".steam-window-title").innerText;
             let textToDisplay = formatString(LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["preparing"], {game: lgwTitle.split(" ")[0]});
             loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
+        }
+
+        if(Steam.#info) {
+            Steam.#info.changeWindowName(LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].text);
+            Steam.#info.win.querySelector("#steam-texts").innerHTML = `
+                <p>${LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].valve}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].expl}</p>
+                <p>${LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].aff}</p>
+            `;
         }
         
         if(LocalizationManager.getInstance().locale === "de_DE") {
@@ -189,10 +202,20 @@ export default class Steam extends Program {
         });
     }
 
+    async #showAboutInfo() {
+        if(!Steam.#info) {
+            Steam.#info = WindowManager.getInstance().createWindow(SteamSubwindow, this, this.instanceData.width, 280, this.instanceData.width, 280, 
+                {name: LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].text, contentRoute: `${getRoot()}html/programs/steam/about.html`});
+            Steam.#info = await Steam.#info;
+            this.changeLang();
+        }        
+    }
+
     closeSubwindow(sw) {
         if(sw !== null) {
             if(sw === Steam.gamesWindow) Steam.gamesWindow = null;
             else if(sw === Steam.loadingGameWindow) Steam.loadingGameWindow = null;
+            else if(sw === Steam.#info) Steam.#info = null;
             WindowManager.getInstance().remove(sw.id);
         }
     }
@@ -225,6 +248,7 @@ export default class Steam extends Program {
     async onClose() {
         this.closeSubwindow(Steam.loadingGameWindow);
         this.closeSubwindow(Steam.gamesWindow);
+        this.closeSubwindow(Steam.#info);
     }
 
     async getBodyHTML() {

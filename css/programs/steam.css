@@ -3,7 +3,7 @@
     --paragraph-text-size: 12px;
 }
 
-#steam {
+#steam, #about-steam {
     align-items: center;
     width: 90%;
     margin: 0 auto;
@@ -174,4 +174,8 @@
     color: #a4b49e;
     font-size: var(--paragraph-text-size);
     padding-left: 20px;
+}
+
+#steam-texts {
+    color: #818e7c;
 }

@@ -229,7 +229,16 @@
                 "text" : "Bearbeiten"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Steam",
+                        "function" : "showInfo",
+                        "valve" : "Valve, das Valve-Logo, Steam und das Steam-Logo sind Marken und/oder eingetragene Marken der Valve Corporation.",
+                        "expl" : "Diese Anwendung ist eine historische Rekonstruktion, die von Fans ohne Gewinnerzielungsabsicht zu Bildungs- und digitalen Erhaltungszwecken erstellt wurde.",
+                        "aff" : "Dieses Projekt steht in keiner Verbindung zu Valve Corporation und wird weder von Valve Corporation unterstützt noch gesponsert."
+                    }
+                ]
             }
         },
         "texts" : {
