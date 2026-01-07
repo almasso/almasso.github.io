@@ -3,9 +3,12 @@ import {getRoot} from "../utils.js";
 import Car from "./terminalgames/car.js";
 import Tunnel from "./terminalgames/tunnel.js";
 import LocalizationManager from "../localizationmanager.js";
+import Subwindow from "../windows/subwindow.js";
+import WindowManager from "../windows/windowmanager.js";
 
 export default class Terminal extends Program {
     #pendingInput = null;
+    static #info = null;
 
     constructor(processId, instanceData) {
         super(processId, instanceData);
@@ -14,6 +17,19 @@ export default class Terminal extends Program {
         this.output = null; 
         this.input = null;
         this.changeLang();
+
+        this.functionMap = {
+            showInfo : () => this.#showAboutInfo(),
+        };
+    }
+
+    async #showAboutInfo() {
+        if(!Terminal.#info) {
+            Terminal.#info = WindowManager.getInstance().createWindow(Subwindow, this, this.instanceData.width, 130, this.instanceData.width, 130, 
+                {name: LocalizationManager.getInstance().getStringsFromId("terminal").buttons.help.options[0].text, contentRoute: `${getRoot()}html/programs/terminal/about.html`});
+            Terminal.#info = await Terminal.#info;
+            this.changeLang();
+        } 
     }
 
     changeLang() {
@@ -40,6 +56,13 @@ export default class Terminal extends Program {
                 await game.start();
                 return null;
             }
+        }
+
+        if(Terminal.#info) {
+            Terminal.#info.changeWindowName(LocalizationManager.getInstance().getStringsFromId("terminal").buttons.help.options[0].text);
+            Terminal.#info.win.querySelector("#shell-text").innerHTML = `
+                <p>${LocalizationManager.getInstance().getStringsFromId("terminal").buttons.help.options[0].info}</p>
+            `;
         }
     }
 
@@ -134,7 +157,7 @@ export default class Terminal extends Program {
     }
 
     async getBodyHTML() {
-        const response = await fetch(`${getRoot()}html/programs/terminal.html`);
+        const response = await fetch(`${getRoot()}html/programs/terminal/terminal.html`);
         return await response.text();
     }
 
@@ -261,6 +284,17 @@ export default class Terminal extends Program {
             this.input.removeEventListener("keydown", this._keydownListener);
             this._keydownListener = null;
         }
+    }
+
+    closeSubwindow(sw) {
+        if(sw !== null) {
+            if(sw === Terminal.#info) Terminal.#info = null;
+            WindowManager.getInstance().remove(sw.id);
+        }
+    }
+
+    async onClose() {
+        this.closeSubwindow(Terminal.#info);
     }
 
 }

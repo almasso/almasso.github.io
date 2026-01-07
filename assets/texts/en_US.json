@@ -68,7 +68,14 @@
                 "text" : "Edit"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About Shell",
+                        "function" : "showInfo",
+                        "info" : "This application is a custom command-line tool inspired by a Unix shell."
+                    }
+                ]
             }
         },
         "texts" : {

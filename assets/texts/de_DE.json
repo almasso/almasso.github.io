@@ -68,7 +68,14 @@
                 "text" : "Bearbeiten"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Shell",
+                        "function" : "showInfo",
+                        "info" : "Diese Anwendung ist ein benutzerdefiniertes Kommandozeilenwerkzeug, das von einer Unix-Shell inspiriert ist."
+                    }
+                ]
             }
         },
         "texts" : {

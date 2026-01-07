@@ -68,7 +68,14 @@
                 "text" : "Edición"
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                    {
+                        "text" : "Sobre Shell",
+                        "function" : "showInfo",
+                        "info" : "Esta aplicación es una herramienta de línea de comandos personalizada inspirada en un shell Unix."
+                    }
+                ]
             }
         },
         "texts" : {

@@ -7,7 +7,7 @@
 }
 /*#endregion*/
 
-.terminal {
+.terminal, #shell-about {
   margin: 0;
   padding-left: 10px;
   padding-top: 5px;
@@ -70,4 +70,22 @@
   50%, 100% {
     opacity: 0;
   }
+}
+
+/*SUBWINDOWS*/
+#shell-about {
+  text-align: center;
+  padding: 10px 10px !important;
+}
+
+#shell-about hr {
+  border-color: #0f0;
+}
+
+#shell-about a {
+  color: #0ff;
+}
+
+#shell-about a:hover, #shell-about a:active {
+  text-decoration: green wavy underline !important;
 }
