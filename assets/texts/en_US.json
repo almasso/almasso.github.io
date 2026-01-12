@@ -3,7 +3,88 @@
         "id" : "finder",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    {
+                        "text" : "New Folder",
+                        "shortcut" : "⌘N",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Open",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Print",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Move To Trash",
+                        "shortcut" : "⌘RET",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Close Window",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Get Info",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Label",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Duplicate",
+                        "shortcut" : "⌘D",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Make Alias",
+                        "shortcut" : "⌘M",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Add To Favorites",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Put Away",
+                        "shortcut" : "⌘Y",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Encrypt",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Find...",
+                        "shortcut" : "⌘F",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Search Internet...",
+                        "shortcut" : "⌘H",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Show Original",
+                        "shortcut" : "⌘R",
+                        "active" : false
+                    }
+                ]
             },
             "edit" : {
                 "text" : "Edit"

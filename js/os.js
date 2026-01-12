@@ -319,9 +319,16 @@ export default class OS extends EventTarget {
                         <button>${this.currentApp.getButtons()[key]["text"]}</button>
                     </div>
                     <div id="${key}-settings" class="topbar-button-menu">
-                        ${this.currentApp.getButtons()[key].options.map(option => `
-                            <button data-action="${option.function}">${option.text}</button>
-                        `).join("")}
+                        ${this.currentApp.getButtons()[key].options.map(option =>
+                            option.break ?
+                            `<hr>` :
+                            `<button data-action="${option.function}" ${option.active === false ? "disabled" : ""}>
+                                <div class="topbar-button-text">
+                                    <span class="topbar-button-text-text">${option.text}</span>
+                                    <span class="topbar-button-text-${option.shortcut ? "shortcut" : option.arrow ? "arrow" : "shortcut"}">${option.shortcut ? option.shortcut : option.arrow ? "▶" : ""}</span>
+                                </div>
+                            </button>`
+                        ).join("")}
                     </div>
                 </div>
             `;

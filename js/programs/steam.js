@@ -66,6 +66,7 @@ export default class Steam extends Program {
             const gamesWindow = document.querySelector("#steam-games");
             gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
             gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
+            gamesWindow.querySelector("#game-galactic p").textContent = LocalizationManager.getInstance().locale === "es_ES" ? "La Plaga Galáctica" : "The Galactic Plague";
         }
 
         if(Steam.loadingGameWindow) {
@@ -182,6 +183,7 @@ export default class Steam extends Program {
         gamesWindow.querySelector("#game-ctp img").src = `${getRoot()}assets/icons/programs/ctp.bmp`;
         gamesWindow.querySelector("#my-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["myGames"];
         gamesWindow.querySelector("#available-games h1").textContent = LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["availableGames"];
+        gamesWindow.querySelector("#game-galactic p").textContent = LocalizationManager.getInstance().locale === "es_ES" ? "La Plaga Galáctica" : "The Galactic Plague";
 
         gamesWindow.querySelectorAll(".steam-game:not(.game-not-available)").forEach(button => {
             button.addEventListener("click", async () => {

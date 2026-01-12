@@ -3,7 +3,88 @@
         "id" : "finder",
         "buttons" : {
             "file" : {
-                "text" : "Archivo"
+                "text" : "Archivo",
+                "options" : [
+                    {
+                        "text" : "Nueva carpeta",
+                        "shortcut" : "⌘N",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Abrir",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Imprimir",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Mover a la papelera",
+                        "shortcut" : "⌘RET",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Cerrar ventana",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Obtener información",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Etiqueta",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Duplicar",
+                        "shortcut" : "⌘D",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Hacer Alias",
+                        "shortcut" : "⌘M",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Añadir a favoritos",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Esconder",
+                        "shortcut" : "⌘Y",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Encriptar",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Buscar...",
+                        "shortcut" : "⌘F",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Buscar en internet",
+                        "shortcut" : "⌘H",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Mostrar original",
+                        "shortcut" : "⌘R",
+                        "active" : false
+                    }
+                ]
             },
             "edit" : {
                 "text" : "Edición"
@@ -170,7 +251,7 @@
                 "text" : "Ayuda",
                 "options" : [
                     {
-                        "text" : "Sobre The Galactic Plague",
+                        "text" : "Sobre La Plaga Galáctica",
                         "function" : "showInfo",
                         "authors" : "Alejandro Massó Martínez, Luis Rafael Argandoña Blácido y Francisco Miguel Galván Muñoz - 2024",
                         "expl" : "Esta aplicación es un port realizado con Emscripten de una práctica para la asignatura de \"Videojuegos en Consola\" del Grado en Desarrollo de Videojuegos de la Universidad Complutense de Madrid.",

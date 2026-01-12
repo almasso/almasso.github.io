@@ -417,6 +417,13 @@ noscript .noscript-js-message p {
   flex-direction: column;
 }
 
+.topbar-button-menu hr {
+  width: 97%;
+  border-width: 1px;
+  border-color: lightgray;
+  height: 1px;
+}
+
 .topbar-button-menu button {
   position: relative;
   background: transparent;
@@ -429,9 +436,34 @@ noscript .noscript-js-message p {
   display: block;
 }
 
-.topbar-button-menu button:hover {
+.topbar-button-menu button:not(:disabled):hover {
   background: #3531A2 !important;
   color: white;
+}
+
+.topbar-button-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topbar-button-text-shortcut {
+  text-align: left;
+  white-space: nowrap;
+  width: 35px;
+  padding-left: 20px;
+}
+
+.topbar-button-text-arrow {
+  text-align: right;
+  white-space: nowrap;
+  width: 35px;
+  padding-left: 20px;
+}
+
+.topbar-button-text-text {
+  text-align: left;
+  white-space: nowrap;
 }
 
 .topbar-button-menu.visible {

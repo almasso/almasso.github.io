@@ -3,7 +3,88 @@
         "id" : "finder",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    {
+                        "text" : "Neuer Ordner",
+                        "shortcut" : "⌘N",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Öffnen",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Drucken",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "text" : "In der Papierkorb bewegen",
+                        "shortcut" : "⌘RET",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Fenster schließen",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Informationen",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Markierung",
+                        "arrow" : true,
+                        "active" : false
+                    },
+                    {
+                        "text" : "Duplizieren",
+                        "shortcut" : "⌘D",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Alias erzeugen",
+                        "shortcut" : "⌘M",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Zu Favoriten hinzufügen",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Weglegen",
+                        "shortcut" : "⌘Y",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Verschlüsseln",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Suchen...",
+                        "shortcut" : "⌘F",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Im Internet suchen...",
+                        "shortcut" : "⌘H",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Original anzeigen",
+                        "shortcut" : "⌘R",
+                        "active" : false
+                    }
+                ]
             },
             "edit" : {
                 "text" : "Bearbeiten"
