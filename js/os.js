@@ -3,7 +3,7 @@ import WindowManager from "./windows/windowmanager.js";
 import LocalizationManager from "./localizationmanager.js";
 import Icon from "./icon.js";
 import {clamp, getRoot, shuffle} from "./utils.js";
-import {Filesystem, getFullPath} from "./filesystem.js";
+import {Filesystem, getFullPath, loadFilesystem} from "./filesystem.js";
 
 const debugVar = false;
 
@@ -199,6 +199,7 @@ export default class OS extends EventTarget {
 
     async init() {
         this.#initControlStrip();
+        await loadFilesystem(LocalizationManager.getInstance().locale);
         await this.#loadFinder();
         this.#loadDesktop();
         this.#setCurrentApp(this.#baseFinder);
@@ -264,7 +265,7 @@ export default class OS extends EventTarget {
      * Loads all files/programs/folders in desktop and generates a functional icon for them
      */
     #loadDesktop() {
-        const desktopNode = Filesystem.root.children.find(c => c.desktopName === "Desktop");
+        const desktopNode = Filesystem.root.children.find(c => c.internalName === "desktop");
         if(desktopNode && desktopNode.children) {
             const rootName = Filesystem.root.desktopName;
             const desktopName = desktopNode.desktopName;
