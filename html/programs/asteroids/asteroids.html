@@ -1,6 +1,41 @@
 <!doctype html>
 <html lang="en-us">
-  <body style="background-color: black; overflow:hidden;">
+  <body style="background-color: #00AAAA; overflow:hidden;">
+    <script>
+      (function () {
+        var AUDIO_SYSTEM = null;
+        try {
+          if(window.parent && window.parent.ALMASSO_AUDIO) AUDIO_SYSTEM = window.parent.ALMASSO_AUDIO;
+        } catch (e) {
+          console.warn("[Asteroids] Could not connect with parent audio system");
+        }
+
+        if(!AUDIO_SYSTEM) AUDIO_SYSTEM = {volume: 1.0, contexts: new Set()};
+
+        const originalAudioContext = window.AudioContext || window.webkitAudioContext;
+        window.AudioContext = window.webkitAudioContext = function(options) {
+          const ctx = new originalAudioContext(options);
+          const masterGain = ctx.createGain();
+          masterGain.gain.value = AUDIO_SYSTEM.volume;
+          masterGain.connect(ctx.destination);
+          ctx.osMasterGainNode = masterGain;
+          AUDIO_SYSTEM.contexts.add(ctx);
+          ctx.addEventListener('statechange', () => {
+            if(ctx.state === 'closed') AUDIO_SYSTEM.contexts.delete(ctx);
+          });
+
+          return new Proxy(ctx, {
+            get(target, prop) {
+              if(prop === 'destination') return masterGain;
+              let value = target[prop];
+              if(typeof value === 'function') return value.bind(target);
+              return value;
+            }
+          });
+        };
+        window.AudioContext.prototype = originalAudioContext.prototype;
+      })();
+    </script>
     <div class="spinner" id='spinner'></div>
     <div class="emscripten" id="status">Downloading...</div>
 
@@ -21,6 +56,6 @@
 
         outputElement&&(outputElement.value=""),
         canvasElement.addEventListener("webglcontextlost",(e=>{alert("WebGL context lost. You will need to reload the page."),e.preventDefault()}),!1);var Module={print(...e){if(console.log(...e),outputElement){var t=e.join(" ");outputElement.value+=t+"\n",outputElement.scrollTop=outputElement.scrollHeight}},canvas:canvasElement,setStatus(e){if(Module.setStatus.last??={time:Date.now(),text:""},e!==Module.setStatus.last.text){var t=e.match(/([^(]+)\((\d+(\.\d+)?)\/(\d+)\)/),n=Date.now();t&&n-Module.setStatus.last.time<30||(Module.setStatus.last.time=n,Module.setStatus.last.text=e,t?(e=t[1],progressElement.value=100*parseInt(t[2]),progressElement.max=100*parseInt(t[4]),progressElement.hidden=!1,spinnerElement.hidden=!1):(progressElement.value=null,progressElement.max=null,progressElement.hidden=!0,e||(spinnerElement.style.display="none")),statusElement.innerHTML=e)}},totalDependencies:0,monitorRunDependencies(e){this.totalDependencies=Math.max(this.totalDependencies,e),Module.setStatus(e?"Preparing... ("+(this.totalDependencies-e)+"/"+this.totalDependencies+")":"All downloads complete.")}};Module.setStatus("Downloading..."),window.onerror=e=>{Module.setStatus("Exception thrown, see JavaScript console"),spinnerElement.style.display="none",Module.setStatus=e=>{e&&console.error("[post-exception status] "+e)}}</script>
-    <script async type="text/javascript" src="./../../js/emscripten/arkanoid.js"></script>
+    <script async type="text/javascript" src="./../../../js/emscripten/asteroids.js"></script>
   </body>
 </html>

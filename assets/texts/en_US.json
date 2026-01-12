@@ -115,7 +115,16 @@
                 "text" : "Play"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About Arkanoid",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez & Pablo Sánchez Martín - 2022",
+                        "expl" : "This application is a port created with Emscripten from an assignment for the course \"Technology for Video Game Programming I\" of the Bachelor's Degree in Video Game Development at the Complutense University of Madrid.",
+                        "tech" : "The original program is developed using C++ and SDL2 and features cross-platform support for Windows, macOS, and Linux."
+                    }
+                ]
             }
         }
     },
@@ -132,7 +141,16 @@
                 "text" : "Play"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About Asteroids",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez & Pablo Sánchez Martín - 2023",
+                        "expl" : "This application is a port created with Emscripten from an assignment for the course \"Technology for Video Game Programming II\" of the Bachelor's Degree in Video Game Development at the Complutense University of Madrid.",
+                        "tech" : "The original program is developed using C++ and SDL2 and features cross-platform support for Windows, macOS, and Linux."
+                    }
+                ]
             }
         }
     },
@@ -149,7 +167,17 @@
                 "text" : "Play"
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "About The Galactic Plague",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez, Luis Rafael Argandoña Blácido & Francisco Miguel Galván Muñoz - 2024",
+                        "expl" : "This application is a port created with Emscripten from an assignment for the course \"Console Video Games\" of the Bachelor's Degree in Video Game Development at the Complutense University of Madrid.",
+                        "tech" : "The original program is developed using C++ and a cross-platform engine, compatible with Windows using SDL2, and with PlayStation 5 using proprietary native technology and the official development kit.",
+                        "trib" : "This version pays tribute to Paco Suárez, developer at Indescomp/Amsoft, who in 1984 released La Plaga Galáctica/The Galactic Plague."
+                    }
+                ]
             }
         }
     },

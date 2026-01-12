@@ -115,7 +115,16 @@
                 "text" : "Spielen"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Arkanoid",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez und Pablo Sánchez Martín - 2022",
+                        "expl" : "Diese Anwendung ist ein mit Emscripten erstellter Port einer Übung aus dem Kurs \"Technology for Video Game Programming I\" des Bachelorstudiengangs Videospielentwicklung an der Universität Complutense Madrid.",
+                        "tech" : "Das Originalprogramm wurde mit C++ und SDL2 entwickelt und bietet plattformübergreifende Unterstützung für Windows, macOS und Linux."
+                    }
+                ]
             }
         }
     },
@@ -132,7 +141,16 @@
                 "text" : "Spielen"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über Asteroids",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez und Pablo Sánchez Martín - 2023",
+                        "expl" : "Diese Anwendung ist ein mit Emscripten erstellter Port einer Übung aus dem Kurs \"Technology for Video Game Programming II\" des Bachelorstudiengangs Videospielentwicklung an der Universität Complutense Madrid.",
+                        "tech" : "Das Originalprogramm wurde mit C++ und SDL2 entwickelt und bietet plattformübergreifende Unterstützung für Windows, macOS und Linux."
+                    }
+                ]
             }
         }
     },
@@ -149,7 +167,17 @@
                 "text" : "Spielen"
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Über The Galactic Plague",
+                        "function" : "showInfo",
+                        "authors" : "Alejandro Massó Martínez, Luis Rafael Argandoña Blácido und Francisco Miguel Galván Muñoz - 2024",
+                        "expl" : "Diese Anwendung ist ein mit Emscripten erstellter Port einer Übung aus dem Kurs \"Console Video Games\" des Bachelorstudiengangs Videospielentwicklung an der Universität Complutense Madrid.",
+                        "tech" : "Das Originalprogramm wurde mit C++ und einer plattformübergreifenden Engine entwickelt, kompatibel mit Windows unter Verwendung von SDL2 sowie mit der PlayStation 5 unter Verwendung proprietärer nativer Technologie und des offiziellen Entwicklungs-Kits.",
+                        "trib" : "Diese Version ist eine Hommage an Paco Suárez, Entwickler bei Indescomp/Amsoft, der 1984 La Plaga Galáctica/The Galactic Plague veröffentlichte."
+                    }
+                ]
             }
         }
     },
