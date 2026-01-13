@@ -113,29 +113,31 @@ noscript .noscript-js-message p {
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.1) 0px,
-    rgba(0, 0, 0, 0.1) 1px,
-    transparent 2px,
-    transparent 3px
+    rgb(218, 49, 49, 0.4) 0px,
+    rgb(112, 159, 115, 0.4) 2px,
+    rgb(40, 129, 206, 0.4) 4px
   );
   mix-blend-mode: multiply;
-  z-index: 100;
+  z-index: 999998;
 }
 
 #monitor::after {
   content: "";
   position: absolute;
+  display: block;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   pointer-events: none;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.4);
+  border-radius: 20px / 60px;
   background: radial-gradient(
     ellipse at center,
     rgba(0, 0, 0, 0) 60%,
     rgba(0, 0, 0, 0.25) 100%
   );
-  z-index: 101;
+  z-index: 999999;
 }
 /*#endregion*/
 
