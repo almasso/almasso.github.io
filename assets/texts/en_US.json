@@ -220,12 +220,22 @@
                     {
                         "text" : "Restart",
                         "function" : "restartWebsite",
-                        "active" : true
+                        "active" : true,
+                        "restart" : "Are you sure you want to restart your computer now?",
+                        "reload" : "(webpage will reload)",
+                        "rstbtn" : "Restart",
+                        "cancel" : "Cancel"
                     },
                     {
                         "text" : "Shut Down",
                         "function" : "closeWebsite",
-                        "active" : true
+                        "active" : true,
+                        "shutdown" : "Are you sure you want to shut down your computer now?",
+                        "close" : "(webpage will be closed)",
+                        "restart" : "Restart",
+                        "cancel" : "Cancel",
+                        "sleep" : "Sleep",
+                        "sdbtn" : "Shut Down"
                     }
                 ]  
             },

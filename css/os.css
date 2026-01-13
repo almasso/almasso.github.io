@@ -141,6 +141,27 @@ noscript .noscript-js-message p {
 
 /*#region OS*/
 
+#sleep-screen {
+  align-items: center;
+  background-color: black;
+  transition: background-color 2s linear;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
+}
+
+#sleep-screen.sleeping {
+  opacity: 1;
+  pointer-events: all;
+  cursor: none;
+}
+
 /*#region BOOTUP-SPECIAL*/
 :root {
   --square_size: 20px;

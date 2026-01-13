@@ -220,12 +220,22 @@
                     {
                         "text" : "Neustart",
                         "function" : "restartWebsite",
-                        "active" : true
+                        "active" : true,
+                        "restart" : "Möchten Sie Ihren Computer jetzt neu starten?",
+                        "reload" : "(die Website wird neu geladen)",
+                        "rstbtn" : "Neustart",
+                        "cancel" : "Abbrechen"
                     },
                     {
                         "text" : "Ausschalten",
                         "function" : "closeWebsite",
-                        "active" : true
+                        "active" : true,
+                        "shutdown" : "Möchten Sie Ihren Computer jetzt ausschalten?",
+                        "close" : "(die Website wird geschlossen)",
+                        "restart" : "Neustart",
+                        "cancel" : "Abbrechen",
+                        "sleep" : "Ruhezustand",
+                        "sdbtn" : "Ausschalten"
                     }
                 ]  
             },

@@ -220,12 +220,22 @@
                     {
                         "text" : "Reiniciar",
                         "function" : "restartWebsite",
-                        "active" : true
+                        "active" : true,
+                        "restart" : "¿Estás seguro de que quieres reiniciar ahora el ordenador?",
+                        "reload" : "(se reiniciará la página web)",
+                        "rstbtn" : "Reiniciar",
+                        "cancel" : "Cancelar"
                     },
                     {
                         "text" : "Apagar",
                         "function" : "closeWebsite",
-                        "active" : true
+                        "active" : true,
+                        "shutdown" : "¿Estás seguro de que quieres apagar ahora el ordenador?",
+                        "close" : "(se cerrará la página web)",
+                        "restart" : "Reiniciar",
+                        "cancel" : "Cancelar",
+                        "sleep" : "Suspender",
+                        "sdbtn" : "Apagar"
                     }
                 ]
             },

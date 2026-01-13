@@ -53,6 +53,7 @@ export default class OS extends EventTarget {
         this.currentApp = null;
         this.showTime = true;
         this.currentAppResumed = false;
+        this.isSleeping = false;
 
         document.getElementById("topbar-slider").addEventListener("click", () => {
             this.currentAppResumed = !this.currentAppResumed;
@@ -66,6 +67,14 @@ export default class OS extends EventTarget {
                 this.#setCurrentApp(this.#baseFinder);
             }
         });
+
+        document.addEventListener("keydown", () => {
+            if(this.isSleeping) this.#wakeUp();
+        });
+
+        document.getElementById("sleep-screen").addEventListener("click", () => {
+            if(this.isSleeping) this.#wakeUp();
+        })
 
         setInterval(this.updateTime.bind(this), 100);
         this.updateTime();
@@ -681,6 +690,16 @@ export default class OS extends EventTarget {
         });
 
         document.querySelectorAll("video, audio").forEach(el => el.volume = vol);
+    }
+
+    sleepWebsite() {
+        document.querySelector("#sleep-screen").classList.add("sleeping");
+        this.isSleeping = true;
+    }
+
+    #wakeUp() {
+        document.querySelector("#sleep-screen").classList.remove("sleeping");
+        this.isSleeping = false;
     }
 
     updateTime() {

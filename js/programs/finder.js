@@ -6,6 +6,7 @@ import LocalizationManager from "../localizationmanager.js";
 import WindowManager from "../windows/windowmanager.js";
 import Subwindow from "../windows/subwindow.js";
 import AlertSW from "../windows/alert.js";
+import OS from "../os.js";
 
 export default class Finder extends Program {
     static #thisComputer = null;
@@ -39,13 +40,13 @@ export default class Finder extends Program {
     }
 
     #sleepWebsite() {
-
+        OS.getInstance().sleepWebsite();
     }
 
     async #restartWebsite() {
         if(!Finder.#restartComputer) {
             Finder.#restartComputer = WindowManager.getInstance().createWindow(AlertSW, this, 500, 130, 500, 130, 
-                {name: LocalizationManager.getInstance().getStringsFromId("os").buttons.apple.options[0].text, contentRoute: `${getRoot()}html/system/restart.html`});
+                {name: LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].text, contentRoute: `${getRoot()}html/system/restart.html`});
             Finder.#restartComputer = await Finder.#restartComputer;
 
             Finder.#restartComputer.win.querySelector("button#cancel").addEventListener("click", () => this.closeSubwindow(Finder.#restartComputer));
@@ -55,7 +56,17 @@ export default class Finder extends Program {
     }
 
     async #closeWebsite() {
-        //close();
+        if(!Finder.#shutdownComputer) {
+            Finder.#shutdownComputer = WindowManager.getInstance().createWindow(AlertSW, this, 500, 130, 500, 130, 
+                {name: LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].text, contentRoute: `${getRoot()}html/system/shutdown.html`});
+            Finder.#shutdownComputer = await Finder.#shutdownComputer;
+
+            Finder.#shutdownComputer.win.querySelector("button#cancel").addEventListener("click", () => this.closeSubwindow(Finder.#shutdownComputer));
+            Finder.#shutdownComputer.win.querySelector("button#restart").addEventListener("click", () => window.location.reload());
+            Finder.#shutdownComputer.win.querySelector("button#sleep").addEventListener("click", () => this.#sleepWebsite());
+            Finder.#shutdownComputer.win.querySelector("button#shutdown").addEventListener("click", () => close());
+            this.changeLang();
+        }
     }
 
     async #setId() {
@@ -148,6 +159,26 @@ export default class Finder extends Program {
                 </div>
             `;
         }
+
+        if(Finder.#restartComputer) {
+            Finder.#restartComputer.win.querySelector("#restart-text").innerHTML = `
+                <b>${LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].restart}</b>
+                <small>${LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].reload}</small>
+            `
+            Finder.#restartComputer.win.querySelector("button#cancel").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].cancel;
+            Finder.#restartComputer.win.querySelector("button#restart").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].rstbtn;
+        }
+
+        if(Finder.#shutdownComputer) {
+            Finder.#shutdownComputer.win.querySelector("#restart-text").innerHTML = `
+                <b>${LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].shutdown}</b>
+                <small>${LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].close}</small>
+            `
+            Finder.#shutdownComputer.win.querySelector("button#cancel").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].cancel;
+            Finder.#shutdownComputer.win.querySelector("button#restart").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].restart;
+            Finder.#shutdownComputer.win.querySelector("button#sleep").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].sleep;
+            Finder.#shutdownComputer.win.querySelector("button#shutdown").innerText = LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].sdbtn;
+        }
     }
 
     async getBodyHTML() {
@@ -206,6 +237,7 @@ export default class Finder extends Program {
         if(sw !== null) {
             if(sw === Finder.#thisComputer) Finder.#thisComputer = null;
             else if(sw === Finder.#restartComputer) Finder.#restartComputer = null;
+            else if(sw === Finder.#shutdownComputer) Finder.#shutdownComputer = null;
             WindowManager.getInstance().remove(sw.id);
         }
     }
