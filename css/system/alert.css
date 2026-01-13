@@ -1,0 +1,78 @@
+.alert-body {
+    font-family: 'Chicago', sans-serif;
+    font-size: 13px;
+}
+
+.window:has(.alert-body) {
+    background-color: #BBBBBB !important;
+    border-left: 2px solid #FF9999;
+    border-top: 2px solid #FF9999;
+    border-right: 2px solid #FF6162;
+    border-bottom: 2px solid #FF6162;
+}
+
+.alert-body button {
+    border-radius: 3px;
+    background-color: #C3C3C3;
+    color: black;
+    min-width: 58px;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 25px;
+    font-family: 'Chicago', sans-serif;
+    font-size: 13px;
+    /*style from os9.ca*/
+    box-shadow: inset -1px -1px #777, inset -2px -2px #aaa, inset 1px 1px #C3C3C3, inset 2px 2px #fff;
+}
+
+.alert-body button:active {
+    background-color: #666666;
+    color: white;
+    box-shadow: inset 1px 1px #777, inset 2px 2px #aaa, inset -1px -1px #C3C3C3, inset -2px -2px #fff;
+}
+
+.alert-body button.important-button:active {
+    background-color: #666666;
+    color: white;
+    box-shadow: inset 1px 1px #777, inset 2px 2px #aaa, inset -1px -1px #C3C3C3, inset -2px -2px #fff, 0 0 0 1px #aaa, 0 0 0 2px #C3C3C3, 0 0 0 3px #000;
+}
+
+.alert-body button.important-button {
+    /*style from os9.ca*/
+    box-shadow: inset -1px -1px #777, inset -2px -2px #aaa, inset 1px 1px #C3C3C3, inset 2px 2px #fff, 0 0 0 1px #aaa, 0 0 0 2px #C3C3C3, 0 0 0 3px #000;
+}
+
+.alert-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: right;
+    padding-right: 20px;
+}
+
+/*SPECIFIC ALERTS*/
+
+/*RESTART ALERT*/
+#restart-alert {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+#restart-data {
+    padding-top: 15px;
+    padding-left: 40px;
+    display: flex;
+    flex-direction: row;
+}
+
+#restart-data img {
+    width: 60px;
+    height: 60px;
+}
+
+#restart-text {
+    padding-left: 10px;
+    padding-right: 10px;
+    word-wrap: wrap;
+}

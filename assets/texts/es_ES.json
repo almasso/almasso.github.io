@@ -22,7 +22,7 @@
                     },
                     {
                         "text" : "Mover a la papelera",
-                        "shortcut" : "⌘RET",
+                        "shortcut" : "⌘⌫",
                         "active" : false
                     },
                     {
@@ -87,16 +87,171 @@
                 ]
             },
             "edit" : {
-                "text" : "Edición"
+                "text" : "Edición",
+                "options" : [
+                    {
+                        "text" : "Deshacer",
+                        "shortcut" : "⌘Z",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Cortar",
+                        "shortcut" : "⌘X",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Copiar",
+                        "shortcut" : "⌘C",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Pegar",
+                        "shortcut" : "⌘V",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Borrar el portapapeles",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Seleccionar todo",
+                        "shortcut" : "⌘A",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Mostrar el portapapeles",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Preferencias...",
+                        "active" : false
+                    }
+                ]
             },
             "view" : {
-                "text" : "Visualización"
+                "text" : "Visualización",
+                "options" : [
+                    {
+                        "text" : "como iconos",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "como botones",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "como lista",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "como ventana",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "como ventana emergente",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Limpiar",
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Ordenar",
+                        "arrow" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Reestablecer las columnas",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Opciones de visualización...",
+                        "active" : false 
+                    }
+                ]
             },
             "special" : {
-                "text" : "Especial"
+                "text" : "Especial",
+                "options" : [
+                    {
+                        "text" : "Vaciar papelera...",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Expulsar",
+                        "shortcut" : "⌘E",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Borrar disco...",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Suspender",
+                        "function" : "sleepWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Reiniciar",
+                        "function" : "restartWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Apagar",
+                        "function" : "closeWebsite",
+                        "active" : true
+                    }
+                ]
             },
             "help" : {
-                "text" : "Ayuda"
+                "text" : "Ayuda",
+                "options" : [
+                    {
+                        "text" : "Centro de ayuda",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Mostrar globos",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Ayuda de Mac",
+                        "shortcut" : "⌘?",
+                        "active" : false 
+                    }
+                ]
             }
         },
         "texts" : {

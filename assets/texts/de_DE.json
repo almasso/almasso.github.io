@@ -22,7 +22,7 @@
                     },
                     {
                         "text" : "In der Papierkorb bewegen",
-                        "shortcut" : "⌘RET",
+                        "shortcut" : "⌘⌫",
                         "active" : false
                     },
                     {
@@ -87,16 +87,171 @@
                 ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    {
+                        "text" : "Wiederrufen",
+                        "shortcut" : "⌘Z",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Ausschneiden",
+                        "shortcut" : "⌘X",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Kopieren",
+                        "shortcut" : "⌘C",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Einsetzen",
+                        "shortcut" : "⌘V",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Löschen",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Alles auswählen",
+                        "shortcut" : "⌘A",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Zwischenablage anzeigen",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Einstellungen...",
+                        "active" : false
+                    }
+                ]
             },
             "view" : {
-                "text" : "Darstellung"
+                "text" : "Darstellung",
+                "options" : [
+                    {
+                        "text" : "als Symbole",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "als Tasten",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "als Liste",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "als Fenster",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "als Einblendfenster",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Aufräumen",
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Anordnen",
+                        "arrow" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Spaltenpositionen zurücksetzen",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Darstellungsoptionen...",
+                        "active" : false 
+                    }
+                ]
             },
             "special" : {
-                "text" : "Spezial"
+                "text" : "Spezial",
+                "options" : [
+                    {
+                        "text" : "Papierkorb entleeren...",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Auswerfen",
+                        "shortcut" : "⌘E",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Volume löschen...",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Ruhezustand",
+                        "function" : "sleepWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Neustart",
+                        "function" : "restartWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Ausschalten",
+                        "function" : "closeWebsite",
+                        "active" : true
+                    }
+                ]  
             },
             "help" : {
-                "text" : "Hilfe"
+                "text" : "Hilfe",
+                "options" : [
+                    {
+                        "text" : "Hilfezentrum",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Ballons einblenden",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Mac-Hilfe",
+                        "shortcut" : "⌘?",
+                        "active" : false 
+                    }
+                ]
             }
         },
         "texts" : {

@@ -5,9 +5,12 @@ import Icon from "../icon.js";
 import LocalizationManager from "../localizationmanager.js";
 import WindowManager from "../windows/windowmanager.js";
 import Subwindow from "../windows/subwindow.js";
+import AlertSW from "../windows/alert.js";
 
 export default class Finder extends Program {
     static #thisComputer = null;
+    static #restartComputer = null;
+    static #shutdownComputer = null;
 
     constructor(processId, instanceData) {
         super(processId, instanceData);
@@ -20,6 +23,9 @@ export default class Finder extends Program {
 
         this.functionMap = {
             showAbout : () => this.#showAboutInfo(),
+            sleepWebsite : () => this.#sleepWebsite(),
+            restartWebsite : () => this.#restartWebsite(),
+            closeWebsite : () => this.#closeWebsite()
         };
     }
 
@@ -30,6 +36,26 @@ export default class Finder extends Program {
             Finder.#thisComputer = await Finder.#thisComputer;
             this.changeLang();
         }
+    }
+
+    #sleepWebsite() {
+
+    }
+
+    async #restartWebsite() {
+        if(!Finder.#restartComputer) {
+            Finder.#restartComputer = WindowManager.getInstance().createWindow(AlertSW, this, 500, 130, 500, 130, 
+                {name: LocalizationManager.getInstance().getStringsFromId("os").buttons.apple.options[0].text, contentRoute: `${getRoot()}html/system/restart.html`});
+            Finder.#restartComputer = await Finder.#restartComputer;
+
+            Finder.#restartComputer.win.querySelector("button#cancel").addEventListener("click", () => this.closeSubwindow(Finder.#restartComputer));
+            Finder.#restartComputer.win.querySelector("button#restart").addEventListener("click", () => window.location.reload());
+            this.changeLang();
+        }
+    }
+
+    async #closeWebsite() {
+        //close();
     }
 
     async #setId() {
@@ -179,6 +205,7 @@ export default class Finder extends Program {
     closeSubwindow(sw) {
         if(sw !== null) {
             if(sw === Finder.#thisComputer) Finder.#thisComputer = null;
+            else if(sw === Finder.#restartComputer) Finder.#restartComputer = null;
             WindowManager.getInstance().remove(sw.id);
         }
     }

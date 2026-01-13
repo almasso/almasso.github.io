@@ -22,7 +22,7 @@
                     },
                     {
                         "text" : "Move To Trash",
-                        "shortcut" : "⌘RET",
+                        "shortcut" : "⌘⌫",
                         "active" : false
                     },
                     {
@@ -87,16 +87,171 @@
                 ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    {
+                        "text" : "Undo",
+                        "shortcut" : "⌘Z",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Cut",
+                        "shortcut" : "⌘X",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Copy",
+                        "shortcut" : "⌘C",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Paste",
+                        "shortcut" : "⌘V",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Clear",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Select All",
+                        "shortcut" : "⌘A",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Show Clipboard",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Preferences...",
+                        "active" : false
+                    }
+                ]
             },
             "view" : {
-                "text" : "View"
+                "text" : "View",
+                "options" : [
+                    {
+                        "text" : "as Icons",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "as Buttons",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "as List",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "as Window",
+                        "selected" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "as Pop-up Window",
+                        "selected" : false,
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Clean Up",
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Arrange",
+                        "arrow" : true,
+                        "active" : false 
+                    },
+                    {
+                        "text" : "Reset Column Positions",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "View Options...",
+                        "active" : false 
+                    }
+                ]
             },
             "special" : {
-                "text" : "Special"  
+                "text" : "Special",
+                "options" : [
+                    {
+                        "text" : "Empty Trash...",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Eject",
+                        "shortcut" : "⌘E",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Erase Disk...",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Sleep",
+                        "function" : "sleepWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Restart",
+                        "function" : "restartWebsite",
+                        "active" : true
+                    },
+                    {
+                        "text" : "Shut Down",
+                        "function" : "closeWebsite",
+                        "active" : true
+                    }
+                ]  
             },
             "help" : {
-                "text" : "Help"
+                "text" : "Help",
+                "options" : [
+                    {
+                        "text" : "Help Center",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Show Balloons",
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Mac Help",
+                        "shortcut" : "⌘?",
+                        "active" : false 
+                    }
+                ]
             }
         },
         "texts" : {

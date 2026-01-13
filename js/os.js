@@ -324,6 +324,7 @@ export default class OS extends EventTarget {
                             `<hr>` :
                             `<button data-action="${option.function}" ${option.active === false ? "disabled" : ""}>
                                 <div class="topbar-button-text">
+                                    <span class="topbar-button-text-check">${option.selected ? "✔" : ""}</span>
                                     <span class="topbar-button-text-text">${option.text}</span>
                                     <span class="topbar-button-text-${option.shortcut ? "shortcut" : option.arrow ? "arrow" : "shortcut"}">${option.shortcut ? option.shortcut : option.arrow ? "▶" : ""}</span>
                                 </div>
@@ -342,9 +343,15 @@ export default class OS extends EventTarget {
                     <button><img src="assets/icons/system/apple.png" /></button>
                 </div>
                 <div id="mac-settings" class="topbar-button-menu">
-                    ${macOptions.map(option => `
-                        <button data-action="${option.function}">${option.text}</button>
-                    `).join("")}
+                    ${macOptions.map(option => 
+                        `<button data-action="${option.function}">
+                            <div class="topbar-button-text">
+                                <span class="topbar-button-text-check">${option.selected ? "✔" : ""}</span>
+                                <span class="topbar-button-text-text">${option.text}</span>
+                                <span class="topbar-button-text-${option.shortcut ? "shortcut" : option.arrow ? "arrow" : "shortcut"}">${option.shortcut ? option.shortcut : option.arrow ? "▶" : ""}</span>
+                            </div>
+                        </button>`
+                    ).join("")}
                 </div>
             </div>
             ${buttonsHtml}

@@ -306,7 +306,7 @@ noscript .noscript-js-message p {
   left: 0;
   right: 0;
   height: 30px;
-  background-color: #DDDDDD;
+  background-color: #D5D5D5;
   border-bottom: 2px solid black;
   color: black;
   display: flex;
@@ -330,7 +330,7 @@ noscript .noscript-js-message p {
   height: 30px;
 }
 
-#topbar button:not(.topbar-button-menu button):active, #topbar button:not(.topbar-button-menu button).btn-selected {
+#topbar button:not(.topbar-button-menu button):not(#topbar-slider button):active, #topbar button:not(.topbar-button-menu button).btn-selected {
   background-color: #3531A2;
   color: white;
 }
@@ -367,12 +367,12 @@ noscript .noscript-js-message p {
 
 .dropdown {
   position: absolute;
-  background-color: #DDDDDD;
-  border: 2px solid black;
+  background-color: #D5D5D5;
   color: black;
   min-width: 15px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 60;
+  border: 1px solid black;
+  box-shadow: 2px 2px black, inset 1px 1px #FFF, inset 0px 0px 1px 1px #888;
+  z-index: 1;
 }
 
 .dropdown-option {
@@ -409,19 +409,20 @@ noscript .noscript-js-message p {
 
 .topbar-button-menu {
   position: fixed;
-  background: #C1C1C1;
+  background: #D5D5D5;
   border: 1px solid black;
-  box-shadow: 2px 2px black;
-  z-index: 9999 !important;
+  box-shadow: 2px 2px black, inset 1px 1px #FFF, inset 0px 0px 1px 1px #888;
+  z-index: 1 !important;
   display: none;
   flex-direction: column;
+  padding-top: 3px;
+  padding-bottom: 5px;
 }
 
 .topbar-button-menu hr {
-  width: 97%;
+  width: 99%;
   border-width: 1px;
-  border-color: lightgray;
-  height: 1px;
+  border-color: #AAA;
 }
 
 .topbar-button-menu button {
@@ -436,6 +437,10 @@ noscript .noscript-js-message p {
   display: block;
 }
 
+.topbar-button-menu button:disabled {
+  color: #7E7E7E;
+}
+
 .topbar-button-menu button:not(:disabled):hover {
   background: #3531A2 !important;
   color: white;
@@ -443,27 +448,34 @@ noscript .noscript-js-message p {
 
 .topbar-button-text {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   align-items: center;
 }
 
-.topbar-button-text-shortcut {
+.topbar-button-text-check {
+  text-align: center;
+  white-space: nowrap;
+  width: 15px;
+  min-width: 15px;
+}
+
+.topbar-button-text-arrow, .topbar-button-text-shortcut {
   text-align: left;
   white-space: nowrap;
   width: 35px;
-  padding-left: 20px;
+  min-width: 35px;
 }
 
 .topbar-button-text-arrow {
   text-align: right;
-  white-space: nowrap;
-  width: 35px;
-  padding-left: 20px;
 }
 
 .topbar-button-text-text {
+  flex-grow: 1;
   text-align: left;
   white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 20px;
 }
 
 .topbar-button-menu.visible {
@@ -777,6 +789,7 @@ noscript .noscript-js-message p {
   left: 0px;
   display: flex;
   flex-direction: row;
+  z-index: 9999 !important;
 }
 
 #control-non-movable {
@@ -839,9 +852,9 @@ noscript .noscript-js-message p {
 
 .control-strip-menu {
   position: fixed;
-  background: #C1C1C1;
+  background: #D5D5D5;
   border: 1px solid black;
-  box-shadow: 2px 2px black;
+  box-shadow: 2px 2px black, inset 1px 1px #FFF, inset 0px 0px 1px 1px #888;
   padding: 2px;
   z-index: 9999 !important;
   display: none;
