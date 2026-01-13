@@ -3,7 +3,7 @@ import WindowManager from "./windows/windowmanager.js";
 import LocalizationManager from "./localizationmanager.js";
 import Icon from "./icon.js";
 import {clamp, getRoot, shuffle} from "./utils.js";
-import {Filesystem, getFullPath, loadFilesystem} from "./filesystem.js";
+import {Filesystem, loadFilesystem} from "./filesystem.js";
 
 const debugVar = false;
 

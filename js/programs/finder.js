@@ -49,7 +49,7 @@ export default class Finder extends Program {
                 {name: LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[6].text, contentRoute: `${getRoot()}html/system/restart.html`});
             Finder.#restartComputer = await Finder.#restartComputer;
 
-            Finder.#restartComputer.win.querySelector("button#cancel").addEventListener("click", () => this.closeSubwindow(Finder.#restartComputer));
+            Finder.#restartComputer.win.querySelector("button#cancel").addEventListener("click", () => Finder.#restartComputer.close());
             Finder.#restartComputer.win.querySelector("button#restart").addEventListener("click", () => window.location.reload());
             this.changeLang();
         }
@@ -61,7 +61,7 @@ export default class Finder extends Program {
                 {name: LocalizationManager.getInstance().getStringsFromId("finder").buttons.special.options[7].text, contentRoute: `${getRoot()}html/system/shutdown.html`});
             Finder.#shutdownComputer = await Finder.#shutdownComputer;
 
-            Finder.#shutdownComputer.win.querySelector("button#cancel").addEventListener("click", () => this.closeSubwindow(Finder.#shutdownComputer));
+            Finder.#shutdownComputer.win.querySelector("button#cancel").addEventListener("click", () => Finder.#restartComputer.close());
             Finder.#shutdownComputer.win.querySelector("button#restart").addEventListener("click", () => window.location.reload());
             Finder.#shutdownComputer.win.querySelector("button#sleep").addEventListener("click", () => this.#sleepWebsite());
             Finder.#shutdownComputer.win.querySelector("button#shutdown").addEventListener("click", () => close());

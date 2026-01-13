@@ -84,7 +84,7 @@ export default class Window extends EventTarget{
     /**
      * Appends the created window to the desktop (index environment)
      */
-    #appendWindowToDesktop() {
+    _appendWindowToDesktop() {
         const dk = document.getElementById("desktop");
         const container = document.createElement("div");
         container.id = `windows-container-${this.program.id}-${this.id}`;
@@ -124,7 +124,7 @@ export default class Window extends EventTarget{
         if(!existingWindow) {
             await this._createWindow();
             this._addButtonListeners();
-            this.#appendWindowToDesktop();
+            this._appendWindowToDesktop();
             this.#animateWindowOpening();
         }
         else {

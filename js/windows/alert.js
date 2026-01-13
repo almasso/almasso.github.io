@@ -23,6 +23,17 @@ export default class AlertSW extends Subwindow {
         pageStyle.rel = "stylesheet";
         pageStyle.href = `css/system/alert.css`;
         this.win.appendChild(pageStyle);
+
+        document.getElementById("modal-screen").classList.remove("invisible");
+    }
+
+    _appendWindowToDesktop() {
+        const dk = document.getElementById("monitor");
+        const container = document.createElement("div");
+        container.id = `windows-container-${this.program.id}-${this.id}`;
+        container.appendChild(this.win);
+        this.makeDraggable()
+        dk.appendChild(container);
     }
 
     _addButtonListeners() {
@@ -51,6 +62,7 @@ export default class AlertSW extends Subwindow {
     makeDraggable() {}
 
     close() {
+        document.getElementById("modal-screen").classList.add("invisible");
         this.program.closeSubwindow(this);
     }
 }
