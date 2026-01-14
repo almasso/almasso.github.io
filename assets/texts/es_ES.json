@@ -308,10 +308,83 @@
         "id" : "terminal",
         "buttons" : {
             "file" : {
-                "text" : "Archivo"
+                "text" : "Archivo",
+                "options" : [
+                    {
+                        "text" : "Nueva sesión",
+                        "shortcut" : "⌘N",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Abrir script...",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Cerrar ventana",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Guardar texto...",
+                        "shortcut" : "⌘S",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Imprimir selección",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Salir",
+                        "shortcut" : "⌘Q",
+                        "function": "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edición"
+                "text" : "Edición",
+                "options": [
+                    { 
+                        "text": "Copiar", 
+                        "shortcut": "⌘C", 
+                        "active": false 
+                    },
+                    { 
+                        "text": "Pegar", 
+                        "shortcut": "⌘V", 
+                        "active": false 
+                    },
+                    { 
+                        "text": "Seleccionar todo", 
+                        "shortcut": "⌘A", 
+                        "active": false 
+                    },
+                    { 
+                        "break": true 
+                    },
+                    { 
+                        "text": "Limpiar pantalla", 
+                        "shortcut": "⌘K", 
+                        "active": false 
+                    },
+                    { 
+                        "break": true 
+                    },
+                    { 
+                        "text": "Preferencias...", 
+                        "active": false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Ayuda",
@@ -352,13 +425,30 @@
         "id" : "arkanoid",
         "buttons" : {
             "file" : {
-                "text" : "Archivo"
+                "text" : "Archivo",
+                "options" : [
+                    { "text": "Nuevo juego", "shortcut": "⌘N", "active": false },
+                    { "break": true },
+                    { "text": "Cerrar", "shortcut": "⌘W", "active": false },
+                    { "text": "Salir", "shortcut": "⌘Q", "active": false }
+                ]
             },
             "edit" : {
-                "text" : "Edición"
+                "text" : "Edición",
+                "options" : [
+                    { "text": "Cortar", "shortcut": "⌘X", "active": false },
+                    { "text": "Copiar", "shortcut": "⌘C", "active": false },
+                    { "text": "Pegar", "shortcut": "⌘V", "active": false }
+                ]
             },
             "play" : {
-                "text" : "Jugar"
+                "text" : "Jugar",
+                "options" : [
+                    { "text": "Pausar", "shortcut": "⌘P", "active": false },
+                    { "text": "Sonido activado", "selected": true, "active": false },
+                    { "break": true },
+                    { "text": "Puntuaciones altas...", "active": false }
+                ]
             },
             "help" : {
                 "text" : "Ayuda",

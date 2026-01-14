@@ -671,9 +671,10 @@ export default class OS extends EventTarget {
     }
 
     #applyMonitorFilter(filter) {
-        const monitor = document.getElementById("monitor");
-        monitor.classList.remove("mode-256-gray", "mode-normal");
-        monitor.classList.add("mode-" + filter);
+        const filterScreen = document.getElementById("grayscale-filter-screen");
+        console.log(filter);
+        if(filter === "256-gray") filterScreen.classList.add("activated");
+        else filterScreen.classList.remove("activated");
     }
 
     #changeVolume(volume) {

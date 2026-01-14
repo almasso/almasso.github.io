@@ -42,13 +42,6 @@ body, html {
   image-rendering: crisp-edges;
 }
 
-.mode-256-gray {
-  filter: grayscale(100%);
-}
-
-.mode-normal {
-  filter: none;
-}
 /*#endregion*/
 
 /*#region NOSCRIPT*/
@@ -130,8 +123,7 @@ noscript .noscript-js-message p {
   right: 0;
   bottom: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.4);
-  border-radius: 20px / 60px;
+  box-shadow: inset 0 0 80px rgba(0, 0, 0, 1);
   background: radial-gradient(
     ellipse at center,
     rgba(0, 0, 0, 0) 60%,
@@ -158,6 +150,12 @@ noscript .noscript-js-message p {
   transition: opacity 1.5s ease-in-out;
 }
 
+#sleep-screen.sleeping {
+  opacity: 1;
+  pointer-events: all;
+  cursor: none;
+}
+
 #modal-screen {
   align-items: center;
   background-color: transparent;
@@ -170,10 +168,24 @@ noscript .noscript-js-message p {
   opacity: 0;
 }
 
-#sleep-screen.sleeping {
+#grayscale-filter-screen {
+  align-items: center;
+  background-color: white;
+  mix-blend-mode: saturation;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 99997;
+  opacity: 0;
+  transition: opacity 1.5s ease-in-out;
+  pointer-events: none;
+}
+
+#grayscale-filter-screen.activated {
   opacity: 1;
-  pointer-events: all;
-  cursor: none;
+  transition: opacity 1.5s ease-in-out;
 }
 
 /*#region BOOTUP-SPECIAL*/
@@ -378,14 +390,6 @@ noscript .noscript-js-message p {
 
 #mac-icon img {
   width: 18px;
-}
-
-#buttons div {
-  /*transform: translateX(5px);*/
-}
-
-#monitor.mode-256-gray #buttons div {
-  /*transform: translateX(-5px);*/
 }
 
 .right-group {
