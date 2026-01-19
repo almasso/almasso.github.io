@@ -1,0 +1,41 @@
+name: Generate changelog.json
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+jobs:
+  changelog:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Fetch releases and generate changelog.json
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        mkdir -p assets/json
+
+        curl -s \
+          -H "Authorization: Bearer $GITHUB_TOKEN" \
+          -H "Accept: application/vnd.github+json" \
+          https://api.github.com/repos/almasso/almasso.github.io/releases \
+        | jq '[.[] | {
+              tag: .tag_name,
+              name: .name,
+              published_at: .published_at,
+              body: .body
+            }]' > assets/json/changelog.json
+
+    - name: Commit changelog.json
+      run: |
+        git config user.name "github-actions"
+        git config user.email "github-actions@github.com"
+        git add assets/json/changelog.json
+        git commit -m"Update changelog.json" || echo "No changes"
+        git push

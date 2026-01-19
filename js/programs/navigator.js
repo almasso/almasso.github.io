@@ -3,6 +3,7 @@ import {getRoot} from "../utils.js";
 import LocalizationManager from "../localizationmanager.js";
 import Subwindow from "../windows/subwindow.js";
 import WindowManager from "../windows/windowmanager.js";
+import ProcessManager from "../processmanager.js";
 
 
 export default class Navigator extends Program {
@@ -26,9 +27,18 @@ export default class Navigator extends Program {
 
         this.historyStack = [];
         this.currentIndex = -1;
+        this.previousIndex = 0;
+        this.addingPage = true;
 
         this.functionMap = {
             showInfo : () => this.#showAboutInfo(),
+            newSession : () => Navigator.launch(this.instanceData),
+            closeWindow : () => ProcessManager.getInstance().killProcess(this.pid),
+            reload : () => this.iframe.src = this.iframe.src,
+            goBack : () => this.#goBack(),
+            goForward : () => this.#goForward(),
+            goHome : () => this.navigate(Navigator.#specialNames.get("home")),
+            goToWebsite : (attr) => this.navigate(Navigator.#specialNames.get(attr))
         };
     }
 
@@ -74,19 +84,11 @@ export default class Navigator extends Program {
 
         if(!this.addedListeners) {
             this.backButton.addEventListener("click", () => {
-                if(this.currentIndex > 0) {
-                    this.currentIndex--;
-                    this.iframe.src = this.historyStack[this.currentIndex];
-                    this.#updateButtons();
-                }
+                this.#goBack();
             });
 
             this.forwardButton.addEventListener("click", () => {
-                if(this.currentIndex < this.historyStack.length - 1) {
-                    this.currentIndex++;
-                    this.iframe.src = this.historyStack[this.currentIndex];
-                    this.#updateButtons();
-                }
+                this.#goForward();
             });
 
             this.homeButton.addEventListener("click", () => {
@@ -129,12 +131,33 @@ export default class Navigator extends Program {
         this.urlInput.value = url;
         this.statusBar.textContent = "Loading...";
 
-        this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
-        this.historyStack.push(url);
-        this.currentIndex++;
+        if(this.addingPage) {
+            this.historyStack = this.historyStack.slice(0, this.currentIndex + 1);
+            this.historyStack.push(url);
+            this.currentIndex++;
+        }
+        
         this.stopButton.disabled = false;
-
         this.#updateButtons();
+        this.addingPage = true;
+    }
+
+    #goBack() {
+        if(this.currentIndex > 0) {
+            this.currentIndex--;
+            this.addingPage = false;
+            this.navigate(this.historyStack[this.currentIndex]);
+            this.#updateButtons();
+        }
+    }
+    
+    #goForward() {
+        if(this.currentIndex < this.historyStack.length - 1) {
+            this.addingPage = false;
+            this.currentIndex++;
+            this.navigate(this.historyStack[this.currentIndex]);
+            this.#updateButtons();
+        }
     }
 
     #updateButtons() {

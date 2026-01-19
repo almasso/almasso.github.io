@@ -308,10 +308,83 @@
         "id" : "terminal",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    {
+                        "text" : "Neue Sitzung",
+                        "shortcut" : "⌘N",
+                        "function" : "newSession"
+                    },
+                    {
+                        "text" : "Skript öffnen...",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Fenster schließen",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Text sichern...",
+                        "shortcut" : "⌘S",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Auswahl drucken",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Beenden",
+                        "shortcut" : "⌘Q",
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einsetzen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Alles auswählen", 
+                        "shortcut" : "⌘A", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Bildschirm löschen", 
+                        "shortcut" : "⌘K", 
+                        "function" : "clearTerminal"
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Einstellungen...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -352,13 +425,64 @@
         "id" : "arkanoid",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Neues Spiel", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Ausschneiden", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einsetzen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
             "play" : {
-                "text" : "Spielen"
+                "text" : "Spielen",
+                "options" : [
+                    { 
+                        "text" : "Pause", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Ton ein", 
+                        "selected" : true, 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Bestenlisten...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -378,13 +502,64 @@
         "id" : "asteroids",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Neues Spiel", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Ausschneiden", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einsetzen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
             "play" : {
-                "text" : "Spielen"
+                "text" : "Spielen",
+                "options" : [
+                    { 
+                        "text" : "Pause", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Ton ein", 
+                        "selected" : true, 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Bestenlisten...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -404,13 +579,62 @@
         "id" : "galactic",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Neues Spiel", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Ausschneiden", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einsetzen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
-            "play" : {
-                "text" : "Spielen"
+            "options" : {
+                "text" : "Optionen",
+                "options" : [
+                    { 
+                        "text" : "Bildschirm-Einstellungen…", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Audio-Einstellungen…", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Steuerung…", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -431,19 +655,138 @@
         "id" : "navigator",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Neues Fenster", 
+                        "shortcut" : "⌘N", 
+                        "function" : "newSession"
+                    },
+                    { 
+                        "text" : "Adresse öffnen...", 
+                        "shortcut" : "⌘L", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Sichern unter...", 
+                        "shortcut" : "⌘S", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Drucken...", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Ausschneiden", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einfügen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Suchen...", 
+                        "shortcut" : "⌘F", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Einstellungen...", 
+                        "active" : false 
+                    }
+                ]
             },
             "view" : {
-                "text" : "Darstellung"
+                "text" : "Darstellung",
+                "options" : [
+                    { 
+                        "text" : "Neu laden", 
+                        "shortcut" : "⌘R", 
+                        "function" : "reload"
+                    },
+                    { 
+                        "text" : "Bilder anzeigen", 
+                        "active" : false
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Quelltext", 
+                        "active" : false 
+                    }
+                ]
             },
             "go" : {
-                "text" : "Gehen"
+                "text" : "Gehen",
+                "options" : [
+                    { 
+                        "text" : "Zurück", 
+                        "shortcut" : "⌘[", 
+                        "function" : "goBack" 
+                    },
+                    { 
+                        "text" : "Weiter", 
+                        "shortcut" : "⌘]", 
+                        "function" : "goForward"
+                    },
+                    { 
+                        "text" : "Startseite", 
+                        "function" : "goHome"
+                    }
+                ]
             },
             "bookmarks" : {
-                "text" : "Lesezeichen"
+                "text" : "Lesezeichen",
+                "options" : [
+                    { 
+                        "text" : "Lesezeichen hinzufügen", 
+                        "shortcut" : "⌘D", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Lesezeichen bearbeiten...", 
+                        "shortcut" : "⌘B", 
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "ÑRPG - Manín Interactive",
+                        "function" : "goToWebsite",
+                        "attr" : "erpg"
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -473,10 +816,106 @@
         "id" : "acrobat",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Öffnen...", 
+                        "shortcut" : "⌘O", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Schließen", 
+                        "shortcut" : "⌘W", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Dokumenteigenschaften...", 
+                        "shortcut" : "⌘D", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Seite einrichten", 
+                        "shortcut" : "⌘⇧P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Drucken...", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Alles auswählen", 
+                        "shortcut" : "⌘A", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Suchen...", 
+                        "shortcut" : "⌘F", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Weitersuchen", 
+                        "shortcut" : "⌘G", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Einstellungen...", 
+                        "shortcut" : "⌘K", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "view" : {
+                "text" : "Darstellung",
+                "options" : [
+                    { 
+                        "text" : "Originalgröße", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "An Fenster anpassen", 
+                        "shortcut" : "⌘0", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Einzelne Seite",
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Fortlaufend", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",
@@ -504,10 +943,87 @@
         "id" : "steam",
         "buttons" : {
             "file" : {
-                "text" : "Ablage"
+                "text" : "Ablage",
+                "options" : [
+                    { 
+                        "text" : "Spiel starten", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Spiel hinzufügen...", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Beenden", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow" 
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Bearbeiten"
+                "text" : "Bearbeiten",
+                "options" : [
+                    { 
+                        "text" : "Kopieren", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Einfügen", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Einstellungen...", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "view" : {
+                "text" : "Darstellung",
+                "options" : [
+                    { 
+                        "text" : "Spiele", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Freunde", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Kompaktmodus", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "account" : {
+                "text" : "Konto",
+                "options" : [
+                    { 
+                        "text" : "Profil anzeigen", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Status: Online", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Abmelden...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Hilfe",

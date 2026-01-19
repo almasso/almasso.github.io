@@ -308,10 +308,83 @@
         "id" : "terminal",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    {
+                        "text" : "New session",
+                        "shortcut" : "⌘N",
+                        "function" : "newSession"
+                    },
+                    {
+                        "text" : "Open script...",
+                        "shortcut" : "⌘O",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Close window",
+                        "shortcut" : "⌘W",
+                        "active" : false
+                    },
+                    {
+                        "text" : "Save text...",
+                        "shortcut" : "⌘S",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Print selection",
+                        "shortcut" : "⌘P",
+                        "active" : false
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "Exit",
+                        "shortcut" : "⌘Q",
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Select all", 
+                        "shortcut" : "⌘A", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Clean terminal", 
+                        "shortcut" : "⌘K", 
+                        "function" : "clearTerminal"
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Preferences...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -352,13 +425,64 @@
         "id" : "arkanoid",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "New Game", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Cut", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
             "play" : {
-                "text" : "Play"
+                "text" : "Play",
+                "options" : [
+                    { 
+                        "text" : "Pause", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Sound on", 
+                        "selected" : true, 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Highscores...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -378,13 +502,64 @@
         "id" : "asteroids",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "New Game", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Cut", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
             "play" : {
-                "text" : "Play"
+                "text" : "Play",
+                "options" : [
+                    { 
+                        "text" : "Pause", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Sound on", 
+                        "selected" : true, 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Highscores...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -404,13 +579,62 @@
         "id" : "galactic",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "New Game", 
+                        "shortcut" : "⌘N", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Cut", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    }
+                ]
             },
-            "play" : {
-                "text" : "Play"
+            "options" : {
+                "text" : "Options",
+                "options" : [
+                    { 
+                        "text" : "Screen Configuration...", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Audio Configuration...", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Controls...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -431,19 +655,138 @@
         "id" : "navigator",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "New window", 
+                        "shortcut" : "⌘N", 
+                        "function" : "newSession"
+                    },
+                    { 
+                        "text" : "Open link...", 
+                        "shortcut" : "⌘L", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Save as...", 
+                        "shortcut" : "⌘S", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Print...", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Cut", 
+                        "shortcut" : "⌘X", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Search...", 
+                        "shortcut" : "⌘F", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Preferences...", 
+                        "active" : false 
+                    }
+                ]
             },
             "view" : {
-                "text" : "View"
+                "text" : "View",
+                "options" : [
+                    { 
+                        "text" : "Reload", 
+                        "shortcut" : "⌘R", 
+                        "function" : "reload"
+                    },
+                    { 
+                        "text" : "Show images", 
+                        "active" : false
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Source code", 
+                        "active" : false 
+                    }
+                ]
             },
             "go" : {
-                "text" : "Go"  
+                "text" : "Go",
+                "options" : [
+                    { 
+                        "text" : "Back", 
+                        "shortcut" : "⌘[", 
+                        "function" : "goBack" 
+                    },
+                    { 
+                        "text" : "Forward", 
+                        "shortcut" : "⌘]", 
+                        "function" : "goForward"
+                    },
+                    { 
+                        "text" : "Home Page", 
+                        "function" : "goHome"
+                    }
+                ]
             },
             "bookmarks" : {
-                "text" : "Bookmarks"
+                "text" : "Bookmarks",
+                "options" : [
+                    { 
+                        "text" : "Add bookmark", 
+                        "shortcut" : "⌘D", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Edit bookmarks...", 
+                        "shortcut" : "⌘B", 
+                        "active" : false 
+                    },
+                    {
+                        "break" : true
+                    },
+                    {
+                        "text" : "ÑRPG - Manín Interactive",
+                        "function" : "goToWebsite",
+                        "attr" : "erpg"
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -473,10 +816,106 @@
         "id" : "acrobat",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "Open...", 
+                        "shortcut" : "⌘O", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Close", 
+                        "shortcut" : "⌘W", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Properties...", 
+                        "shortcut" : "⌘D", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Fit page", 
+                        "shortcut" : "⌘⇧P", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Print...", 
+                        "shortcut" : "⌘P", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow"
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Select all", 
+                        "shortcut" : "⌘A", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Search...", 
+                        "shortcut" : "⌘F", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Find next", 
+                        "shortcut" : "⌘G", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Preferences...", 
+                        "shortcut" : "⌘K", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "view" : {
+                "text" : "View",
+                "options" : [
+                    { 
+                        "text" : "Real Size", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Fit in Window", 
+                        "shortcut" : "⌘0", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Single Page",
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Continuous", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",
@@ -503,10 +942,87 @@
         "id" : "steam",
         "buttons" : {
             "file" : {
-                "text" : "File"
+                "text" : "File",
+                "options" : [
+                    { 
+                        "text" : "Launch Game", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Add game...", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Exit", 
+                        "shortcut" : "⌘Q", 
+                        "function" : "closeWindow" 
+                    }
+                ]
             },
             "edit" : {
-                "text" : "Edit"
+                "text" : "Edit",
+                "options" : [
+                    { 
+                        "text" : "Copy", 
+                        "shortcut" : "⌘C", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Paste", 
+                        "shortcut" : "⌘V", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Preferences...", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "view" : {
+                "text" : "View",
+                "options" : [
+                    { 
+                        "text" : "Games", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Friends", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Compact Mode", 
+                        "active" : false 
+                    }
+                ]
+            },
+            "account" : {
+                "text" : "Account",
+                "options" : [
+                    { 
+                        "text" : "Profile", 
+                        "active" : false 
+                    },
+                    { 
+                        "text" : "Status: Online", 
+                        "active" : false 
+                    },
+                    { 
+                        "break" : true 
+                    },
+                    { 
+                        "text" : "Log out...", 
+                        "active" : false 
+                    }
+                ]
             },
             "help" : {
                 "text" : "Help",

@@ -5,6 +5,7 @@ import Tunnel from "./terminalgames/tunnel.js";
 import LocalizationManager from "../localizationmanager.js";
 import Subwindow from "../windows/subwindow.js";
 import WindowManager from "../windows/windowmanager.js";
+import ProcessManager from "../processmanager.js";
 
 export default class Terminal extends Program {
     #pendingInput = null;
@@ -20,7 +21,11 @@ export default class Terminal extends Program {
 
         this.functionMap = {
             showInfo : () => this.#showAboutInfo(),
+            newSession : () => Terminal.launch(this.instanceData),
+            closeWindow : () => ProcessManager.getInstance().killProcess(this.pid),
+            clearTerminal : async () => await this.commands["clear"]()
         };
+
     }
 
     async #showAboutInfo() {

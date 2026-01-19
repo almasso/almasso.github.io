@@ -3,6 +3,7 @@ import {getRoot} from "../utils.js";
 import LocalizationManager from "../localizationmanager.js";
 import Subwindow from "../windows/subwindow.js";
 import WindowManager from "../windows/windowmanager.js";
+import ProcessManager from "../processmanager.js";
 
 export default class Acrobat extends Program {
     static #info = null;
@@ -22,6 +23,7 @@ export default class Acrobat extends Program {
 
         this.functionMap = {
             showInfo : () => this.#showAboutInfo(),
+            closeWindow : () => ProcessManager.getInstance().killProcess(this.pid)
         };
     }
 

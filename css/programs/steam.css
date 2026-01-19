@@ -24,9 +24,10 @@
 .steam-main-button p {
     color: #818e7c;
     font-size: var(--paragraph-text-size);
+    width: 75%;
 }
 
-.steam-button {
+.steam-button:not(:disabled) {
     font-family: 'Chicago', sans-serif;
     background-color: #4c5844;
     border-top: 2px solid #80827F;
@@ -40,7 +41,21 @@
     font-size: var(--button-text-size);
 }
 
-.steam-button:active {
+.steam-button:disabled {
+    font-family: 'Chicago', sans-serif;
+    background-color: #4c5844;
+    border-top: 2px solid #80827F;
+    border-left: 2px solid #80827F;
+    border-right: 2px solid #27301F;
+    border-bottom: 2px solid #27301F;
+    color: #2E3726;
+    height: 26px;
+    width: 86px;
+    text-align: left;
+    font-size: var(--button-text-size);
+}
+
+.steam-button:not(:disabled):active {
     border-right: 2px solid #80827F;
     border-bottom: 2px solid #80827F;
     border-left: 2px solid #27301F;
@@ -78,7 +93,7 @@
     height: 1px;
 }
 
-#steam-games {
+#steam-games, #steam-news {
     height: 95%;
     background-color: #3f4738 !important;
     border-right: 2px solid #80827F;
@@ -91,24 +106,25 @@
 }
 
 @-moz-document url-prefix() {
-    #steam-games {
+    #steam-games, #steam-news {
         scrollbar-color: #80827F #4c5844;
     }
 }
 
 @supports selector(::-webkit-scrollbar) {
-    #steam-games::-webkit-scrollbar {
+    #steam-games::-webkit-scrollbar, #steam-news::-webkit-scrollbar {
         background-color: #4c5844;
     }
 
-    #steam-games::-webkit-scrollbar-thumb {
+    #steam-games::-webkit-scrollbar-thumb, #steam-news::-webkit-scrollbar-thumb {
         border-left: 2px solid #80827F;
         border-top: 2px solid #80827F;
         border-right: 2px solid #27301F;
         border-bottom: 2px solid #27301F;
     }
 
-    #steam-games::-webkit-scrollbar-button:vertical:start:decrement, #steam-games::-webkit-scrollbar-button:vertical:end:increment {
+    #steam-games::-webkit-scrollbar-button:vertical:start:decrement, #steam-games::-webkit-scrollbar-button:vertical:end:increment,
+    #steam-news::-webkit-scrollbar-button:vertical:start:decrement, #steam-news::-webkit-scrollbar-button:vertical:end:increment {
         border-left: 2px solid #80827F;
         border-top: 2px solid #80827F;
         border-right: 2px solid #27301F;
@@ -178,4 +194,32 @@
 
 #steam-texts {
     color: #818e7c;
+}
+
+#steam-news {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    color: #98a593;
+    overflow-x: hidden;
+}
+
+.steam-news-article {
+    text-align: left;
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.steam-news-article time {
+    font-size: 10px;
+    transform: translateY(-10px);
+}
+
+#steam-news hr {
+    width: 100%;
+    border-top: 2px solid #80827F;
+    border-bottom: 2px solid #27301F;
 }

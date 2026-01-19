@@ -7,11 +7,13 @@ import WindowManager from "../windows/windowmanager.js";
 import { ClassMap } from "../registry.js";
 import { Filesystem, findNodeByProgramId, findAllNodesByProgramId } from "../filesystem.js";
 import Icon from "./../icon.js";
+import ProcessManager from "../processmanager.js";
 
 
 export default class Steam extends Program {
 
     static gamesWindow = null;
+    static newsWindow = null;
     static loadingGameWindow = null;
     static #info = null;
 
@@ -30,6 +32,7 @@ export default class Steam extends Program {
         this.currentIndex = -1;
         this.functionMap = {
             showInfo : () => this.#showAboutInfo(),
+            closeWindow : () => ProcessManager.getInstance().killProcess(this.pid)
         };
     }
 
@@ -222,6 +225,47 @@ export default class Steam extends Program {
         });
     }
 
+    async #loadChangelog() {
+        const res = await fetch(`${getRoot()}assets/json/changelog.json`);
+        this.changelog = await res.json();
+    }
+
+    async #openNewsWindow() {
+        try {
+            await this.#loadChangelog();
+        }
+        catch(e) {}
+        Steam.newsWindow = WindowManager.getInstance().createWindow(SteamSubwindow, this,
+            this.instanceData.width * 1.5, this.instanceData.height * 1.5, this.instanceData.width * 1.5, this.instanceData.height * 1.5, 
+            {name: LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["news"], contentRoute: `${getRoot()}html/programs/steam/news.html`});
+
+        Steam.newsWindow = await Steam.newsWindow;
+        
+        let added = false;
+        if(this.changelog) {
+            this.changelog.forEach(entry => {
+                added = true;
+                this.#addNewEntry(entry);
+            });
+        }
+        if(!added) {
+            document.getElementById("steam-news").innerHTML = "No news available!";
+        }
+    }
+
+    #addNewEntry(entry) {
+        const news = document.getElementById("steam-news");
+        let art = document.createElement("article");
+        art.className = "steam-news-article";
+        art.innerHTML = `
+            <h2>${entry.name}</h2>
+            <time>${new Date(entry.published_at).toLocaleDateString()}</time>
+            <div>${marked.parse(entry.body || "")}</div>
+        `
+        news.appendChild(art);
+        news.appendChild(document.createElement("hr"));
+    }
+
     async #showAboutInfo() {
         if(!Steam.#info) {
             Steam.#info = WindowManager.getInstance().createWindow(SteamSubwindow, this, this.instanceData.width, 280, this.instanceData.width, 280, 
@@ -236,6 +280,7 @@ export default class Steam extends Program {
             if(sw === Steam.gamesWindow) Steam.gamesWindow = null;
             else if(sw === Steam.loadingGameWindow) Steam.loadingGameWindow = null;
             else if(sw === Steam.#info) Steam.#info = null;
+            else if(sw === Steam.newsWindow) Steam.newsWindow = null;
             WindowManager.getInstance().remove(sw.id);
         }
     }
@@ -257,7 +302,8 @@ export default class Steam extends Program {
                 });
                 steamDiv.querySelector("#steam-button-settings button").addEventListener("click", () => {
                 });
-                steamDiv.querySelector("#steam-button-news button").addEventListener("click", () => {
+                steamDiv.querySelector("#steam-button-news button").addEventListener("click", async () => {
+                    if(!Steam.newsWindow) await this.#openNewsWindow();
                 });
                 this.addedListeners = true;
                 this.changeLang();
@@ -268,6 +314,7 @@ export default class Steam extends Program {
     async onClose() {
         this.closeSubwindow(Steam.loadingGameWindow);
         this.closeSubwindow(Steam.gamesWindow);
+        this.closeSubwindow(Steam.newsWindow);
         this.closeSubwindow(Steam.#info);
     }
 

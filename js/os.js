@@ -331,7 +331,7 @@ export default class OS extends EventTarget {
                         ${this.currentApp.getButtons()[key].options.map(option =>
                             option.break ?
                             `<hr>` :
-                            `<button data-action="${option.function}" ${option.active === false ? "disabled" : ""}>
+                            `<button data-action="${option.function}" data-attr="${option.attr}" ${option.active === false ? "disabled" : ""}>
                                 <div class="topbar-button-text">
                                     <span class="topbar-button-text-check">${option.selected ? "✔" : ""}</span>
                                     <span class="topbar-button-text-text">${option.text}</span>
@@ -394,7 +394,8 @@ export default class OS extends EventTarget {
                 menuBtn.addEventListener("click", (e) => {
                     e.stopPropagation();
                     const action = menuBtn.dataset.action;
-                    menu.id === "mac-settings" ? this.#baseFinder.functionMap[action]?.() : this.currentApp.functionMap[action]?.();
+                    const attr = menuBtn.dataset.attr || null;
+                    menu.id === "mac-settings" ? this.#baseFinder.functionMap[action]?.() : this.currentApp.functionMap[action]?.(attr);
                     closeAllMenus();
                 });
             });

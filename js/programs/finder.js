@@ -41,6 +41,7 @@ export default class Finder extends Program {
 
     #sleepWebsite() {
         OS.getInstance().sleepWebsite();
+        Finder.#shutdownComputer.close();
     }
 
     async #restartWebsite() {
