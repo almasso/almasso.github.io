@@ -2,6 +2,7 @@ import {getRoot} from "./utils.js"
 import {Filesystem} from "./filesystem.js";
 import { ClassMap } from "./registry.js";
 import ProcessManager from "./processmanager.js";
+import URLLoader from "./programs/urlloader.js";
 
 export default class Icon extends EventTarget {
 
@@ -175,13 +176,20 @@ export default class Icon extends EventTarget {
 
                 Icon.#unclickIcons(null);
                 const AppClass = ClassMap[this.fileData.classRef];
-                if(AppClass) {
+                if(AppClass !== URLLoader) {
                     const launchMetadata = {...this.fileData, launcherId: this.uuid};
                     if(launchMetadata.appClass && launchMetadata.appClass.includes("game")) {
                         await this.#launchSteamGame(this.fileData.programId, launchMetadata);
+                        this.iconDiv.querySelector(".icon-div").classList.remove("opened-app");
+                        this.opened = false;
                         return;
                     }
                     await AppClass.launch(launchMetadata);
+                }
+                else {
+                    open(this.fileData.metadata.url, "_blank");
+                    this.iconDiv.querySelector(".icon-div").classList.remove("opened-app");
+                    this.opened = false;
                 }
             }
         });

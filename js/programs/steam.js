@@ -79,6 +79,10 @@ export default class Steam extends Program {
             loadingWindow.querySelector("#loading-text").textContent = textToDisplay;
         }
 
+        if(Steam.newsWindow) {
+            Steam.newsWindow.changeWindowName(LocalizationManager.getInstance().getStringsFromId(this.id)["texts"]["interface"]["news"]);
+        }
+
         if(Steam.#info) {
             Steam.#info.changeWindowName(LocalizationManager.getInstance().getStringsFromId("steam").buttons.help.options[0].text);
             Steam.#info.win.querySelector("#steam-texts").innerHTML = `

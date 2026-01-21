@@ -77,6 +77,10 @@
             "maxWidth": 1280,
             "maxHeight": 720,
             "appClass": "game"
+        },
+        "url": {
+            "icon": "link.png",
+            "classRef": "URL"
         }
     },
     "root": {
@@ -188,6 +192,67 @@
                                 "desktopIcon": "pdf.png",
                                 "metadata" : {
                                     "pdf": "TFG"
+                                }
+                            },
+                            {
+                                "desktopName": "RPGBaker",
+                                "type": "systemfile",
+                                "programId": "url",
+                                "desktopIcon": "link.png",
+                                "metadata": {
+                                    "url": "https://github.com/almasso/rpgbaker/"
+                                }
+                            },
+                            {
+                                "desktopName": "EDEN Engine",
+                                "type": "systemfile",
+                                "programId": "url",
+                                "desktopIcon": "link.png",
+                                "metadata": {
+                                    "url": "https://github.com/UCM-FDI-DISIA/EDEN/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "desktopName": "Code",
+                        "type": "folder",
+                        "desktopIcon": "folder.png",
+                        "availableStorage": "13.2 GB",
+                        "children": [
+                            {
+                                "desktopName": "web.html",
+                                "type": "systemfile",
+                                "programId": "url",
+                                "desktopIcon": "script.png",
+                                "metadata": {
+                                    "url": "https://github.com/almasso/almasso.github.io/"
+                                }
+                            },
+                            {
+                                "desktopName": "Repository",
+                                "type": "systemfile",
+                                "programId": "url",
+                                "desktopIcon": "link.png",
+                                "metadata": {
+                                    "url": "https://github.com/almasso/"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "desktopName": "About me",
+                        "type": "folder",
+                        "desktopIcon": "folder.png",
+                        "availableStorage": "13.2 GB",
+                        "children": [
+                            {
+                                "desktopName": "LinkedIn",
+                                "type": "file",
+                                "programId": "url",
+                                "desktopIcon": "linkedin.png",
+                                "metadata": {
+                                    "url": "https://linkedin.com/in/almasso/"
                                 }
                             }
                         ]

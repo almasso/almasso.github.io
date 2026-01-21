@@ -1,6 +1,8 @@
 import ProcessManager from "./processmanager.js";
 import WindowManager from "./windows/windowmanager.js";
 import LocalizationManager from "./localizationmanager.js";
+import ImagePreloader from "./imagepreloader.js";
+import SoundManager from "./soundmanager.js"
 import Icon from "./icon.js";
 import {clamp, getRoot, shuffle} from "./utils.js";
 import {Filesystem, loadFilesystem} from "./filesystem.js";
@@ -8,6 +10,10 @@ import {Filesystem, loadFilesystem} from "./filesystem.js";
 const debugVar = false;
 
 document.addEventListener("DOMContentLoaded", () => {
+    ImagePreloader.getInstance();
+    SoundManager.getInstance().load("startup.m4a");
+    SoundManager.getInstance().load("Temple.wav");
+    SoundManager.getInstance().load("Sosumi.wav");
     OS.getInstance().init();
 });
 
@@ -76,6 +82,10 @@ export default class OS extends EventTarget {
             if(this.isSleeping) this.#wakeUp();
         })
 
+        document.getElementById("modal-screen").addEventListener("click", () => {
+            SoundManager.getInstance().play("Sosumi.wav");
+        });
+
         setInterval(this.updateTime.bind(this), 100);
         this.updateTime();
 
@@ -135,17 +145,13 @@ export default class OS extends EventTarget {
         bootupScreen.classList.remove("checkered");
         let macIcon = document.getElementById("bootup-macicon");
         let welcomeScreen = document.getElementById("welcome");
-        const bootupSound = new Audio(`${getRoot()}assets/sounds/startup.m4a`);
-        bootupSound.volume = 0.3;
-        bootupSound.play();
+        SoundManager.getInstance().play("startup.m4a", 0.3);
         setTimeout(() => {
             bootupScreen.classList.add("afterChime");
             setTimeout(() => {
                 macIcon.classList.remove("invisible");
                 setTimeout(() => {
-                    const winkSound = new Audio(`${getRoot()}assets/sounds/Temple.wav`);
-                    winkSound.volume = 0.3;
-                    winkSound.play();
+                    SoundManager.getInstance().play("Temple.wav", 0.3);
                     macIcon.src = `${getRoot()}assets/icons/system/macs/wink.png`;
                     setTimeout(() => {
                         macIcon.classList.add("invisible");

@@ -6,6 +6,7 @@ import Navigator from "./programs/navigator.js";
 import Finder from "./programs/finder.js";
 import Steam from "./programs/steam.js";
 import Terminal from "./programs/terminal.js";
+import URLLoader from "./programs/urlloader.js";
 
 export const ClassMap = {
     "Acrobat" : Acrobat,
@@ -15,5 +16,6 @@ export const ClassMap = {
     "Navigator" : Navigator,
     "Finder" : Finder,
     "Steam" : Steam,
-    "Terminal" : Terminal
+    "Terminal" : Terminal,
+    "URL" : URLLoader
 }
