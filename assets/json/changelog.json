@@ -1,0 +1,8 @@
+[
+  {
+    "tag": "v1.0.0",
+    "name": "Release 1.0.0",
+    "published_at": "2026-01-21T21:41:17Z",
+    "body": "- Added basic functionality to the OS: filesystem, windows, folders, control strip, header buttons and context menus.\r\n  - Although most context menu options are disabled, their functionality can be added in a future if necessary.\r\n  - Most programs have a \"About X\" showing some information about copyright.\r\n- Added bootup animation.\r\n- Added Arkanoid, Asteroids and Galactic Plague as C++ game ports.\r\n- Added Terminal with some commands and two games (car and tunnel).\r\n- Added Navigator, with the ability to show some webpages (if not limited by GitHub), and ÑRPG webgame.\r\n- Added Acrobat Reader, with the ability to open and show PDF files.\r\n- Added two Steam pages: games (gathers all games, including some webpages to non-ported games); and news, which shows this list.\r\n  - This list is shown by fetching the release data via GitHub workflows whenever a release is done.\r\n- Added some folders with some info about the web and me."
+  }
+]
